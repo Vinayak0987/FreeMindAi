@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import Icon from '../AppIcon';
 import Button from './Button';
 
@@ -8,6 +9,16 @@ const Header = () => {
   const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/login');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
 
   const primaryNavItems = [
     { label: 'Dashboard', path: '/dashboard', icon: 'LayoutDashboard' },
@@ -134,8 +145,8 @@ const Header = () => {
             {isUserMenuOpen && (
               <div className="absolute right-0 top-full mt-1 w-56 bg-popover border border-border rounded-md elevation-2 animate-fade-in">
                 <div className="px-3 py-2 border-b border-border">
-                  <p className="text-sm font-medium text-popover-foreground">🙏 Alok Gupta</p>
-                  <p className="text-xs text-muted-foreground">alok.gupta@aiindia.dev</p>
+                  <p className="text-sm font-medium text-popover-foreground">🙏 {user?.name || 'User'}</p>
+                  <p className="text-xs text-muted-foreground">{user?.email || 'user@example.com'}</p>
                 </div>
                 <div className="py-1">
                   <button className="flex items-center space-x-2 w-full px-3 py-2 text-sm text-popover-foreground hover:bg-muted transition-colors duration-150">
@@ -151,7 +162,10 @@ const Header = () => {
                     <span>Help & Support</span>
                   </button>
                   <div className="border-t border-border my-1"></div>
-                  <button className="flex items-center space-x-2 w-full px-3 py-2 text-sm text-error hover:bg-muted transition-colors duration-150">
+                  <button 
+                    onClick={handleLogout}
+                    className="flex items-center space-x-2 w-full px-3 py-2 text-sm text-error hover:bg-muted transition-colors duration-150"
+                  >
                     <Icon name="LogOut" size={16} />
                     <span>Sign out</span>
                   </button>
