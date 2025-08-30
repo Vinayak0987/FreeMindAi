@@ -1,0 +1,65 @@
+# FreeMind AI - Node.js Dependencies Requirements
+# This is for reference only. Use 'npm install' to install dependencies.
+# The actual dependencies are defined in package.json
+
+# Prerequisites
+Node.js >= 18.17.0
+npm >= 9.0.0
+Git (latest)
+
+# Core Framework
+react@18.2.0
+react-dom@18.2.0
+vite@5.0.0
+
+# Routing & State
+react-router-dom@6.0.2
+@reduxjs/toolkit@2.6.1
+redux@5.0.1
+
+# UI & Styling  
+tailwindcss@3.4.6
+lucide-react@0.484.0
+framer-motion@10.16.4
+@radix-ui/react-slot@1.2.3
+class-variance-authority@0.7.1
+clsx@2.1.1
+tailwind-merge@3.3.1
+
+# Authentication
+@react-oauth/google@0.12.2
+jsonwebtoken@9.0.2
+bcryptjs@3.0.2
+
+# Backend
+express@5.1.0
+mongoose@8.18.0
+cors@2.8.5
+dotenv@16.6.1
+
+# Forms & Validation
+react-hook-form@7.55.0
+express-validator@7.2.1
+
+# Data Visualization
+recharts@2.15.2
+d3@7.9.0
+
+# Build Tools
+@vitejs/plugin-react@4.3.4
+autoprefixer@10.4.2
+postcss@8.4.8
+vite-tsconfig-paths@3.6.0
+
+# Development
+concurrently@9.2.1
+nodemon@3.1.10
+
+# To install all dependencies:
+# npm install
+
+# To install specific dependency:
+# npm install <package-name>
+
+# To check installed versions:
+# npm list
