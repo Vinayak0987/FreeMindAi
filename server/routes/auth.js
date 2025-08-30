@@ -1,5 +1,6 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
+const axios = require('axios');
 const User = require('../models/User');
 const { protect, generateToken } = require('../middleware/auth');
 
@@ -232,13 +233,84 @@ router.put('/profile', protect, [
   }
 });
 
+// @route   POST /api/auth/google
+// @desc    Google OAuth login/register
+// @access  Public
+router.post('/google', async (req, res) => {
+  try {
+    const { access_token } = req.body;
+    
+    if (!access_token) {
+      return res.status(400).json({
+        success: false,
+        message: 'Access token is required'
+      });
+    }
+
+    // Get user info from Google
+    const googleResponse = await axios.get(`https://www.googleapis.com/oauth2/v2/userinfo?access_token=${access_token}`);
+    const { id, email, name, picture } = googleResponse.data;
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: 'Unable to get user email from Google'
+      });
+    }
+
+    // Check if user exists
+    let user = await User.findOne({ email });
+    
+    if (!user) {
+      // Create new user
+      user = await User.create({
+        name: name || 'Google User',
+        email: email,
+        password: `google_${id}_${Date.now()}`, // Generate a random password
+        avatar: picture || '',
+        isVerified: true // Google accounts are verified
+      });
+    }
+
+    // Update last login
+    await user.updateLastLogin();
+
+    // Generate token
+    const token = generateToken(user._id);
+
+    // Send response
+    res.json({
+      success: true,
+      message: `Welcome ${user.name}! 🎉`,
+      data: {
+        token,
+        user: user.getPublicProfile()
+      }
+    });
+  } catch (error) {
+    console.error('Google OAuth error:', error);
+    
+    if (error.response?.status === 401) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid Google access token'
+      });
+    }
+    
+    res.status(500).json({
+      success: false,
+      message: 'Google authentication failed'
+    });
+  }
+});
+
 // @route   POST /api/auth/logout
 // @desc    Logout user (client-side token removal)
 // @access  Private
 router.post('/logout', protect, (req, res) => {
   res.json({
     success: true,
-    message: 'Logged out successfully. Thanks for using Alok\'s AI Studio! 👋'
+    message: 'Logged out successfully. Thanks for using FreeMind AI! 👋'
   });
 });
 

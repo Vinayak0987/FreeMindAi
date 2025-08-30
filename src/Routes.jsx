@@ -14,14 +14,18 @@ import ProjectWorkspace from './pages/project-workspace';
 import AIAssistantChat from './pages/ai-assistant-chat';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const Routes = () => {
+  const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || 'demo-client-id';
+  
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <ErrorBoundary>
-          <ScrollToTop />
-          <RouterRoutes>
+    <GoogleOAuthProvider clientId={googleClientId}>
+      <BrowserRouter>
+        <AuthProvider>
+          <ErrorBoundary>
+            <ScrollToTop />
+            <RouterRoutes>
             {/* Public Routes */}
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<Login />} />
@@ -38,9 +42,10 @@ const Routes = () => {
             {/* 404 Page */}
             <Route path="*" element={<NotFound />} />
           </RouterRoutes>
-        </ErrorBoundary>
-      </AuthProvider>
-    </BrowserRouter>
+          </ErrorBoundary>
+        </AuthProvider>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   );
 };
 

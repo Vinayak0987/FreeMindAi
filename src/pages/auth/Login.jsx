@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useGoogleLogin } from '@react-oauth/google';
 import Icon from '../../components/AppIcon';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
+import axios from 'axios';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +18,42 @@ const Login = () => {
 
   const navigate = useNavigate();
   const { login } = useAuth();
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      setIsLoading(true);
+      try {
+        // Send the Google access token to your backend
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/google`, {
+          access_token: tokenResponse.access_token
+        });
+        
+        if (response.data.success) {
+          const { token, user } = response.data.data;
+          localStorage.setItem('token', token);
+          navigate('/dashboard');
+          window.location.reload(); // Refresh to update auth state
+        }
+      } catch (error) {
+        console.error('Google login error:', error);
+        setErrors({
+          submit: error.response?.data?.message || 'Google login failed. Please try again.'
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    onError: (error) => {
+      console.error('Google OAuth error:', error);
+      setErrors({
+        submit: 'Google login failed. Please try again.'
+      });
+    }
+  });
+
+  const handleGoogleLogin = () => {
+    googleLogin();
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -202,25 +240,17 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Social Login */}
-            <div className="grid grid-cols-2 gap-4">
-              <Button
-                type="button"
-                variant="outline"
-                className="border border-white/20 text-white hover:bg-white/10 py-3 rounded-xl"
-              >
-                <Icon name="Github" size={16} className="mr-2" />
-                GitHub
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                className="border border-white/20 text-white hover:bg-white/10 py-3 rounded-xl"
-              >
-                <span className="mr-2">🔍</span>
-                Google
-              </Button>
-            </div>
+            {/* Google Login */}
+            <Button
+              type="button"
+              variant="outline"
+              onClick={handleGoogleLogin}
+              disabled={isLoading}
+              className="w-full border border-white/20 text-white hover:bg-white/10 py-3 rounded-xl flex items-center justify-center"
+            >
+              <span className="mr-2">🔍</span>
+              Continue with Google
+            </Button>
           </form>
 
           {/* Sign Up Link */}
