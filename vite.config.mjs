@@ -4,6 +4,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import tagger from "@dhiwise/component-tagger";
 
 // https://vitejs.dev/config/
+// Force Vercel redeploy - FreeMind AI
 export default defineConfig({
   build: {
     outDir: "dist",
