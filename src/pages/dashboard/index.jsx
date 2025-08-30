@@ -62,59 +62,59 @@ const Dashboard = () => {
   const projectsData = [
     {
       id: 1,
-      name: 'Customer Churn Prediction',
-      description: 'Predict customer churn using machine learning algorithms to identify at-risk customers and improve retention strategies.',
+      name: 'Digital India Payment Fraud Detection',
+      description: 'AI-powered fraud detection system for UPI transactions to secure digital payments across India.',
       status: 'training',
       progress: 75,
       thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
       lastModified: '2 hours ago',
-      tags: ['Classification', 'Customer Analytics', 'Business Intelligence']
+      tags: ['FinTech', 'Security', 'UPI', 'Digital India']
     },
     {
       id: 2,
-      name: 'Sales Forecasting Model',
-      description: 'Time series forecasting model to predict future sales trends and optimize inventory management.',
+      name: 'Crop Yield Prediction - Kisan AI',
+      description: 'ML model to predict crop yields using satellite imagery and weather data to help Indian farmers optimize production.',
       status: 'deployed',
       thumbnail: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?w=400&h=300&fit=crop',
       lastModified: '1 day ago',
-      tags: ['Regression', 'Time Series', 'Sales']
+      tags: ['AgriTech', 'Satellite Imagery', 'Weather Analysis']
     },
     {
       id: 3,
-      name: 'Image Classification System',
-      description: 'Deep learning model for automated image classification and object detection in manufacturing quality control.',
+      name: 'Ayurveda Medicine Classifier',
+      description: 'Computer vision system to identify and classify traditional Indian medicinal plants using deep learning.',
       status: 'preparing',
       thumbnail: 'https://images.pixabay.com/photo/2017/05/10/19/29/robot-2301646_1280.jpg?w=400&h=300&fit=crop',
       lastModified: '3 days ago',
-      tags: ['Computer Vision', 'CNN', 'Manufacturing']
+      tags: ['Healthcare', 'Traditional Medicine', 'Plant Recognition']
     },
     {
       id: 4,
-      name: 'Sentiment Analysis Tool',
-      description: 'Natural language processing model to analyze customer feedback and social media sentiment.',
+      name: 'Hindi-English Code-Mixed Analysis',
+      description: 'NLP model to analyze sentiment in Hinglish social media posts and customer reviews.',
       status: 'completed',
       thumbnail: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop',
       lastModified: '5 days ago',
-      tags: ['NLP', 'Sentiment Analysis', 'Text Processing']
+      tags: ['NLP', 'Multilingual', 'Social Media', 'Hinglish']
     },
     {
       id: 5,
-      name: 'Fraud Detection System',
-      description: 'Real-time fraud detection using anomaly detection algorithms for financial transactions.',
+      name: 'Smart City Traffic Optimizer',
+      description: 'Real-time traffic flow optimization for Indian metropolitan cities using computer vision and IoT sensors.',
       status: 'training',
       progress: 45,
       thumbnail: 'https://images.pexels.com/photos/164527/pexels-photo-164527.jpeg?w=400&h=300&fit=crop',
       lastModified: '1 week ago',
-      tags: ['Anomaly Detection', 'Finance', 'Security']
+      tags: ['Smart City', 'Traffic Management', 'IoT', 'Computer Vision']
     },
     {
       id: 6,
-      name: 'Recommendation Engine',
-      description: 'Collaborative filtering system for personalized product recommendations in e-commerce.',
+      name: 'E-commerce Recommendation - Bharatiya Style',
+      description: 'Personalized product recommendations for Indian festivals, regional preferences, and cultural occasions.',
       status: 'deployed',
       thumbnail: 'https://images.pixabay.com/photo/2017/08/10/08/47/laptop-2619337_1280.jpg?w=400&h=300&fit=crop',
       lastModified: '2 weeks ago',
-      tags: ['Recommendation', 'E-commerce', 'Collaborative Filtering']
+      tags: ['E-commerce', 'Cultural AI', 'Festival Analytics', 'Regional Preferences']
     }
   ];
 
@@ -123,37 +123,37 @@ const Dashboard = () => {
     {
       id: 1,
       type: 'model_trained',
-      description: 'Customer Churn Prediction model training completed',
+      description: 'Digital India Payment Fraud Detection model training completed 🚀',
       timestamp: new Date(Date.now() - 1800000), // 30 minutes ago
-      project: 'Customer Analytics'
+      project: 'FinTech Security'
     },
     {
       id: 2,
       type: 'model_deployed',
-      description: 'Sales Forecasting model deployed to production',
+      description: 'Kisan AI Crop Yield model deployed to production 🌾',
       timestamp: new Date(Date.now() - 3600000), // 1 hour ago
-      project: 'Sales Intelligence'
+      project: 'AgriTech Intelligence'
     },
     {
       id: 3,
       type: 'dataset_uploaded',
-      description: 'New customer data uploaded for analysis',
+      description: 'New Ayurveda medicinal plant dataset uploaded 🌿',
       timestamp: new Date(Date.now() - 7200000), // 2 hours ago
-      project: 'Customer Analytics'
+      project: 'Healthcare AI'
     },
     {
       id: 4,
       type: 'project_created',
-      description: 'Image Classification System project created',
+      description: 'Smart City Traffic Optimizer project created 🏙️',
       timestamp: new Date(Date.now() - 14400000), // 4 hours ago
-      project: 'Quality Control'
+      project: 'Urban Intelligence'
     },
     {
       id: 5,
       type: 'collaboration',
-      description: 'John Doe joined Fraud Detection project',
+      description: 'Team member joined Hindi-English Analysis project 🤝',
       timestamp: new Date(Date.now() - 21600000), // 6 hours ago
-      project: 'Security Analytics'
+      project: 'Language AI'
     }
   ];
 
@@ -161,7 +161,7 @@ const Dashboard = () => {
   const trainingJobsData = [
     {
       id: 1,
-      modelName: 'Customer Churn v2.1',
+      modelName: 'UPI Fraud Detection v2.1 🛡️',
       status: 'running',
       progress: 75,
       currentEpoch: 15,
@@ -171,7 +171,7 @@ const Dashboard = () => {
     },
     {
       id: 2,
-      modelName: 'Fraud Detection v1.3',
+      modelName: 'Kisan Crop Predictor v1.3 🌾',
       status: 'running',
       progress: 45,
       currentEpoch: 9,
@@ -181,7 +181,7 @@ const Dashboard = () => {
     },
     {
       id: 3,
-      modelName: 'Image Classifier v1.0',
+      modelName: 'Ayurveda Plant Classifier v1.0 🌿',
       status: 'queued',
       progress: 0,
       currentEpoch: 0,
@@ -194,32 +194,32 @@ const Dashboard = () => {
   const templatesData = [
     {
       id: 1,
-      name: 'Customer Segmentation',
-      description: 'Cluster customers based on behavior patterns',
-      type: 'clustering',
+      name: 'Cricket Analytics 🏏',
+      description: 'Analyze player performance and match predictions',
+      type: 'sports_analytics',
       difficulty: 'Beginner',
       estimatedTime: '30 min'
     },
     {
       id: 2,
-      name: 'Price Prediction',
-      description: 'Predict product prices using regression',
-      type: 'regression',
+      name: 'Monsoon Prediction ⛈️',
+      description: 'Predict rainfall patterns for agricultural planning',
+      type: 'weather_forecasting',
       difficulty: 'Intermediate',
       estimatedTime: '45 min'
     },
     {
       id: 3,
-      name: 'Text Classification',
-      description: 'Classify documents into categories',
+      name: 'Bollywood Sentiment 🎬',
+      description: 'Analyze movie reviews in Hindi and English',
       type: 'nlp',
       difficulty: 'Intermediate',
       estimatedTime: '1 hour'
     },
     {
       id: 4,
-      name: 'Object Detection',
-      description: 'Detect objects in images using CNN',
+      name: 'Street Food Classification 🍛',
+      description: 'Identify Indian street food items using computer vision',
       type: 'computer_vision',
       difficulty: 'Advanced',
       estimatedTime: '2 hours'
@@ -270,11 +270,11 @@ const Dashboard = () => {
           <div className="mb-12">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
               <div>
-                <h1 className="text-4xl font-bold text-foreground mb-3 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  Welcome back, John! 👋
+                <h1 className="text-4xl font-bold text-foreground mb-3">
+                  Welcome back, Alok! 🙏✨
                 </h1>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Here's what's happening with your ML projects today.
+                  Here's what's happening with your ML projects today. Let's build the future of Indian AI! 🇮🇳
                 </p>
               </div>
               <Button

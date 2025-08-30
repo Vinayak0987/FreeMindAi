@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes as RouterRoutes, Route } from "react-router-dom";
+import { BrowserRouter, Routes as RouterRoutes, Route, Navigate } from "react-router-dom";
 import ScrollToTop from "components/ScrollToTop";
 import ErrorBoundary from "components/ErrorBoundary";
 import NotFound from "pages/NotFound";
@@ -17,7 +17,7 @@ const Routes = () => {
       <ScrollToTop />
       <RouterRoutes>
         {/* Define your route here */}
-        <Route path="/" element={<AIAssistantChat />} />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/model-training" element={<ModelTraining />} />
         <Route path="/model-deployment" element={<ModelDeployment />} />
         <Route path="/dashboard" element={<Dashboard />} />

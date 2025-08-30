@@ -43,21 +43,21 @@ const ProjectHeader = ({ project, onProjectUpdate, onExport, onShare }) => {
   };
 
   return (
-    <div className="bg-card border-b border-border px-6 py-4">
+    <div className="bg-card border-b border-border px-4 py-3">
       {/* Breadcrumb */}
-      <div className="flex items-center space-x-2 text-sm text-muted-foreground mb-4">
+      <div className="flex items-center space-x-2 text-sm text-muted-foreground mb-3">
         <button 
           onClick={() => navigate('/dashboard')}
           className="hover:text-foreground transition-colors duration-150"
         >
           Dashboard
         </button>
-        <Icon name="ChevronRight" size={16} />
+        <Icon name="ChevronRight" size={14} />
         <span className="text-foreground font-medium">Project Workspace</span>
       </div>
       {/* Main Header */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-3">
           {/* Project Name */}
           <div className="flex items-center space-x-2">
             {isEditing ? (
@@ -72,7 +72,7 @@ const ProjectHeader = ({ project, onProjectUpdate, onExport, onShare }) => {
               />
             ) : (
               <h1 
-                className="text-2xl font-bold text-foreground cursor-pointer hover:text-primary transition-colors duration-150"
+                className="text-xl font-bold text-foreground cursor-pointer hover:text-primary transition-colors duration-150"
                 onClick={() => setIsEditing(true)}
               >
                 {project?.name}
@@ -82,25 +82,25 @@ const ProjectHeader = ({ project, onProjectUpdate, onExport, onShare }) => {
               onClick={() => setIsEditing(true)}
               className="p-1 hover:bg-muted rounded transition-colors duration-150"
             >
-              <Icon name="Edit2" size={16} className="text-muted-foreground" />
+              <Icon name="Edit2" size={14} className="text-muted-foreground" />
             </button>
           </div>
 
           {/* Status Badge */}
-          <div className={`flex items-center space-x-2 px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(project?.status)}`}>
-            <Icon name={getStatusIcon(project?.status)} size={16} />
+          <div className={`flex items-center space-x-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${getStatusColor(project?.status)}`}>
+            <Icon name={getStatusIcon(project?.status)} size={14} />
             <span className="capitalize">{project?.status}</span>
           </div>
 
           {/* Progress */}
           <div className="flex items-center space-x-2">
-            <div className="w-32 bg-muted rounded-full h-2">
+            <div className="w-24 bg-muted rounded-full h-1.5">
               <div 
-                className="h-2 bg-primary rounded-full transition-all duration-300"
+                className="h-1.5 bg-primary rounded-full transition-all duration-300"
                 style={{ width: `${project?.progress}%` }}
               />
             </div>
-            <span className="text-sm text-muted-foreground">{project?.progress}%</span>
+            <span className="text-xs text-muted-foreground">{project?.progress}%</span>
           </div>
         </div>
 
@@ -139,25 +139,25 @@ const ProjectHeader = ({ project, onProjectUpdate, onExport, onShare }) => {
         </div>
       </div>
       {/* Project Info */}
-      <div className="flex items-center space-x-6 mt-4 text-sm text-muted-foreground">
+      <div className="flex items-center space-x-4 mt-3 text-xs text-muted-foreground">
         <div className="flex items-center space-x-1">
-          <Icon name="Calendar" size={16} />
+          <Icon name="Calendar" size={14} />
           <span>Created {project?.createdAt}</span>
         </div>
         <div className="flex items-center space-x-1">
-          <Icon name="User" size={16} />
+          <Icon name="User" size={14} />
           <span>By {project?.owner}</span>
         </div>
         <div className="flex items-center space-x-1">
-          <Icon name="Clock" size={16} />
+          <Icon name="Clock" size={14} />
           <span>Last updated {project?.lastUpdated}</span>
         </div>
         <div className="flex items-center space-x-1">
-          <Icon name="Database" size={16} />
+          <Icon name="Database" size={14} />
           <span>{project?.datasetCount} datasets</span>
         </div>
         <div className="flex items-center space-x-1">
-          <Icon name="Brain" size={16} />
+          <Icon name="Brain" size={14} />
           <span>{project?.modelCount} models</span>
         </div>
       </div>

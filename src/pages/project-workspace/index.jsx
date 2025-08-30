@@ -147,15 +147,15 @@ const ProjectWorkspace = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <div className="pt-16 flex">
+      <div className="pt-16 flex min-h-screen">
         <ProjectSidebar 
           project={currentProject}
           isCollapsed={isSidebarCollapsed}
           onToggleCollapse={toggleSidebar}
         />
         
-        <main className={`flex-1 transition-all duration-300 ${
-          isSidebarCollapsed ? 'ml-16' : 'ml-80'
+        <main className={`flex-1 flex flex-col transition-all duration-300 ${
+          isSidebarCollapsed ? 'ml-16' : 'ml-72'
         }`}>
           <ProjectHeader
             project={currentProject}
@@ -164,7 +164,7 @@ const ProjectWorkspace = () => {
             onShare={handleShare}
           />
           
-          <div className="min-h-screen">
+          <div className="flex-1 bg-background">
             {renderMainContent()}
           </div>
         </main>
