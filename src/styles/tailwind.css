@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Colors - Modern soft palette */
+    --color-background: #FAFBFC; /* Soft white background */
+    --color-foreground: #0F172A; /* Deep slate for better contrast */
+    --color-border: #E1E7EF; /* Softer border color */
+    --color-input: #FFFFFF; /* white */
+    --color-ring: #4F46E5; /* Modern indigo */
+    
+    /* Card Colors */
+    --color-card: #FFFFFF; /* white */
+    --color-card-foreground: #0F172A; /* Deep slate */
+    
+    /* Popover Colors */
+    --color-popover: #FFFFFF; /* white */
+    --color-popover-foreground: #0F172A; /* Deep slate */
+    
+    /* Muted Colors */
+    --color-muted: #F8FAFC; /* Ultra light slate */
+    --color-muted-foreground: #64748B; /* Medium slate */
+    
+    /* Primary Colors - Modern indigo gradient */
+    --color-primary: #4F46E5; /* indigo-600 */
+    --color-primary-foreground: #FFFFFF; /* white */
+    
+    /* Secondary Colors */
+    --color-secondary: #64748B; /* slate-500 */
+    --color-secondary-foreground: #FFFFFF; /* white */
+    
+    /* Accent Colors - Vibrant purple */
+    --color-accent: #8B5CF6; /* violet-500 */
+    --color-accent-foreground: #FFFFFF; /* white */
+    
+    /* Success Colors - Fresh green */
+    --color-success: #059669; /* emerald-600 */
+    --color-success-foreground: #FFFFFF; /* white */
+    
+    /* Warning Colors - Warm orange */
+    --color-warning: #EA580C; /* orange-600 */
+    --color-warning-foreground: #FFFFFF; /* white */
+    
+    /* Error/Destructive Colors - Modern red */
+    --color-error: #DC2626; /* red-600 */
+    --color-error-foreground: #FFFFFF; /* white */
+    --color-destructive: #DC2626; /* red-600 */
+    --color-destructive-foreground: #FFFFFF; /* white */
+    
+    /* Surface Color */
+    --color-surface: #FFFFFF; /* white */
+    
+    /* Text Colors */
+    --color-text-primary: #0F172A; /* Deep slate */
+    --color-text-secondary: #64748B; /* Medium slate */
+    
+    /* Border Radius - More modern rounded corners */
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Elevation System */
+  .elevation-1 {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+  
+  .elevation-2 {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  .elevation-3 {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Animation Classes */
+  .animate-fade-in {
+    animation: fadeIn 200ms ease-out;
+  }
+  
+  .animate-slide-in {
+    animation: slideIn 300ms ease-out;
+  }
+  
+  .animate-hover {
+    transition: all 150ms ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
+}
