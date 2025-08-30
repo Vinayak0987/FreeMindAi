@@ -274,7 +274,7 @@ const Dashboard = () => {
                   Welcome back, Alok! 🙏✨
                 </h1>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Here's what's happening with your ML projects today. Let's build the future of Indian AI! 🇮🇳
+                  Here's what's happening with your ML projects today. Let's build the future of AI! 🚀
                 </p>
               </div>
               <Button

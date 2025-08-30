@@ -111,19 +111,19 @@ const Login = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center px-6 py-12">
       {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500/30 rounded-full mix-blend-multiply filter blur-xl animate-pulse" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-orange-500/30 rounded-full mix-blend-multiply filter blur-xl animate-pulse" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-green-500/20 rounded-full mix-blend-multiply filter blur-xl animate-pulse" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/30 rounded-full mix-blend-multiply filter blur-xl animate-pulse" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/30 rounded-full mix-blend-multiply filter blur-xl animate-pulse" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/20 rounded-full mix-blend-multiply filter blur-xl animate-pulse" />
       </div>
 
       <div className="relative z-10 w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center space-x-3 mb-8 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-orange-500 to-green-600 flex items-center justify-center group-hover:shadow-lg transition-all duration-300">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center group-hover:shadow-lg transition-all duration-300">
               <Icon name="Brain" size={24} color="white" />
             </div>
-            <span className="text-2xl font-bold text-white">🧠 Alok's AI Studio</span>
+            <span className="text-2xl font-bold text-white">🧠 FreeMind AI</span>
           </Link>
           
           <h1 className="text-3xl font-bold text-white mb-2">Welcome Back!</h1>
@@ -146,7 +146,7 @@ const Login = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Enter your email"
-                  className="w-full bg-white/10 border border-white/20 text-white placeholder-white/50 focus:border-orange-500 focus:ring-orange-500/20 rounded-xl"
+                  className="w-full bg-white/10 border border-white/20 text-white placeholder-white/50 focus:border-blue-500 focus:ring-blue-500/20 rounded-xl"
                 />
                 <Icon 
                   name="Mail" 
@@ -172,7 +172,7 @@ const Login = () => {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Enter your password"
-                  className="w-full bg-white/10 border border-white/20 text-white placeholder-white/50 focus:border-orange-500 focus:ring-orange-500/20 rounded-xl pr-12"
+                  className="w-full bg-white/10 border border-white/20 text-white placeholder-white/50 focus:border-blue-500 focus:ring-blue-500/20 rounded-xl pr-12"
                 />
                 <button
                   type="button"
@@ -192,13 +192,13 @@ const Login = () => {
               <label className="flex items-center space-x-2">
                 <input
                   type="checkbox"
-                  className="rounded border-white/20 bg-white/10 text-orange-500 focus:ring-orange-500/20"
+                  className="rounded border-white/20 bg-white/10 text-blue-500 focus:ring-blue-500/20"
                 />
                 <span className="text-sm text-white/70">Remember me</span>
               </label>
               <Link
                 to="/forgot-password"
-                className="text-sm text-orange-400 hover:text-orange-300 transition-colors"
+                className="text-sm text-blue-400 hover:text-blue-300 transition-colors"
               >
                 Forgot password?
               </Link>
@@ -215,7 +215,7 @@ const Login = () => {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-orange-500 to-green-600 hover:from-orange-600 hover:to-green-700 text-white border-0 py-3 text-base font-semibold rounded-xl shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 py-3 text-base font-semibold rounded-xl shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>

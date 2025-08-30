@@ -54,12 +54,12 @@ const Header = () => {
             onClick={handleLogoClick}
             className="flex items-center space-x-3 hover:opacity-80 transition-opacity duration-150"
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-green-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
               <Icon name="Brain" size={20} color="white" />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-semibold text-foreground">🧠 Alok's AI Studio</span>
-              <span className="text-xs text-muted-foreground -mt-1">भारतीय ML Platform</span>
+              <span className="text-lg font-semibold text-foreground">🧠 FreeMind AI</span>
+              <span className="text-xs text-muted-foreground -mt-1">Intelligent ML Platform</span>
             </div>
           </button>
         </div>
