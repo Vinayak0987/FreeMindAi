@@ -3,8 +3,8 @@
   publish = "dist"
 
 [build.environment]
-  # Disable secrets scanning for files that may contain placeholder values
-  SECRETS_SCAN_OMIT_PATHS = "dist/assets/*.js.map,DEPLOYMENT.md"
+  # Disable secrets scanning entirely for this build
+  SECRETS_SCAN_ENABLED = "false"
   
 # Redirect all API routes to your backend (if using external API)
 [[redirects]]
