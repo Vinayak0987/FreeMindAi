@@ -27,22 +27,24 @@
    - Vercel will auto-detect it as a Vite project
 
 3. **Set Environment Variables in Vercel Dashboard:**
-   ```
-   MONGODB_URI=mongodb+srv://A-alok17:Gupta2005@cluster0.zmkrfwa.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-   JWT_SECRET=alok_freemind_ai_secret_key_2024
-   NODE_ENV=production
-   VITE_GOOGLE_CLIENT_ID=demo-google-client-id-for-development
-   ```
+   Copy the variables from `.env.example` and set them with your actual values:
    
-   **Add your actual API keys:**
+   **Required Environment Variables:**
    ```
-   VITE_OPENAI_API_KEY=your-openai-api-key-here
-   VITE_GEMINI_API_KEY=your-gemini-api-key-here
-   VITE_ANTHROPIC_API_KEY=your-anthropic-api-key-here
-   VITE_GOOGLE_ANALYTICS_ID=your-google-analytics-id-here
-   VITE_ADSENSE_ID=your-adsense-id-here
-   VITE_PERPLEXITY_API_KEY=your-perplexity-api-key-here
-   VITE_STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key-here
+   MONGODB_URI=your-mongodb-connection-string
+   JWT_SECRET=your-jwt-secret-key
+   NODE_ENV=production
+   VITE_API_URL=https://your-app-name.vercel.app/api
+   VITE_GOOGLE_CLIENT_ID=your-google-client-id
+   
+   # Add your actual API keys
+   VITE_OPENAI_API_KEY=your-openai-api-key
+   VITE_GEMINI_API_KEY=your-gemini-api-key
+   VITE_ANTHROPIC_API_KEY=your-anthropic-api-key
+   VITE_GOOGLE_ANALYTICS_ID=your-google-analytics-id
+   VITE_ADSENSE_ID=your-adsense-id
+   VITE_PERPLEXITY_API_KEY=your-perplexity-api-key
+   VITE_STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
    ```
 
 4. **Deploy!**
