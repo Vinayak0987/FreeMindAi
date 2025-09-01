@@ -11,7 +11,9 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:4028', 'http://localhost:3000'],
+  origin: process.env.NODE_ENV === 'production' 
+    ? [process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://your-app.vercel.app'] 
+    : ['http://localhost:4028', 'http://localhost:3000'],
   credentials: true
 }));
 app.use(express.json());
@@ -47,8 +49,13 @@ app.use((error, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+// For Vercel serverless functions, we export the app instead of listening
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, 'localhost', () => {
+    console.log(`🌟 Alok's AI Studio Backend running on http://localhost:${PORT}`);
+  });
+}
 
-app.listen(PORT, () => {
-  console.log(`🌟 Alok's AI Studio Backend running on port ${PORT}`);
-});
+// Export the Express app for Vercel
+module.exports = app;

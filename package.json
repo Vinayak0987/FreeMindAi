@@ -68,7 +68,8 @@
     "serve": "vite preview",
     "server": "node server/server.js",
     "dev:server": "nodemon server/server.js",
-    "dev": "concurrently \"npm run dev:server\" \"npm run start\""
+    "dev": "concurrently \"npm run dev:server\" \"npm run start\"",
+    "vercel-build": "npm run build"
   },
   "eslintConfig": {
     "extends": [
