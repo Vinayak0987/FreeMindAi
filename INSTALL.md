@@ -155,7 +155,7 @@ npm run build
 
 For issues and questions:
 - Create an issue on GitHub: https://github.com/Vinayak0987/FreeMindAi/issues
-- Contact: TeamVsa
+- Contact: TeamAntiMatter
 
 ---
 
