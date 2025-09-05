@@ -115,7 +115,7 @@ const LandingPage = () => {
         <div className="relative z-10 text-center max-w-5xl mx-auto">
           <div className="mb-6">
             <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/90 text-gray-700 border border-gray-200 backdrop-blur-sm shadow-sm">
-              ✨ Powered by AI • Built by TeamAntiMatter
+              ✨ Powered by AI • Built by Team AntiMatter
             </span>
           </div>
           
@@ -253,7 +253,7 @@ const LandingPage = () => {
       <section id="about" className="relative py-32 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-6xl font-bold mb-8 text-gray-900">
-            Built by TeamAntiMatter
+            Built by Team AntiMatter
           </h2>
           <div className="bg-white/90 backdrop-blur-lg rounded-3xl p-12 border border-gray-200 shadow-xl">
             <div className="w-24 h-24 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center mx-auto mb-6">
@@ -265,7 +265,7 @@ const LandingPage = () => {
               intuitive design and powerful automation capabilities."
             </p>
             <div className="mt-8">
-              <div className="text-gray-900 font-semibold text-lg">TeamAntiMatter</div>
+              <div className="text-gray-900 font-semibold text-lg">Team AntiMatter</div>
               <div className="text-gray-600">AI Innovation Team</div>
             </div>
           </div>
@@ -284,7 +284,7 @@ const LandingPage = () => {
             </div>
             
             <div className="text-gray-600 text-center">
-              © 2024 FreeMind AI by TeamAntiMatter. Built with ❤️
+              © 2024 FreeMind AI by Team AntiMatter. Built with ❤️
             </div>
           </div>
         </div>
