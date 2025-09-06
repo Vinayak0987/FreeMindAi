@@ -183,3 +183,112 @@
 2025-09-07 00:41:42,685 - __main__ - INFO - No file uploaded, creating mock processing response
 2025-09-07 00:41:42,685 - __main__ - INFO - No file uploaded, creating mock processing response
 2025-09-07 00:41:42,686 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:41:42] "POST /process HTTP/1.1" 200 -
+2025-09-07 01:22:29,594 - __main__ - INFO - Processing request - Task Type: object-detection
+2025-09-07 01:22:29,594 - __main__ - INFO - Processing request - Task Type: object-detection
+2025-09-07 01:22:29,616 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 01:22:29,616 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 01:22:29,634 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 01:22:29] "POST /process HTTP/1.1" 200 -
+2025-09-07 01:27:44,870 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 01:27:44,870 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 01:27:44,873 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 01:27:44,873 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 01:27:44,878 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 01:27:44] "POST /process HTTP/1.1" 200 -
+2025-09-07 01:32:47,396 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 01:32:47,396 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 01:32:49,710 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 01:32:49,710 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 01:32:49,712 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 01:32:49,712 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 01:32:51,220 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 01:32:51] "POST /process HTTP/1.1" 200 -
+2025-09-07 01:36:49,436 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 01:36:49,436 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 01:36:49,516 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 01:36:49,516 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 01:36:49,517 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 01:36:49,517 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 01:36:52,860 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 01:36:52] "POST /process HTTP/1.1" 200 -
+2025-09-07 01:38:50,482 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 01:39:03,644 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 01:39:03,646 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 01:39:30,413 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 01:39:30,413 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 01:39:30,665 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 01:39:30,665 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 01:39:30,666 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 01:39:30,666 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 01:39:30,667 - __main__ - INFO - Dataset analysis: 5 samples, 5 features
+2025-09-07 01:39:30,667 - __main__ - INFO - Dataset analysis: 5 samples, 5 features
+2025-09-07 01:39:30,670 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 01:39:30] "POST /process HTTP/1.1" 200 -
+2025-09-07 01:41:36,946 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 01:41:36,946 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 01:41:37,691 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 01:41:37,691 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 01:41:37,691 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 01:41:37,691 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 01:41:37,693 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
+2025-09-07 01:41:37,693 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
+2025-09-07 01:41:37,696 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 01:41:37] "POST /process HTTP/1.1" 200 -
+2025-09-07 01:42:06,860 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 01:42:06,860 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 01:42:07,541 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 01:42:07,541 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 01:42:07,542 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 01:42:07,542 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 01:42:07,543 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
+2025-09-07 01:42:07,543 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
+2025-09-07 01:42:07,544 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 01:42:07] "POST /process HTTP/1.1" 200 -
+2025-09-07 01:44:54,754 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 01:44:54,754 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 01:44:55,420 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 01:44:55,420 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 01:44:55,421 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 01:44:55,421 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 01:44:55,422 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
+2025-09-07 01:44:55,422 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
+2025-09-07 01:44:55,424 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 01:44:55] "POST /process HTTP/1.1" 200 -
+2025-09-07 02:03:23,745 - __main__ - INFO - Processing request - Task Type: clustering
+2025-09-07 02:03:23,745 - __main__ - INFO - Processing request - Task Type: clustering
+2025-09-07 02:03:25,164 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 02:03:25,164 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 02:03:25,173 - __main__ - INFO - Changing task type from clustering to regression based on file analysis
+2025-09-07 02:03:25,173 - __main__ - INFO - Changing task type from clustering to regression based on file analysis
+2025-09-07 02:03:25,189 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
+2025-09-07 02:03:25,189 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
+2025-09-07 02:03:25,201 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 02:03:25] "POST /process HTTP/1.1" 200 -
+2025-09-07 02:23:02,276 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 02:23:12,352 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 02:23:12,353 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 02:23:47,501 - __main__ - INFO - Processing request - Task Type: test
+2025-09-07 02:23:47,501 - __main__ - INFO - Processing request - Task Type: test
+2025-09-07 02:23:47,502 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 02:23:47,502 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 02:23:47,504 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 02:23:47] "POST /process HTTP/1.1" 200 -
+2025-09-07 02:24:21,357 - __main__ - INFO - Processing request - Task Type: test
+2025-09-07 02:24:21,357 - __main__ - INFO - Processing request - Task Type: test
+2025-09-07 02:24:21,359 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 02:24:21,359 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 02:24:21,361 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 02:24:21] "POST /process HTTP/1.1" 200 -
+2025-09-07 02:35:43,200 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 02:35:50,245 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 02:35:50,246 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 03:22:35,763 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 03:22:35,763 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 03:22:37,160 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 03:22:37,160 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 03:22:37,162 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 03:22:37,162 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 03:22:37,170 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
+2025-09-07 03:22:37,170 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
+2025-09-07 03:22:37,185 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 03:22:37] "POST /process HTTP/1.1" 200 -

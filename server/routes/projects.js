@@ -91,6 +91,55 @@ router.get('/', auth, [
   }
 });
 
+// Get project metrics/statistics (MUST be before /:id route)
+router.get('/metrics/overview', auth, async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const metrics = await Project.aggregate([
+      { $match: { owner: userId } },
+      {
+        $group: {
+          _id: null,
+          totalProjects: { $sum: 1 },
+          preparingProjects: {
+            $sum: { $cond: [{ $eq: ['$status', 'preparing'] }, 1, 0] }
+          },
+          trainingProjects: {
+            $sum: { $cond: [{ $eq: ['$status', 'training'] }, 1, 0] }
+          },
+          deployedProjects: {
+            $sum: { $cond: [{ $eq: ['$status', 'deployed'] }, 1, 0] }
+          },
+          completedProjects: {
+            $sum: { $cond: [{ $eq: ['$status', 'completed'] }, 1, 0] }
+          }
+        }
+      }
+    ]);
+
+    const result = metrics[0] || {
+      totalProjects: 0,
+      preparingProjects: 0,
+      trainingProjects: 0,
+      deployedProjects: 0,
+      completedProjects: 0
+    };
+
+    res.json({
+      success: true,
+      data: { metrics: result }
+    });
+  } catch (error) {
+    console.error('Error fetching project metrics:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch project metrics',
+      error: error.message
+    });
+  }
+});
+
 // Get a specific project
 router.get('/:id', auth, [
   param('id').isMongoId()
@@ -366,55 +415,6 @@ router.delete('/:id', auth, [
     res.status(500).json({
       success: false,
       message: 'Failed to delete project',
-      error: error.message
-    });
-  }
-});
-
-// Get project metrics/statistics
-router.get('/metrics/overview', auth, async (req, res) => {
-  try {
-    const userId = req.user._id;
-
-    const metrics = await Project.aggregate([
-      { $match: { owner: userId } },
-      {
-        $group: {
-          _id: null,
-          totalProjects: { $sum: 1 },
-          preparingProjects: {
-            $sum: { $cond: [{ $eq: ['$status', 'preparing'] }, 1, 0] }
-          },
-          trainingProjects: {
-            $sum: { $cond: [{ $eq: ['$status', 'training'] }, 1, 0] }
-          },
-          deployedProjects: {
-            $sum: { $cond: [{ $eq: ['$status', 'deployed'] }, 1, 0] }
-          },
-          completedProjects: {
-            $sum: { $cond: [{ $eq: ['$status', 'completed'] }, 1, 0] }
-          }
-        }
-      }
-    ]);
-
-    const result = metrics[0] || {
-      totalProjects: 0,
-      preparingProjects: 0,
-      trainingProjects: 0,
-      deployedProjects: 0,
-      completedProjects: 0
-    };
-
-    res.json({
-      success: true,
-      data: { metrics: result }
-    });
-  } catch (error) {
-    console.error('Error fetching project metrics:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Failed to fetch project metrics',
       error: error.message
     });
   }

@@ -47,7 +47,7 @@ const ActivityFeed = ({ activities }) => {
       </div>
       <div className="space-y-3">
         {activities?.map((activity) => (
-          <div key={activity?.id} className="flex items-start space-x-3 group">
+          <div key={activity?._id || activity?.id} className="flex items-start space-x-3 group">
             <div className={`w-8 h-8 rounded-full bg-muted flex items-center justify-center flex-shrink-0 ${getActivityColor(activity?.type)}`}>
               <Icon name={getActivityIcon(activity?.type)} size={16} />
             </div>
@@ -63,7 +63,7 @@ const ActivityFeed = ({ activities }) => {
                   <>
                     <span className="text-xs text-muted-foreground">•</span>
                     <span className="text-xs text-muted-foreground">
-                      {activity?.project}
+                      {typeof activity?.project === 'string' ? activity?.project : activity?.project?.name || 'Unknown Project'}
                     </span>
                   </>
                 )}

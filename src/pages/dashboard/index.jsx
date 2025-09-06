@@ -22,9 +22,11 @@ const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('recent');
   const [filterBy, setFilterBy] = useState('all');
+  const [isAuthenticated, setIsAuthenticated] = useState(null); // null = checking, false = not auth, true = auth
   const navigate = useNavigate();
 
-  // API data hooks
+  // CRITICAL: All hooks must be called BEFORE any conditional returns!
+  // API data hooks - these must be called on every render
   const { data: projectsData, loading: projectsLoading, error: projectsError, refetch: refetchProjects } = useProjects({
     search: searchQuery,
     sort: sortBy,
@@ -36,6 +38,38 @@ const Dashboard = () => {
   const { data: activitiesData, loading: activitiesLoading } = useActivities();
   const { data: trainingJobsData, loading: trainingLoading } = useTrainingJobs();
   const { data: templatesData, loading: templatesLoading } = useTemplates();
+
+  // Check authentication status
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.log('No authentication token found, redirecting to login');
+        navigate('/login');
+        setIsAuthenticated(false);
+        return;
+      }
+      setIsAuthenticated(true);
+    };
+    
+    checkAuth();
+  }, [navigate]);
+
+  // Don't render anything while checking authentication or if not authenticated
+  if (isAuthenticated === null) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Checking authentication...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isAuthenticated === false) {
+    return null; // This will be handled by the redirect
+  }
 
   // Transform metrics data for display
   const displayMetrics = metricsData?.metrics ? [
@@ -74,13 +108,7 @@ const Dashboard = () => {
   ] : [];
 
 
-  // Refetch data when filters change
-  useEffect(() => {
-    if (searchQuery || sortBy !== 'recent' || filterBy !== 'all') {
-      refetchProjects();
-    }
-  }, [searchQuery, sortBy, filterBy]); // Removed refetchProjects from deps to prevent loop
-
+  // Note: No manual refetch needed - useProjects hook will automatically refetch when params change
 
   // Get projects from API data
   const projects = projectsData?.data?.projects || [];

@@ -97,9 +97,10 @@ const DataProcessingStep = ({ data, updateData, stepData }) => {
 
     setProcessing(true);
     try {
-      // Prepare preprocessing configuration
+      // Prepare preprocessing configuration with actual file data
       const preprocessingConfig = {
-        taskType: data.task || 'text_classification',
+        taskType: data.taskConfig?.id || data.task || 'text_classification',
+        textPrompt: data.description || 'ML Project',
         preprocessing: {
           dataCleaning: data.preprocessing?.options?.some(opt => opt.id === 'data_cleaning') || false,
           dataSplitting: data.preprocessing?.options?.some(opt => opt.id === 'data_splitting') || false,
@@ -112,6 +113,14 @@ const DataProcessingStep = ({ data, updateData, stepData }) => {
           dataType: data.dataType || 'text'
         }
       };
+
+      // Add the first uploaded file to the configuration
+      if (data.datasets && data.datasets.length > 0 && data.datasets[0].file) {
+        preprocessingConfig.file = data.datasets[0].file;
+        console.log('Adding file to processing:', data.datasets[0].file.name);
+      } else {
+        console.log('No file found in datasets:', data.datasets);
+      }
 
       const response = await apiService.nebula.processDataset(preprocessingConfig);
       const results = response;

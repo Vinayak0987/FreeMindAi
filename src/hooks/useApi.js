@@ -59,7 +59,27 @@ const getMockData = (type) => {
     },
     activities: {
       data: {
-        activities: []
+        activities: [
+          {
+            _id: 'act1',
+            id: 'act1',
+            type: 'project_created',
+            description: 'Welcome to FreeMind AI! Start by creating your first ML project.',
+            timestamp: new Date(Date.now() - 30 * 60 * 1000).toISOString(), // 30 minutes ago
+            project: {
+              _id: 'proj1',
+              name: 'Getting Started'
+            }
+          },
+          {
+            _id: 'act2',
+            id: 'act2',
+            type: 'dataset_uploaded',
+            description: 'Explore our pre-built templates for quick ML model development.',
+            timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
+            project: 'Sample Project'
+          }
+        ]
       }
     },
     trainingJobs: {
@@ -123,11 +143,8 @@ export const useProjects = (params = {}) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [hasInitialized, setHasInitialized] = useState(false);
 
   const fetchData = useCallback(async () => {
-    if (hasInitialized && !isAuthenticated()) return; // Prevent repeated calls for unauthenticated users
-    
     try {
       setLoading(true);
       setError(null);
@@ -136,11 +153,9 @@ export const useProjects = (params = {}) => {
         // Use mock data for unauthenticated users
         const mockResponse = await getMockData('projects');
         setData(mockResponse);
-        setHasInitialized(true);
       } else {
         const response = await apiService.projects.getAll(params);
-        setData(response.data);
-        setHasInitialized(true);
+        setData(response);
       }
     } catch (err) {
       console.error('Error fetching projects:', err);
@@ -148,20 +163,16 @@ export const useProjects = (params = {}) => {
       const mockResponse = await getMockData('projects');
       setData(mockResponse);
       setError(null); // Clear error since we're using fallback data
-      setHasInitialized(true);
     } finally {
       setLoading(false);
     }
-  }, [hasInitialized]);
+  }, [params.search, params.sort, params.filter, params.limit]);
 
   useEffect(() => {
-    if (!hasInitialized) {
-      fetchData();
-    }
-  }, [fetchData, hasInitialized]);
+    fetchData();
+  }, [fetchData]);
 
   const refetch = useCallback(() => {
-    setHasInitialized(false);
     fetchData();
   }, [fetchData]);
 
@@ -172,11 +183,8 @@ export const useActivities = (params = {}) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [hasInitialized, setHasInitialized] = useState(false);
 
   const fetchData = useCallback(async () => {
-    if (hasInitialized && !isAuthenticated()) return;
-    
     try {
       setLoading(true);
       setError(null);
@@ -184,31 +192,25 @@ export const useActivities = (params = {}) => {
       if (!isAuthenticated()) {
         const mockResponse = await getMockData('activities');
         setData(mockResponse);
-        setHasInitialized(true);
       } else {
         const response = await apiService.activities.getRecent(params);
         setData(response.data);
-        setHasInitialized(true);
       }
     } catch (err) {
       console.error('Error fetching activities:', err);
       const mockResponse = await getMockData('activities');
       setData(mockResponse);
       setError(null);
-      setHasInitialized(true);
     } finally {
       setLoading(false);
     }
-  }, [hasInitialized]);
+  }, []);
 
   useEffect(() => {
-    if (!hasInitialized) {
-      fetchData();
-    }
-  }, [fetchData, hasInitialized]);
+    fetchData();
+  }, [fetchData]);
 
   const refetch = useCallback(() => {
-    setHasInitialized(false);
     fetchData();
   }, [fetchData]);
 
@@ -219,11 +221,8 @@ export const useTrainingJobs = (params = {}) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [hasInitialized, setHasInitialized] = useState(false);
 
   const fetchData = useCallback(async () => {
-    if (hasInitialized && !isAuthenticated()) return;
-    
     try {
       setLoading(true);
       setError(null);
@@ -231,31 +230,25 @@ export const useTrainingJobs = (params = {}) => {
       if (!isAuthenticated()) {
         const mockResponse = await getMockData('trainingJobs');
         setData(mockResponse);
-        setHasInitialized(true);
       } else {
         const response = await apiService.training.getActive(params);
         setData(response.data);
-        setHasInitialized(true);
       }
     } catch (err) {
       console.error('Error fetching training jobs:', err);
       const mockResponse = await getMockData('trainingJobs');
       setData(mockResponse);
       setError(null);
-      setHasInitialized(true);
     } finally {
       setLoading(false);
     }
-  }, [hasInitialized]);
+  }, []);
 
   useEffect(() => {
-    if (!hasInitialized) {
-      fetchData();
-    }
-  }, [fetchData, hasInitialized]);
+    fetchData();
+  }, [fetchData]);
 
   const refetch = useCallback(() => {
-    setHasInitialized(false);
     fetchData();
   }, [fetchData]);
 
@@ -266,11 +259,8 @@ export const useTemplates = (params = {}) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [hasInitialized, setHasInitialized] = useState(false);
 
   const fetchData = useCallback(async () => {
-    if (hasInitialized) return; // Prevent repeated calls
-    
     try {
       setLoading(true);
       setError(null);
@@ -278,27 +268,22 @@ export const useTemplates = (params = {}) => {
       // Always try to get templates from API first (they're public)
       const response = await apiService.templates.getPopular(params);
       setData(response.data);
-      setHasInitialized(true);
     } catch (err) {
       console.error('Error fetching templates:', err);
       // Fallback to mock data if API fails
       const mockResponse = await getMockData('templates');
       setData(mockResponse);
       setError(null); // Don't show error for templates since they're optional
-      setHasInitialized(true);
     } finally {
       setLoading(false);
     }
-  }, [hasInitialized]);
+  }, []);
 
   useEffect(() => {
-    if (!hasInitialized) {
-      fetchData();
-    }
-  }, [fetchData, hasInitialized]);
+    fetchData();
+  }, [fetchData]);
 
   const refetch = useCallback(() => {
-    setHasInitialized(false);
     fetchData();
   }, [fetchData]);
 
@@ -309,11 +294,8 @@ export const useProjectMetrics = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [hasInitialized, setHasInitialized] = useState(false);
 
   const fetchData = useCallback(async () => {
-    if (hasInitialized && !isAuthenticated()) return;
-    
     try {
       setLoading(true);
       setError(null);
@@ -321,31 +303,25 @@ export const useProjectMetrics = () => {
       if (!isAuthenticated()) {
         const mockResponse = await getMockData('metrics');
         setData(mockResponse);
-        setHasInitialized(true);
       } else {
         const response = await apiService.projects.getMetrics();
         setData(response.data);
-        setHasInitialized(true);
       }
     } catch (err) {
       console.error('Error fetching metrics:', err);
       const mockResponse = await getMockData('metrics');
       setData(mockResponse);
       setError(null);
-      setHasInitialized(true);
     } finally {
       setLoading(false);
     }
-  }, [hasInitialized]);
+  }, []);
 
   useEffect(() => {
-    if (!hasInitialized) {
-      fetchData();
-    }
-  }, [fetchData, hasInitialized]);
+    fetchData();
+  }, [fetchData]);
 
   const refetch = useCallback(() => {
-    setHasInitialized(false);
     fetchData();
   }, [fetchData]);
 

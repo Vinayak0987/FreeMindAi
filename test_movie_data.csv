@@ -1,0 +1,6 @@
+movieId,title,genres,rating,userId
+1,"Toy Story (1995)","Adventure|Animation|Children|Comedy|Fantasy",4.0,1
+2,"Jumanji (1995)","Adventure|Children|Fantasy",3.5,1
+3,"Grumpier Old Men (1995)","Comedy|Romance",3.0,2
+4,"Waiting to Exhale (1995)","Comedy|Drama|Romance",3.5,2
+5,"Father of the Bride Part II (1995)",Comedy,4.0,3

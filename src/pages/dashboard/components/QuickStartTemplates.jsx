@@ -46,7 +46,7 @@ const QuickStartTemplates = ({ templates }) => {
       <div className="grid grid-cols-1 gap-3">
         {templates?.map((template) => (
           <div
-            key={template?.id}
+            key={template?._id || template?.id}
             className="border border-border rounded-lg p-3 hover:bg-muted/50 transition-all duration-150 cursor-pointer group"
             onClick={() => handleTemplateSelect(template)}
           >
