@@ -12,239 +12,84 @@ import ProjectCard from './components/ProjectCard';
 import ActivityFeed from './components/ActivityFeed';
 import TrainingProgress from './components/TrainingProgress';
 import QuickStartTemplates from './components/QuickStartTemplates';
-import NewProjectModal from './components/NewProjectModal';
 import AIAssistantFAB from '../../components/AIAssistantFAB';
 
+// Import API hooks
+import { useProjects, useActivities, useTrainingJobs, useTemplates, useProjectMetrics } from '../../hooks/useApi';
+import apiService from '../../utils/api';
+
 const Dashboard = () => {
-  const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('recent');
   const [filterBy, setFilterBy] = useState('all');
   const navigate = useNavigate();
 
-  // Mock data for metrics
-  const metricsData = [
+  // API data hooks
+  const { data: projectsData, loading: projectsLoading, error: projectsError, refetch: refetchProjects } = useProjects({
+    search: searchQuery,
+    sort: sortBy,
+    filter: filterBy,
+    limit: 20
+  });
+  
+  const { data: metricsData, loading: metricsLoading } = useProjectMetrics();
+  const { data: activitiesData, loading: activitiesLoading } = useActivities();
+  const { data: trainingJobsData, loading: trainingLoading } = useTrainingJobs();
+  const { data: templatesData, loading: templatesLoading } = useTemplates();
+
+  // Transform metrics data for display
+  const displayMetrics = metricsData?.metrics ? [
     {
       title: 'Active Projects',
-      value: '12',
-      change: '+3',
+      value: metricsData.metrics.totalProjects?.toString() || '0',
+      change: '+' + (metricsData.metrics.totalProjects - (metricsData.metrics.totalProjects - metricsData.metrics.trainingProjects))?.toString() || '0',
       changeType: 'positive',
       icon: 'FolderOpen',
       color: 'primary'
     },
     {
       title: 'Models Deployed',
-      value: '8',
-      change: '+2',
+      value: metricsData.metrics.deployedProjects?.toString() || '0',
+      change: '+' + metricsData.metrics.deployedProjects?.toString() || '0',
       changeType: 'positive',
       icon: 'Rocket',
       color: 'success'
     },
     {
       title: 'Training Jobs',
-      value: '4',
+      value: metricsData.metrics.trainingProjects?.toString() || '0',
       change: '0',
       changeType: 'neutral',
       icon: 'Brain',
       color: 'warning'
     },
     {
-      title: 'Datasets',
-      value: '24',
-      change: '+5',
+      title: 'Completed',
+      value: metricsData.metrics.completedProjects?.toString() || '0',
+      change: '+' + metricsData.metrics.completedProjects?.toString() || '0',
       changeType: 'positive',
-      icon: 'Database',
+      icon: 'CheckCircle',
       color: 'accent'
     }
-  ];
+  ] : [];
 
-  // Mock data for projects
-  const projectsData = [
-    {
-      id: 1,
-      name: 'Digital India Payment Fraud Detection',
-      description: 'AI-powered fraud detection system for UPI transactions to secure digital payments across India.',
-      status: 'training',
-      progress: 75,
-      thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
-      lastModified: '2 hours ago',
-      tags: ['FinTech', 'Security', 'UPI', 'Digital India']
-    },
-    {
-      id: 2,
-      name: 'Crop Yield Prediction - Kisan AI',
-      description: 'ML model to predict crop yields using satellite imagery and weather data to help Indian farmers optimize production.',
-      status: 'deployed',
-      thumbnail: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?w=400&h=300&fit=crop',
-      lastModified: '1 day ago',
-      tags: ['AgriTech', 'Satellite Imagery', 'Weather Analysis']
-    },
-    {
-      id: 3,
-      name: 'Ayurveda Medicine Classifier',
-      description: 'Computer vision system to identify and classify traditional Indian medicinal plants using deep learning.',
-      status: 'preparing',
-      thumbnail: 'https://images.pixabay.com/photo/2017/05/10/19/29/robot-2301646_1280.jpg?w=400&h=300&fit=crop',
-      lastModified: '3 days ago',
-      tags: ['Healthcare', 'Traditional Medicine', 'Plant Recognition']
-    },
-    {
-      id: 4,
-      name: 'Hindi-English Code-Mixed Analysis',
-      description: 'NLP model to analyze sentiment in Hinglish social media posts and customer reviews.',
-      status: 'completed',
-      thumbnail: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop',
-      lastModified: '5 days ago',
-      tags: ['NLP', 'Multilingual', 'Social Media', 'Hinglish']
-    },
-    {
-      id: 5,
-      name: 'Smart City Traffic Optimizer',
-      description: 'Real-time traffic flow optimization for Indian metropolitan cities using computer vision and IoT sensors.',
-      status: 'training',
-      progress: 45,
-      thumbnail: 'https://images.pexels.com/photos/164527/pexels-photo-164527.jpeg?w=400&h=300&fit=crop',
-      lastModified: '1 week ago',
-      tags: ['Smart City', 'Traffic Management', 'IoT', 'Computer Vision']
-    },
-    {
-      id: 6,
-      name: 'E-commerce Recommendation - Bharatiya Style',
-      description: 'Personalized product recommendations for Indian festivals, regional preferences, and cultural occasions.',
-      status: 'deployed',
-      thumbnail: 'https://images.pixabay.com/photo/2017/08/10/08/47/laptop-2619337_1280.jpg?w=400&h=300&fit=crop',
-      lastModified: '2 weeks ago',
-      tags: ['E-commerce', 'Cultural AI', 'Festival Analytics', 'Regional Preferences']
+
+  // Refetch data when filters change
+  useEffect(() => {
+    if (searchQuery || sortBy !== 'recent' || filterBy !== 'all') {
+      refetchProjects();
     }
-  ];
+  }, [searchQuery, sortBy, filterBy]); // Removed refetchProjects from deps to prevent loop
 
-  // Mock data for recent activities
-  const activitiesData = [
-    {
-      id: 1,
-      type: 'model_trained',
-      description: 'Digital India Payment Fraud Detection model training completed 🚀',
-      timestamp: new Date(Date.now() - 1800000), // 30 minutes ago
-      project: 'FinTech Security'
-    },
-    {
-      id: 2,
-      type: 'model_deployed',
-      description: 'Kisan AI Crop Yield model deployed to production 🌾',
-      timestamp: new Date(Date.now() - 3600000), // 1 hour ago
-      project: 'AgriTech Intelligence'
-    },
-    {
-      id: 3,
-      type: 'dataset_uploaded',
-      description: 'New Ayurveda medicinal plant dataset uploaded 🌿',
-      timestamp: new Date(Date.now() - 7200000), // 2 hours ago
-      project: 'Healthcare AI'
-    },
-    {
-      id: 4,
-      type: 'project_created',
-      description: 'Smart City Traffic Optimizer project created 🏙️',
-      timestamp: new Date(Date.now() - 14400000), // 4 hours ago
-      project: 'Urban Intelligence'
-    },
-    {
-      id: 5,
-      type: 'collaboration',
-      description: 'Team member joined Hindi-English Analysis project 🤝',
-      timestamp: new Date(Date.now() - 21600000), // 6 hours ago
-      project: 'Language AI'
-    }
-  ];
 
-  // Mock data for training jobs
-  const trainingJobsData = [
-    {
-      id: 1,
-      modelName: 'UPI Fraud Detection v2.1 🛡️',
-      status: 'running',
-      progress: 75,
-      currentEpoch: 15,
-      totalEpochs: 20,
-      elapsedTime: 1800, // 30 minutes in seconds
-      eta: 600 // 10 minutes in seconds
-    },
-    {
-      id: 2,
-      modelName: 'Kisan Crop Predictor v1.3 🌾',
-      status: 'running',
-      progress: 45,
-      currentEpoch: 9,
-      totalEpochs: 20,
-      elapsedTime: 2700, // 45 minutes in seconds
-      eta: 1800 // 30 minutes in seconds
-    },
-    {
-      id: 3,
-      modelName: 'Ayurveda Plant Classifier v1.0 🌿',
-      status: 'queued',
-      progress: 0,
-      currentEpoch: 0,
-      totalEpochs: 50,
-      elapsedTime: 0
-    }
-  ];
+  // Get projects from API data
+  const projects = projectsData?.data?.projects || [];
+  const activities = activitiesData?.data?.activities || [];
+  const trainingJobs = trainingJobsData?.data?.trainingJobs || [];
+  const templates = templatesData?.data?.templates || [];
 
-  // Mock data for quick start templates
-  const templatesData = [
-    {
-      id: 1,
-      name: 'Cricket Analytics 🏏',
-      description: 'Analyze player performance and match predictions',
-      type: 'sports_analytics',
-      difficulty: 'Beginner',
-      estimatedTime: '30 min'
-    },
-    {
-      id: 2,
-      name: 'Monsoon Prediction ⛈️',
-      description: 'Predict rainfall patterns for agricultural planning',
-      type: 'weather_forecasting',
-      difficulty: 'Intermediate',
-      estimatedTime: '45 min'
-    },
-    {
-      id: 3,
-      name: 'Bollywood Sentiment 🎬',
-      description: 'Analyze movie reviews in Hindi and English',
-      type: 'nlp',
-      difficulty: 'Intermediate',
-      estimatedTime: '1 hour'
-    },
-    {
-      id: 4,
-      name: 'Street Food Classification 🍛',
-      description: 'Identify Indian street food items using computer vision',
-      type: 'computer_vision',
-      difficulty: 'Advanced',
-      estimatedTime: '2 hours'
-    }
-  ];
-
-  // Filter and sort projects
-  const filteredProjects = projectsData?.filter(project => {
-    const matchesSearch = project?.name?.toLowerCase()?.includes(searchQuery?.toLowerCase()) ||
-                         project?.description?.toLowerCase()?.includes(searchQuery?.toLowerCase());
-    const matchesFilter = filterBy === 'all' || project?.status === filterBy;
-    return matchesSearch && matchesFilter;
-  });
-
-  const sortedProjects = [...filteredProjects]?.sort((a, b) => {
-    switch (sortBy) {
-      case 'name':
-        return a?.name?.localeCompare(b?.name);
-      case 'status':
-        return a?.status?.localeCompare(b?.status);
-      case 'recent':
-      default:
-        return new Date(b.lastModified) - new Date(a.lastModified);
-    }
-  });
+  // Projects are already filtered and sorted by the API based on our parameters
+  const sortedProjects = projects;
 
   const sortOptions = [
     { value: 'recent', label: 'Most Recent' },
@@ -280,7 +125,7 @@ const Dashboard = () => {
               <Button
                 variant="default"
                 size="lg"
-                onClick={() => setIsNewProjectModalOpen(true)}
+                onClick={() => navigate('/projects/new')}
                 iconName="Plus"
                 iconPosition="left"
                 className="self-start lg:self-center px-8 py-4 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
@@ -292,9 +137,20 @@ const Dashboard = () => {
 
           {/* Metrics Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            {metricsData?.map((metric, index) => (
-              <MetricsCard key={index} {...metric} />
-            ))}
+            {metricsLoading ? (
+              // Loading skeleton for metrics
+              Array.from({ length: 4 }).map((_, index) => (
+                <div key={index} className="bg-card border border-border rounded-2xl p-6 animate-pulse">
+                  <div className="h-4 bg-gray-300 rounded mb-4"></div>
+                  <div className="h-8 bg-gray-300 rounded mb-2"></div>
+                  <div className="h-3 bg-gray-300 rounded w-1/2"></div>
+                </div>
+              ))
+            ) : (
+              displayMetrics?.map((metric, index) => (
+                <MetricsCard key={index} {...metric} />
+              ))
+            )}
           </div>
 
           {/* Main Content Grid */}
@@ -338,33 +194,85 @@ const Dashboard = () => {
 
               {/* Projects Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-                {sortedProjects?.map((project) => (
-                  <ProjectCard key={project?.id} project={project} />
-                ))}
+                {projectsLoading ? (
+                  // Loading skeleton for projects
+                  Array.from({ length: 6 }).map((_, index) => (
+                    <div key={index} className="bg-card border border-border rounded-2xl p-6 animate-pulse">
+                      <div className="h-40 bg-gray-300 rounded-xl mb-4"></div>
+                      <div className="h-6 bg-gray-300 rounded mb-2"></div>
+                      <div className="h-4 bg-gray-300 rounded mb-4"></div>
+                      <div className="flex gap-2 mb-4">
+                        <div className="h-6 bg-gray-300 rounded-full w-16"></div>
+                        <div className="h-6 bg-gray-300 rounded-full w-20"></div>
+                      </div>
+                      <div className="h-8 bg-gray-300 rounded"></div>
+                    </div>
+                  ))
+                ) : projectsError ? (
+                  <div className="col-span-full text-center py-8">
+                    <Icon name="AlertCircle" size={48} className="text-red-500 mx-auto mb-4" />
+                    <h3 className="text-lg font-semibold text-foreground mb-2">Error Loading Projects</h3>
+                    <p className="text-muted-foreground mb-4">{projectsError}</p>
+                    <Button onClick={() => refetchProjects()} variant="outline">
+                      Try Again
+                    </Button>
+                  </div>
+                ) : (
+                  sortedProjects?.map((project) => (
+                    <ProjectCard key={project?._id || project?.id} project={project} onUpdate={refetchProjects} />
+                  ))
+                )}
               </div>
 
               {/* Empty State */}
-              {sortedProjects?.length === 0 && (
+              {!projectsLoading && sortedProjects?.length === 0 && (
                 <div className="bg-card border border-border rounded-2xl p-12 text-center shadow-sm">
                   <div className="w-20 h-20 bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl flex items-center justify-center mx-auto mb-6">
                     <Icon name="FolderOpen" size={40} className="text-primary" />
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-3">No projects found</h3>
+                  <h3 className="text-2xl font-bold text-foreground mb-3">
+                    {!localStorage.getItem('token') ? 'Welcome to FreeMind AI!' : 'No projects found'}
+                  </h3>
                   <p className="text-muted-foreground mb-8 max-w-md mx-auto leading-relaxed">
-                    {searchQuery || filterBy !== 'all' 
-                      ? 'Try adjusting your search or filter criteria to find what you\'re looking for.' 
-                      : 'Get started by creating your first machine learning project and unlock the power of AI.'
+                    {!localStorage.getItem('token') 
+                      ? 'Please log in to view and manage your AI/ML projects. Experience the power of dynamic project management with real-time data.'
+                      : searchQuery || filterBy !== 'all' 
+                        ? 'Try adjusting your search or filter criteria to find what you\'re looking for.' 
+                        : 'Get started by creating your first machine learning project and unlock the power of AI.'
                     }
                   </p>
-                  <Button
-                    variant="default"
-                    onClick={() => setIsNewProjectModalOpen(true)}
-                    iconName="Plus"
-                    iconPosition="left"
-                    className="px-8 py-4 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                  >
-                    Create Project
-                  </Button>
+                  {!localStorage.getItem('token') ? (
+                    <div className="flex gap-4 justify-center">
+                      <Button
+                        variant="default"
+                        onClick={() => navigate('/login')}
+                        iconName="LogIn"
+                        iconPosition="left"
+                        className="px-8 py-4 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                      >
+                        Login
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => navigate('/signup')}
+                        iconName="UserPlus"
+                        iconPosition="left"
+                        className="px-8 py-4 text-base font-semibold rounded-xl"
+                      >
+                        Sign Up
+                      </Button>
+                    </div>
+                  ) : (
+                    <Button
+                      variant="default"
+                      onClick={() => navigate('/projects/new')}
+                      iconName="Plus"
+                      iconPosition="left"
+                      className="px-8 py-4 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                    >
+                      Create Project
+                    </Button>
+                  )}
                 </div>
               )}
             </div>
@@ -373,27 +281,31 @@ const Dashboard = () => {
             <div className="xl:col-span-1 space-y-8">
               {/* Training Progress */}
               <div className="bg-card border border-border rounded-2xl shadow-sm">
-                <TrainingProgress trainingJobs={trainingJobsData} />
+                <TrainingProgress 
+                  trainingJobs={trainingJobs} 
+                  loading={trainingLoading} 
+                />
               </div>
               
               {/* Recent Activity */}
               <div className="bg-card border border-border rounded-2xl shadow-sm">
-                <ActivityFeed activities={activitiesData} />
+                <ActivityFeed 
+                  activities={activities} 
+                  loading={activitiesLoading} 
+                />
               </div>
               
               {/* Quick Start Templates */}
               <div className="bg-card border border-border rounded-2xl shadow-sm">
-                <QuickStartTemplates templates={templatesData} />
+                <QuickStartTemplates 
+                  templates={templates} 
+                  loading={templatesLoading} 
+                />
               </div>
             </div>
           </div>
         </div>
       </main>
-      {/* New Project Modal */}
-      <NewProjectModal
-        isOpen={isNewProjectModalOpen}
-        onClose={() => setIsNewProjectModalOpen(false)}
-      />
       {/* AI Assistant FAB */}
       <AIAssistantFAB />
     </div>

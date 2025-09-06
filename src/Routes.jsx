@@ -12,6 +12,7 @@ import Dashboard from './pages/dashboard';
 import DatasetManagement from './pages/dataset-management';
 import ProjectWorkspace from './pages/project-workspace';
 import AIAssistantChat from './pages/ai-assistant-chat';
+import CreateProjectPage from './pages/CreateProjectPage';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -38,6 +39,8 @@ const Routes = () => {
             <Route path="/dataset-management" element={<ProtectedRoute><DatasetManagement /></ProtectedRoute>} />
             <Route path="/project-workspace" element={<ProtectedRoute><ProjectWorkspace /></ProtectedRoute>} />
             <Route path="/ai-assistant-chat" element={<ProtectedRoute><AIAssistantChat /></ProtectedRoute>} />
+            <Route path="/projects" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/projects/new" element={<ProtectedRoute><CreateProjectPage /></ProtectedRoute>} />
             
             {/* 404 Page */}
             <Route path="*" element={<NotFound />} />
