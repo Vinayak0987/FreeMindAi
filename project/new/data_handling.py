@@ -6,7 +6,17 @@ import pandas as pd
 import numpy as np
 import random
 import yaml
-from kaggle.api.kaggle_api_extended import KaggleApi
+# Make Kaggle completely optional
+KAGGLE_AVAILABLE = False
+class KaggleApi:
+    def __init__(self):
+        pass
+    def authenticate(self):
+        raise ImportError("Kaggle API not available")
+    def dataset_list(self, *args, **kwargs):
+        return []
+    def dataset_download_files(self, *args, **kwargs):
+        raise ImportError("Kaggle API not available")
 import logging
 from scipy import stats
 import tempfile
@@ -15,30 +25,33 @@ from db_file_system import DBFileSystem
 # Initialize the database file system
 db_fs = DBFileSystem()
 
+# Make Gemini optional
+GEMINI_AVAILABLE = False
 try:
     import google.generativeai as genai
     import os
     from dotenv import load_dotenv
     
-    GEMINI_AVAILABLE = True
-    
-    # Load environment variables from .env.local file
+    # Load environment variables
     load_dotenv()
     
     # Configure Gemini API with key from environment variables
     api_key = os.getenv('GEMINI_API_KEY')
-    if not api_key:
-        raise ValueError("GOOGLE_API_KEY not found in .env.local file")
-    
-    genai.configure(api_key=api_key)
-    
+    if api_key:
+        genai.configure(api_key=api_key)
+        GEMINI_AVAILABLE = True
+    else:
+        print("Warning: GEMINI_API_KEY not found. AI features will be limited.")
+        
 except ImportError:
-    GEMINI_AVAILABLE = False
+    print("Warning: Google Generative AI not available. AI features will be limited.")
 
 def download_kaggle_dataset(query, datasets_dir):
     """Download a dataset from Kaggle based on a query, then auto-detect task type"""
     try:
         # Initialize the Kaggle API
+        if not KAGGLE_AVAILABLE:
+            raise ImportError("Kaggle API not available")
         api = KaggleApi()
         api.authenticate()
         

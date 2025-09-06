@@ -33,6 +33,7 @@ app.use('/api/projects', require('./routes/projects'));
 app.use('/api/activities', require('./routes/activities'));
 app.use('/api/training', require('./routes/training'));
 app.use('/api/templates', require('./routes/templates'));
+app.use('/api/process', require('./routes/process'));
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

@@ -137,6 +137,32 @@ const ProjectWizard = ({ isOpen, onClose, onComplete }) => {
     }
   };
 
+  // Validate if current step is complete
+  const isCurrentStepValid = () => {
+    const currentStepId = steps[currentStep].id;
+    
+    switch (currentStepId) {
+      case 'basics':
+        return projectData.name && projectData.description;
+      case 'data':
+        return projectData.datasets && projectData.datasets.length > 0;
+      case 'task':
+        return projectData.taskType || projectData.taskConfig;
+      case 'processing':
+        return projectData.preprocessing && projectData.preprocessing.processed;
+      case 'configuration':
+        return true; // Always allow for now
+      case 'training':
+        return true; // Always allow for now
+      case 'evaluation':
+        return true; // Always allow for now
+      case 'deployment':
+        return true; // Always allow for now
+      default:
+        return true;
+    }
+  };
+
   const prevStep = () => {
     if (currentStep > 0) {
       setCurrentStep(currentStep - 1);
@@ -293,6 +319,7 @@ const ProjectWizard = ({ isOpen, onClose, onComplete }) => {
               <Button
                 variant="default"
                 onClick={nextStep}
+                disabled={!isCurrentStepValid()}
                 iconName="ChevronRight"
                 iconPosition="right"
               >

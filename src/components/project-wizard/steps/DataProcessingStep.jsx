@@ -97,25 +97,24 @@ const DataProcessingStep = ({ data, updateData, stepData }) => {
 
     setProcessing(true);
     try {
-      const formData = new FormData();
-      
-      // Add dataset files
-      data.datasets.forEach((dataset, index) => {
-        if (dataset.file) {
-          formData.append(`dataset_${index}`, dataset.file);
+      // Prepare preprocessing configuration
+      const preprocessingConfig = {
+        taskType: data.task || 'text_classification',
+        preprocessing: {
+          dataCleaning: data.preprocessing?.options?.some(opt => opt.id === 'data_cleaning') || false,
+          dataSplitting: data.preprocessing?.options?.some(opt => opt.id === 'data_splitting') || false,
+          dataNormalization: data.preprocessing?.options?.some(opt => opt.id === 'data_normalization') || false,
+          dataAugmentation: data.preprocessing?.options?.some(opt => opt.id === 'data_augmentation') || false
+        },
+        dataset: {
+          totalSamples: data.datasets.length * 100, // Estimate
+          features: ['text', 'label'],
+          dataType: data.dataType || 'text'
         }
-      });
+      };
 
-      // Add preprocessing configuration
-      formData.append('preprocessing_config', JSON.stringify({
-        dataType: data.dataType,
-        task: data.task,
-        options: data.preprocessing?.options || [],
-        customConfig: data.preprocessing?.customConfig || {}
-      }));
-
-      const response = await apiService.nebula.processDataset(formData);
-      const results = response.data;
+      const response = await apiService.nebula.processDataset(preprocessingConfig);
+      const results = response;
 
       setProcessingResults(results);
       updateData({
@@ -129,7 +128,7 @@ const DataProcessingStep = ({ data, updateData, stepData }) => {
 
     } catch (error) {
       console.error('Data processing failed:', error);
-      alert('Data processing failed. Please try again.');
+      alert(`Data processing failed: ${error.message || 'Please try again.'}`);
     } finally {
       setProcessing(false);
     }

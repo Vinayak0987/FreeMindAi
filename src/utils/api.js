@@ -137,10 +137,40 @@ export const apiService = {
 
   // Nebula Backend Integration
   nebula: {
-    // Data Processing
-    processDataset: (formData) => api.post('/process', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    }),
+    // Data Processing - Use Python backend
+    processDataset: (config) => {
+      const formData = new FormData();
+      formData.append('task_type', config.taskType || 'text_classification');
+      formData.append('text_prompt', config.textPrompt || 'Movie recommendation system');
+      
+      // Add file if provided
+      if (config.file) {
+        formData.append('file', config.file);
+      }
+      
+      // Add folder zip if provided
+      if (config.folderZip) {
+        formData.append('folder_zip', config.folderZip);
+      }
+      
+      return fetch('http://localhost:5001/process', {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'same-origin',
+        headers: {
+          'Accept': 'application/json',
+        },
+        body: formData
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      }).catch(error => {
+        console.error('Fetch error:', error);
+        throw error;
+      });
+    },
     
     // Model Training
     trainModel: (config) => api.post('/train', config),

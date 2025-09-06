@@ -1,0 +1,185 @@
+2025-09-06 23:41:01,781 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-06 23:41:01,844 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-06 23:41:24,690 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-06 23:41:24,696 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-06 23:41:24,690 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-06 23:41:24,698 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-06 23:42:32,480 - werkzeug - INFO - 127.0.0.1 - - [06/Sep/2025 23:42:32] "[31m[1mGET /process HTTP/1.1[0m" 405 -
+2025-09-06 23:42:41,887 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-06 23:42:41,887 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-06 23:42:41,890 - werkzeug - INFO - 127.0.0.1 - - [06/Sep/2025 23:42:41] "POST /process HTTP/1.1" 200 -
+2025-09-06 23:43:45,260 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-06 23:43:52,928 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-06 23:43:52,929 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-06 23:58:53,383 - __main__ - INFO - Processing request - Task Type: text_classification
+2025-09-06 23:58:53,383 - __main__ - INFO - Processing request - Task Type: text_classification
+2025-09-06 23:59:20,978 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-06 23:59:20,978 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-06 23:59:20,979 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-06 23:59:20,979 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-06 23:59:20,980 - __main__ - INFO - Changing task type from text_classification to classification based on generated data analysis
+2025-09-06 23:59:20,980 - __main__ - INFO - Changing task type from text_classification to classification based on generated data analysis
+2025-09-06 23:59:35,176 - werkzeug - INFO - 127.0.0.1 - - [06/Sep/2025 23:59:35] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:01:09,551 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 00:01:09,612 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 00:01:29,170 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 00:01:29,171 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 00:01:29,172 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 00:01:29,173 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 00:03:00,672 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 00:03:14,304 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 00:03:14,306 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 00:03:27,546 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 00:03:31,344 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:03:31] "[31m[1mGET /process HTTP/1.1[0m" 405 -
+2025-09-07 00:03:38,705 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 00:03:38,706 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 00:03:41,850 - __main__ - INFO - Processing request - Task Type: text_classification
+2025-09-07 00:03:41,850 - __main__ - INFO - Processing request - Task Type: text_classification
+2025-09-07 00:03:41,852 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:03:41,852 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:03:41,854 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:03:41] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:07:21,342 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 00:07:39,991 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 00:07:39,994 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 00:07:42,472 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:07:42] "[31m[1mGET /process HTTP/1.1[0m" 405 -
+2025-09-07 00:10:15,543 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 00:10:15,543 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 00:10:15,544 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:10:15,544 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:10:15,545 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:10:15] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:10:28,655 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 00:10:28,655 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 00:10:28,655 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:10:28,655 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:10:28,656 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:10:28] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:18:33,810 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 00:18:33,810 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 00:18:33,811 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:18:33,811 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:18:33,812 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:18:33] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:19:00,539 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 00:19:00,539 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 00:19:00,540 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:19:00,540 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:19:00,541 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:19:00] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:19:11,015 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 00:19:11,015 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 00:19:11,016 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:19:11,016 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:19:11,018 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:19:11] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:19:27,404 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 00:19:27,404 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 00:19:27,406 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:19:27,406 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:19:27,408 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:19:27] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:20:21,281 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 00:20:21,281 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 00:20:21,282 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:20:21,282 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:20:21,283 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:20:21] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:25:41,714 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 00:25:47,660 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 00:25:47,660 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 00:26:38,970 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:26:38] "OPTIONS /process HTTP/1.1" 200 -
+2025-09-07 00:26:46,107 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 00:26:46,107 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 00:26:46,112 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:26:46,112 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:26:46,118 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:26:46] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:29:49,720 - __main__ - INFO - Processing request - Task Type: object-detection
+2025-09-07 00:29:49,720 - __main__ - INFO - Processing request - Task Type: object-detection
+2025-09-07 00:29:49,722 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:29:49,722 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:29:49,727 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:29:49] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:29:58,295 - __main__ - INFO - Processing request - Task Type: object-detection
+2025-09-07 00:29:58,295 - __main__ - INFO - Processing request - Task Type: object-detection
+2025-09-07 00:29:58,298 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:29:58,298 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:29:58,299 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:29:58] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:30:04,845 - __main__ - INFO - Processing request - Task Type: object-detection
+2025-09-07 00:30:04,845 - __main__ - INFO - Processing request - Task Type: object-detection
+2025-09-07 00:30:04,847 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:30:04,847 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:30:04,848 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:30:04] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:31:17,917 - __main__ - INFO - Processing request - Task Type: object_detection
+2025-09-07 00:31:17,917 - __main__ - INFO - Processing request - Task Type: object_detection
+2025-09-07 00:31:17,921 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:31:17,921 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:31:17,922 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:31:17] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:32:01,835 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 00:32:08,057 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 00:32:08,058 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 00:33:24,194 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 00:33:30,382 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 00:33:30,382 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 00:33:38,656 - __main__ - INFO - Processing request - Task Type: object_detection
+2025-09-07 00:33:38,656 - __main__ - INFO - Processing request - Task Type: object_detection
+2025-09-07 00:33:38,659 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:33:38,659 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:33:38,666 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:33:38] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:34:29,641 - __main__ - INFO - Processing request - Task Type: object-detection
+2025-09-07 00:34:29,641 - __main__ - INFO - Processing request - Task Type: object-detection
+2025-09-07 00:34:29,641 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:34:29,641 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:34:29,643 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:34:29] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:39:51,213 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 00:39:58,701 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 00:39:58,702 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 00:40:13,671 - __main__ - INFO - Processing request - Task Type: object_detection
+2025-09-07 00:40:13,671 - __main__ - INFO - Processing request - Task Type: object_detection
+2025-09-07 00:40:13,674 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:40:13,674 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:40:13,682 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:40:13] "POST /process HTTP/1.1" 200 -
+2025-09-07 00:41:42,684 - __main__ - INFO - Processing request - Task Type: object-detection
+2025-09-07 00:41:42,684 - __main__ - INFO - Processing request - Task Type: object-detection
+2025-09-07 00:41:42,685 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:41:42,685 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 00:41:42,686 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 00:41:42] "POST /process HTTP/1.1" 200 -
