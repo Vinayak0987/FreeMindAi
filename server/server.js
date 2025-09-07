@@ -18,13 +18,24 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// MongoDB connection
-mongoose.connect(process.env.MONGODB_URI)
+// MongoDB connection with better error handling
+if (!process.env.MONGODB_URI) {
+  console.error('❌ MONGODB_URI is not defined in environment variables');
+  process.exit(1);
+}
+
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
 .then(() => {
   console.log('🚀 Connected to MongoDB successfully!');
+  console.log('📊 Database:', mongoose.connection.name);
 })
 .catch((error) => {
-  console.error('❌ MongoDB connection error:', error);
+  console.error('❌ MongoDB connection error:', error.message);
+  console.error('🔧 Please check your MONGODB_URI in .env file');
+  process.exit(1);
 });
 
 // Routes
