@@ -88,49 +88,21 @@ def process():
         dataset_info = None
         detected_task_type = None
         
-        # If no file uploaded, create a mock response for text classification
-        if 'file' not in request.files or request.files['file'].filename == '':
-            logger.info("No file uploaded, creating mock processing response")
+        # Initialize variables
+        df = None
+        dataset_folder = None
+        dataset_info = None
+        detected_task_type = None
+        
+        # First, check if a file was uploaded
+        file_uploaded = 'file' in request.files and request.files['file'].filename != ''
+        folder_uploaded = 'folder_zip' in request.files and request.files['folder_zip'].filename != ''
+        has_text_prompt = bool(text_prompt.strip()) if text_prompt else False
+        
+        # If no data source is provided at all, return an error
+        if not file_uploaded and not folder_uploaded and not has_text_prompt:
             return jsonify({
-                "success": True,
-                "message": "Data processing completed successfully",
-                "task_type": task_type,
-                "text_prompt": text_prompt,
-                "totalSamples": 1000,
-                "features": 15,
-                "quality": "Good",
-                "processing_steps": [
-                    {
-                        "name": "Data Cleaning",
-                        "status": "completed",
-                        "description": "Removed duplicates and handled missing values"
-                    },
-                    {
-                        "name": "Data Splitting", 
-                        "status": "completed",
-                        "description": "Split data into train/validation/test sets (80/10/10)"
-                    },
-                    {
-                        "name": "Feature Engineering",
-                        "status": "completed", 
-                        "description": "Applied feature extraction and vectorization"
-                    }
-                ],
-                "processed_data": {
-                    "total_samples": 1000,
-                    "features": ["image_features", "bounding_boxes", "labels"],
-                    "train_size": 800,
-                    "validation_size": 100,
-                    "test_size": 100,
-                    "classes": 5 if task_type == "object_detection" else 10
-                },
-                "dataset_info": {
-                    "type": "object_detection" if task_type == "object_detection" else "classification",
-                    "samples": 1000,
-                    "classes": 5 if task_type == "object_detection" else 10,
-                    "format": "YOLO" if task_type == "object_detection" else "CSV"
-                },
-                "next_step": "model_configuration"
+                'error': 'No data provided. Please upload a file, folder, or provide a text prompt for dataset generation.'
             })
         
         # Check if a file was uploaded
@@ -167,38 +139,60 @@ def process():
         
         # Try to download from Kaggle if text prompt is provided
         elif text_prompt:
+            logger.info(f"Processing text prompt: {text_prompt}")
             # First try Kaggle
             kaggle_result = download_kaggle_dataset(text_prompt, DATASETS_DIR)
+            logger.info(f"Kaggle download result: {kaggle_result}")
             
             if isinstance(kaggle_result, tuple) and len(kaggle_result) == 2:
                 # Unpack the result containing file path and detected task type
                 kaggle_file, detected_task_type = kaggle_result
+                logger.info(f"Unpacked Kaggle result - File: {kaggle_file}, Task type: {detected_task_type}")
             else:
                 # For backward compatibility if the function wasn't updated
                 kaggle_file = kaggle_result
                 detected_task_type = None
+                logger.info(f"Backward compatibility mode - File: {kaggle_file}")
                 
             if kaggle_file:
-                df = pd.read_csv(kaggle_file)
-                logger.info(f"Dataset downloaded from Kaggle: {kaggle_file}")
+                logger.info(f"Kaggle file exists: {kaggle_file}")
+                logger.info(f"File exists check: {os.path.exists(kaggle_file) if kaggle_file else False}")
                 
-                # Use detected task type if available
-                if detected_task_type:
-                    logger.info(f"Auto-detected task type for Kaggle dataset: {detected_task_type}")
-                    if detected_task_type != task_type:
-                        logger.info(f"Changing task type from {task_type} to {detected_task_type} based on dataset analysis")
-                        task_type = detected_task_type
+                try:
+                    df = pd.read_csv(kaggle_file)
+                    logger.info(f"Successfully loaded Kaggle dataset: {df.shape} samples")
+                    logger.info(f"Kaggle dataset columns: {list(df.columns)}")
+                    logger.info(f"Dataset downloaded from Kaggle: {kaggle_file}")
+                    
+                    # Use detected task type if available
+                    if detected_task_type:
+                        logger.info(f"Auto-detected task type for Kaggle dataset: {detected_task_type}")
+                        if detected_task_type != task_type:
+                            logger.info(f"Changing task type from {task_type} to {detected_task_type} based on dataset analysis")
+                            task_type = detected_task_type
+                except Exception as csv_error:
+                    logger.error(f"Failed to read CSV from Kaggle file {kaggle_file}: {csv_error}")
+                    df = None
+                    kaggle_file = None  # Force fallback to synthetic data
             else:
+                logger.info("Kaggle download failed, falling back to synthetic data generation")
+                
+            if not kaggle_file or df is None:
+                logger.info("Fallback to synthetic data generation triggered")
                 # If Kaggle fails, generate synthetic data
                 generation_result = generate_dataset_from_text(text_prompt)
                 
                 if isinstance(generation_result, tuple) and len(generation_result) == 2:
                     # Unpack the result containing dataframe and detected task type
                     df, detected_task_type = generation_result
+                    logger.info(f"Generated synthetic dataset: {df.shape} samples")
+                    logger.info(f"Synthetic dataset columns: {list(df.columns)}")
                 else:
                     # For backward compatibility if the function wasn't updated
                     df = generation_result
                     detected_task_type = None
+                    if df is not None:
+                        logger.info(f"Generated synthetic dataset (compat mode): {df.shape} samples")
                 
                 logger.info("Generated synthetic dataset from text prompt")
                 
@@ -213,7 +207,7 @@ def process():
         else:
             return jsonify({'error': 'No data provided. Please upload a file, folder, or provide a text prompt.'})
         
-        # Process data and train model
+        # Process data and (for tabular/NLP) train model
         if df is not None:
             try:
                 # Analyze the uploaded dataset first
@@ -221,24 +215,38 @@ def process():
                 feature_count = len(df.columns)
                 numeric_columns = df.select_dtypes(include=['number']).columns.tolist()
                 categorical_columns = df.select_dtypes(include=['object', 'category']).columns.tolist()
-                
+
                 logger.info(f"Dataset analysis: {total_samples} samples, {feature_count} features")
-                
-                # Create data preview
+
+                # Preprocess (tabular/NLP)
+                X_train, X_test, y_train, y_test, preprocessor, feature_names = preprocess_dataset(
+                    df, 'nlp' if task_type in ['nlp', 'text_classification'] else task_type
+                )
+
+                # Train classical models for tabular/NLP
+                best_model, best_model_name, best_score, y_pred = train_models(
+                    X_train, y_train, X_test, y_test, task_type, MODELS_DIR
+                )
+
+                # Persist best model and create artifacts
+                save_best_model(best_model, MODELS_DIR)
+                model_file = "best_model.pkl"  # Standard name used by save_best_model
+                generate_loading_code(model_file, feature_names, DOWNLOADS_DIR, is_image_model=False)
+                write_requirements_file(DOWNLOADS_DIR, is_tensorflow=False)
+                zip_path = create_project_zip(model_file, MODELS_DIR, DOWNLOADS_DIR, is_image_model=False)
+
                 data_preview = {
                     'columns': df.columns.tolist(),
                     'data': df.head(10).values.tolist()
                 }
-                
-                # Return detailed analysis results
+
                 return jsonify({
                     'success': True,
-                    'message': 'Real data processing completed successfully',
+                    'message': 'Processing and training completed successfully',
                     'task_type': task_type,
                     'detected_task_type': task_type,
                     'totalSamples': total_samples,
                     'features': feature_count,
-                    'quality': 'Good',
                     'data_analysis': {
                         'total_rows': total_samples,
                         'total_columns': feature_count,
@@ -247,54 +255,22 @@ def process():
                         'column_names': df.columns.tolist(),
                         'data_types': df.dtypes.astype(str).to_dict()
                     },
+                    'model_info': {
+                        'model_name': best_model_name,
+                        'score': best_score
+                    },
                     'processing_steps': [
-                        {
-                            'name': 'Data Loading',
-                            'status': 'completed',
-                            'description': f'Successfully loaded {total_samples} rows and {feature_count} columns'
-                        },
-                        {
-                            'name': 'Data Analysis',
-                            'status': 'completed', 
-                            'description': f'Analyzed data types: {len(numeric_columns)} numeric, {len(categorical_columns)} categorical columns'
-                        },
-                        {
-                            'name': 'Task Detection',
-                            'status': 'completed',
-                            'description': f'Detected task type: {task_type}'
-                        }
+                        {'name': 'Data Loading', 'status': 'completed'},
+                        {'name': 'Preprocessing', 'status': 'completed'},
+                        {'name': 'Training', 'status': 'completed'}
                     ],
                     'data_preview': data_preview,
-                    'next_step': 'model_configuration'
+                    'download_url': f"/api/download/{os.path.basename(zip_path)}"
                 })
-                
+
             except Exception as e:
-                logger.error(f"Error processing uploaded file: {str(e)}")
-                # Fallback to basic file analysis
-                try:
-                    total_samples = len(df)
-                    feature_count = len(df.columns)
-                    
-                    return jsonify({
-                        'success': True,
-                        'message': 'Basic data analysis completed',
-                        'task_type': task_type,
-                        'detected_task_type': task_type,
-                        'totalSamples': total_samples,
-                        'features': feature_count,
-                        'quality': 'Good',
-                        'processing_steps': [
-                            {
-                                'name': 'Data Loading',
-                                'status': 'completed',
-                                'description': f'Loaded dataset with {total_samples} rows'
-                            }
-                        ],
-                        'next_step': 'model_configuration'
-                    })
-                except Exception as e2:
-                    logger.error(f"Critical error processing file: {str(e2)}")
-                    return jsonify({'error': f'Error processing uploaded file: {str(e2)}'})
+                logger.error(f"Error processing/training: {str(e)}")
+                return jsonify({'error': f'Error during processing/training: {str(e)}'})
         
         elif dataset_folder is not None:
             # Check for image classification task

@@ -6,17 +6,23 @@ import pandas as pd
 import numpy as np
 import random
 import yaml
-# Make Kaggle completely optional
-KAGGLE_AVAILABLE = False
-class KaggleApi:
-    def __init__(self):
-        pass
-    def authenticate(self):
-        raise ImportError("Kaggle API not available")
-    def dataset_list(self, *args, **kwargs):
-        return []
-    def dataset_download_files(self, *args, **kwargs):
-        raise ImportError("Kaggle API not available")
+# Try to enable real Kaggle usage; fall back gracefully if unavailable
+try:
+    from kaggle.api.kaggle_api_extended import KaggleApi  # type: ignore
+    KAGGLE_AVAILABLE = True
+except Exception:
+    KAGGLE_AVAILABLE = False
+    class KaggleApi:  # type: ignore
+        def __init__(self):
+            pass
+        def authenticate(self):
+            raise ImportError("Kaggle API not available")
+        def dataset_list(self, *args, **kwargs):
+            return []
+        def datasets_list(self, *args, **kwargs):
+            return []
+        def dataset_download_files(self, *args, **kwargs):
+            raise ImportError("Kaggle API not available")
 import logging
 from scipy import stats
 import tempfile
@@ -46,69 +52,188 @@ try:
 except ImportError:
     print("Warning: Google Generative AI not available. AI features will be limited.")
 
+def extract_dataset_keywords(query):
+    """Extract relevant dataset keywords from a complex query"""
+    import re
+    
+    # Common dataset keywords and their priorities
+    dataset_keywords = {
+        'iris': 10,
+        'titanic': 10,
+        'mnist': 10,
+        'boston': 9,
+        'wine': 9,
+        'diabetes': 9,
+        'cancer': 9,
+        'housing': 8,
+        'sales': 7,
+        'price': 7,
+        'stock': 7,
+        'heart': 8,
+        'loan': 7,
+        'customer': 6,
+        'market': 6,
+        'classification': 3,
+        'regression': 3,
+        'prediction': 3,
+    }
+    
+    # Convert query to lowercase for matching
+    query_lower = query.lower()
+    
+    # Find all matching keywords with their priorities
+    found_keywords = []
+    for keyword, priority in dataset_keywords.items():
+        if keyword in query_lower:
+            found_keywords.append((keyword, priority))
+    
+    # Sort by priority (highest first)
+    found_keywords.sort(key=lambda x: x[1], reverse=True)
+    
+    # If we found high-priority dataset names, use the best one
+    if found_keywords and found_keywords[0][1] >= 8:
+        return found_keywords[0][0]
+    
+    # Otherwise, extract the first few meaningful words
+    words = re.findall(r'\b[a-zA-Z]{3,}\b', query_lower)
+    meaningful_words = [w for w in words if w not in ['the', 'for', 'this', 'project', 'used', 'dataset', 'taken', 'kaggle', 'analysis', 'prediction', 'classification', 'regression']]
+    
+    if meaningful_words:
+        return meaningful_words[0]  # Return the first meaningful word
+    
+    # Fallback to original query if nothing found
+    return query
+
 def download_kaggle_dataset(query, datasets_dir):
     """Download a dataset from Kaggle based on a query, then auto-detect task type"""
+    # Extract better search terms from complex queries
+    original_query = query
+    search_query = extract_dataset_keywords(query)
+    
+    logging.info(f"KAGGLE_DEBUG: Starting download for original query '{original_query}'")
+    logging.info(f"KAGGLE_DEBUG: Extracted search query: '{search_query}' -> datasets_dir: '{datasets_dir}'")
+    
     try:
         # Initialize the Kaggle API
         if not KAGGLE_AVAILABLE:
-            raise ImportError("Kaggle API not available")
-        api = KaggleApi()
-        api.authenticate()
-        
-        # Clear the dataset folder before downloading the new dataset
-        # In database approach, we simply clear the 'datasets' directory in the database
-        db_fs.clear_directory('datasets')
-        
-        # Search for datasets matching the query
-        datasets = api.dataset_list(search=query)
-        if datasets:
-            dataset = datasets[0]  # Get the first result
-            dataset_name = dataset.ref  # Dataset reference
-            
-            # Create temporary directory for download
-            temp_dir = tempfile.mkdtemp()
-            
-            # Download the dataset files to the temporary folder
-            api.dataset_download_files(dataset_name, path=temp_dir, unzip=True)
-            
-            # List the files in the download folder
-            downloaded_files = os.listdir(temp_dir)
-            
-            # Find the first CSV file
-            csv_file_path = None
-            for file in downloaded_files:
-                if file.endswith('.csv'):
-                    local_csv_path = os.path.join(temp_dir, file)
-                    
-                    # Save to database
-                    db_fs.save_file(local_csv_path, 'datasets')
-                    
-                    # Use database path for further operations
-                    csv_file_path = os.path.join(datasets_dir, file)
-                    break
-            
-            # Clean up temporary directory
-            shutil.rmtree(temp_dir)
-            
-            if csv_file_path:
-                # Auto-detect task type based on the dataset
-                detected_task_type, df = auto_detect_task_type(csv_file_path)
-                
-                # Use Gemini as second opinion if available
-                gemini_task_type = None
-                if GEMINI_AVAILABLE:
-                    gemini_task_type = get_gemini_task_type_opinion(df, query)
-                
-                # Determine final task type based on both analyses
-                final_task_type = determine_final_task_type(detected_task_type, gemini_task_type)
-                
-                logging.info(f"Dataset downloaded from Kaggle: {csv_file_path}")
-                logging.info(f"Auto-detected task type: {final_task_type}")
-                
-                return csv_file_path, final_task_type
-            
+            logging.error("KAGGLE_DEBUG: Kaggle API not available")
             return None, None
+        
+        logging.info("KAGGLE_DEBUG: Kaggle API is available, initializing...")
+        api = KaggleApi()
+        try:
+            api.authenticate()
+            logging.info("KAGGLE_DEBUG: Kaggle authentication successful")
+        except Exception as auth_err:
+            logging.error(f"KAGGLE_DEBUG: Kaggle authentication failed: {auth_err}")
+            return None, None
+
+        os.makedirs(datasets_dir, exist_ok=True)
+        logging.info(f"KAGGLE_DEBUG: Created datasets directory: {datasets_dir}")
+        
+        # If user passed a full ref like "owner/dataset", use it directly; otherwise search
+        dataset_ref = None
+        if isinstance(search_query, str) and '/' in search_query:
+            dataset_ref = search_query.strip()
+            logging.info(f"KAGGLE_DEBUG: Using direct dataset reference: {dataset_ref}")
+        else:
+            logging.info(f"KAGGLE_DEBUG: Searching for datasets with extracted query: '{search_query}'")
+            # Handle both datasets_list and dataset_list for compatibility
+            search_fn = getattr(api, 'datasets_list', None) or getattr(api, 'dataset_list', None)
+            datasets = []
+            if search_fn:
+                try:
+                    # Kaggle uses search= for datasets_list; some wrappers use different signatures
+                    datasets = search_fn(search=search_query) if 'search' in search_fn.__code__.co_varnames else search_fn(search_query)
+                    logging.info(f"KAGGLE_DEBUG: Found {len(datasets)} datasets for '{search_query}'")
+                    
+                    # Log first few results for debugging
+                    for i, dataset in enumerate(datasets[:3]):
+                        if hasattr(dataset, 'ref'):
+                            logging.info(f"KAGGLE_DEBUG: Dataset {i}: {dataset.ref}")
+                        elif hasattr(dataset, 'datasetSlug') and hasattr(dataset, 'owner'):
+                            logging.info(f"KAGGLE_DEBUG: Dataset {i}: {dataset.owner}/{dataset.datasetSlug}")
+                            
+                except Exception as search_err:
+                    logging.error(f"KAGGLE_DEBUG: Dataset search failed for '{search_query}': {search_err}")
+                    import traceback
+                    logging.error(f"KAGGLE_DEBUG: Search traceback: {traceback.format_exc()}")
+                    pass
+            if datasets:
+                # Objects may have .ref or .datasetSlug with .owner
+                first = datasets[0]
+                if hasattr(first, 'ref') and first.ref:
+                    dataset_ref = first.ref
+                elif hasattr(first, 'datasetSlug') and hasattr(first, 'owner'):
+                    dataset_ref = f"{first.owner}/{first.datasetSlug}"
+                logging.info(f"KAGGLE_DEBUG: Selected dataset reference: {dataset_ref}")
+
+        if not dataset_ref:
+            logging.error("KAGGLE_DEBUG: No dataset reference found")
+            return None, None
+
+        logging.info(f"KAGGLE_DEBUG: Starting download of {dataset_ref}")
+        temp_dir = tempfile.mkdtemp()
+        logging.info(f"KAGGLE_DEBUG: Using temp directory: {temp_dir}")
+        
+        try:
+            api.dataset_download_files(dataset_ref, path=temp_dir, unzip=True)
+            logging.info(f"KAGGLE_DEBUG: Download completed, searching for CSV files...")
+            
+            # pick first csv
+            csv_file_path = None
+            for root, _, files in os.walk(temp_dir):
+                logging.info(f"KAGGLE_DEBUG: Checking directory {root} with files: {files}")
+                for f in files:
+                    if f.lower().endswith('.csv'):
+                        local_csv_path = os.path.join(root, f)
+                        # copy to datasets_dir and also store in DB
+                        final_path = os.path.join(datasets_dir, f)
+                        logging.info(f"KAGGLE_DEBUG: Found CSV {f}, copying to {final_path}")
+                        os.makedirs(datasets_dir, exist_ok=True)
+                        shutil.copy2(local_csv_path, final_path)
+                        logging.info(f"KAGGLE_DEBUG: Copy completed, file exists: {os.path.exists(final_path)}")
+                        try:
+                            db_fs.save_file(local_csv_path, 'datasets')
+                            logging.info(f"KAGGLE_DEBUG: Saved to database successfully")
+                        except Exception as db_err:
+                            logging.warning(f"KAGGLE_DEBUG: Database save failed: {db_err}")
+                            pass
+                        csv_file_path = final_path
+                        break
+                if csv_file_path:
+                    break
+        finally:
+            shutil.rmtree(temp_dir, ignore_errors=True)
+            logging.info(f"KAGGLE_DEBUG: Cleaned up temp directory")
+
+        if csv_file_path:
+            logging.info(f"KAGGLE_DEBUG: Starting task type detection for {csv_file_path}")
+            detected_task_type, df = auto_detect_task_type(csv_file_path)
+            logging.info(f"KAGGLE_DEBUG: Task type detected: {detected_task_type}")
+            
+            gemini_task_type = None
+            if GEMINI_AVAILABLE:
+                try:
+                    gemini_task_type = get_gemini_task_type_opinion(df, original_query)
+                    logging.info(f"KAGGLE_DEBUG: Gemini task type: {gemini_task_type}")
+                except Exception as gemini_err:
+                    logging.warning(f"KAGGLE_DEBUG: Gemini analysis failed: {gemini_err}")
+                    
+            final_task_type = determine_final_task_type(detected_task_type, gemini_task_type)
+            logging.info(f"KAGGLE_DEBUG: Final task type: {final_task_type}")
+            logging.info(f"Dataset downloaded from Kaggle: {csv_file_path}")
+            logging.info(f"Auto-detected task type: {final_task_type}")
+            logging.info(f"KAGGLE_DEBUG: Successfully processed query '{original_query}' -> '{search_query}' -> {csv_file_path}")
+            return csv_file_path, final_task_type
+            
+        logging.error("KAGGLE_DEBUG: No CSV file found in downloaded dataset")
+        return None, None
+        
     except Exception as e:
+        logging.error(f"KAGGLE_DEBUG: Exception in download_kaggle_dataset: {e}")
+        import traceback
+        logging.error(f"KAGGLE_DEBUG: Traceback: {traceback.format_exc()}")
         print(f"Error searching for Kaggle datasets: {e}")
         return None, None
 

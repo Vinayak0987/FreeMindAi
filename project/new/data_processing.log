@@ -292,3 +292,504 @@
 2025-09-07 03:22:37,170 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
 2025-09-07 03:22:37,170 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
 2025-09-07 03:22:37,185 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 03:22:37] "POST /process HTTP/1.1" 200 -
+2025-09-07 03:37:46,682 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 03:37:46,682 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 03:37:47,477 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 03:37:47,477 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 03:37:47,478 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 03:37:47,478 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 03:37:47,480 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
+2025-09-07 03:37:47,480 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
+2025-09-07 03:37:47,487 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 03:37:47] "POST /process HTTP/1.1" 200 -
+2025-09-07 03:45:01,564 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 03:45:01,564 - __main__ - INFO - Processing request - Task Type: text-classification
+2025-09-07 03:45:02,291 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 03:45:02,291 - __main__ - INFO - Auto-detected task type for uploaded file: regression
+2025-09-07 03:45:02,292 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 03:45:02,292 - __main__ - INFO - Changing task type from text-classification to regression based on file analysis
+2025-09-07 03:45:02,293 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
+2025-09-07 03:45:02,293 - __main__ - INFO - Dataset analysis: 9742 samples, 3 features
+2025-09-07 03:45:02,298 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 03:45:02] "POST /process HTTP/1.1" 200 -
+2025-09-07 19:52:21,466 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 19:52:33,277 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 19:52:33,280 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 20:06:05,661 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 20:06:17,513 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 20:06:17,535 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 20:33:02,474 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:33:02,474 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:33:02,503 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 20:33:02,503 - __main__ - INFO - No file uploaded, creating mock processing response
+2025-09-07 20:33:02,581 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 20:33:02] "POST /process HTTP/1.1" 200 -
+2025-09-07 20:34:25,270 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 20:34:37,111 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 20:34:37,111 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 20:34:42,165 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:34:42,165 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:35:03,848 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 20:35:03,848 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 20:35:03,849 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 20:35:03,849 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 20:35:03,852 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 20:35:03,852 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 20:35:09,530 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 20:35:09] "POST /process HTTP/1.1" 200 -
+2025-09-07 20:36:55,825 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:36:55,825 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:37:17,189 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 20:37:17,189 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 20:37:17,205 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 20:37:17,205 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 20:37:17,207 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 20:37:17,207 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 20:37:22,365 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 20:37:22] "POST /process HTTP/1.1" 200 -
+2025-09-07 20:37:24,423 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:37:24,423 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:38:21,705 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 20:38:21,705 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 20:38:21,710 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 20:38:21,710 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 20:38:21,715 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 20:38:21,715 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 20:38:27,219 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 20:38:27] "POST /process HTTP/1.1" 200 -
+2025-09-07 20:43:05,250 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 20:43:05,250 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 20:44:01,723 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 20:44:01,723 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 20:44:01,726 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 20:44:01,726 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 20:44:01,727 - __main__ - INFO - Changing task type from regression to classification based on generated data analysis
+2025-09-07 20:44:01,727 - __main__ - INFO - Changing task type from regression to classification based on generated data analysis
+2025-09-07 20:44:01,729 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 20:44:01,729 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 20:44:07,658 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 20:44:07] "POST /process HTTP/1.1" 200 -
+2025-09-07 20:46:38,514 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:46:38,514 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:46:58,540 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 20:46:58,540 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 20:46:58,542 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 20:46:58,542 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 20:46:58,544 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 20:46:58,544 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 20:47:02,462 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 20:47:02] "POST /process HTTP/1.1" 200 -
+2025-09-07 20:47:32,419 - root - INFO - Dataset downloaded from Kaggle: C:\Users\ADMIN\AppData\Local\Temp\tmphccb7o6b\Iris.csv
+2025-09-07 20:47:32,420 - root - INFO - Auto-detected task type: classification
+2025-09-07 20:48:49,759 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:48:49,759 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:49:46,732 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 20:49:46,732 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 20:49:46,734 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 20:49:46,734 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 20:49:46,736 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 20:49:46,736 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 20:49:50,344 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 20:49:50] "POST /process HTTP/1.1" 200 -
+2025-09-07 20:51:21,305 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 20:51:30,071 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 20:51:30,072 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 20:51:47,510 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 20:51:52,919 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 20:51:52,920 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 20:52:54,684 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:52:54,684 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:52:54,684 - __main__ - INFO - Processing text prompt: iris dataset
+2025-09-07 20:52:54,684 - __main__ - INFO - Processing text prompt: iris dataset
+2025-09-07 20:52:56,169 - __main__ - INFO - Kaggle download result: (None, None)
+2025-09-07 20:52:56,169 - __main__ - INFO - Kaggle download result: (None, None)
+2025-09-07 20:52:56,170 - __main__ - INFO - Unpacked Kaggle result - File: None, Task type: None
+2025-09-07 20:52:56,170 - __main__ - INFO - Unpacked Kaggle result - File: None, Task type: None
+2025-09-07 20:52:56,171 - __main__ - INFO - Kaggle download failed, falling back to synthetic data generation
+2025-09-07 20:52:56,171 - __main__ - INFO - Kaggle download failed, falling back to synthetic data generation
+2025-09-07 20:52:56,171 - __main__ - INFO - Fallback to synthetic data generation triggered
+2025-09-07 20:52:56,171 - __main__ - INFO - Fallback to synthetic data generation triggered
+2025-09-07 20:53:16,815 - __main__ - INFO - Generated synthetic dataset: (200, 5) samples
+2025-09-07 20:53:16,815 - __main__ - INFO - Generated synthetic dataset: (200, 5) samples
+2025-09-07 20:53:16,820 - __main__ - INFO - Synthetic dataset columns: ['feature1', 'feature2', 'feature3', 'feature4', 'target']
+2025-09-07 20:53:16,820 - __main__ - INFO - Synthetic dataset columns: ['feature1', 'feature2', 'feature3', 'feature4', 'target']
+2025-09-07 20:53:16,822 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 20:53:16,822 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 20:53:16,838 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 20:53:16,838 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 20:53:16,840 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 20:53:16,840 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 20:53:20,675 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 20:53:20] "POST /process HTTP/1.1" 200 -
+2025-09-07 20:53:52,869 - root - INFO - Dataset downloaded from Kaggle: ml_system/datasets\iris.csv
+2025-09-07 20:53:52,870 - root - INFO - Auto-detected task type: classification
+2025-09-07 20:55:45,362 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 20:55:53,448 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 20:55:53,449 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 20:59:03,148 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:59:03,148 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:59:03,149 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 20:59:03] "POST /process HTTP/1.1" 200 -
+2025-09-07 20:59:38,144 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:59:38,144 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 20:59:38,147 - __main__ - INFO - Processing text prompt: iris
+2025-09-07 20:59:38,147 - __main__ - INFO - Processing text prompt: iris
+2025-09-07 20:59:40,141 - root - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 20:59:40,141 - root - INFO - Auto-detected task type: classification
+2025-09-07 20:59:40,142 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\Iris.csv', 'classification')
+2025-09-07 20:59:40,142 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\Iris.csv', 'classification')
+2025-09-07 20:59:40,143 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\Iris.csv, Task type: classification
+2025-09-07 20:59:40,143 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\Iris.csv, Task type: classification
+2025-09-07 20:59:40,145 - __main__ - INFO - Kaggle file exists: ml_system\datasets\Iris.csv
+2025-09-07 20:59:40,145 - __main__ - INFO - Kaggle file exists: ml_system\datasets\Iris.csv
+2025-09-07 20:59:40,149 - __main__ - INFO - File exists check: True
+2025-09-07 20:59:40,149 - __main__ - INFO - File exists check: True
+2025-09-07 20:59:40,156 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 6) samples
+2025-09-07 20:59:40,156 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 6) samples
+2025-09-07 20:59:40,157 - __main__ - INFO - Kaggle dataset columns: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+2025-09-07 20:59:40,157 - __main__ - INFO - Kaggle dataset columns: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+2025-09-07 20:59:40,159 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 20:59:40,159 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 20:59:40,159 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 20:59:40,159 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 20:59:40,161 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
+2025-09-07 20:59:40,161 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
+2025-09-07 20:59:45,707 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 20:59:45] "POST /process HTTP/1.1" 200 -
+2025-09-07 21:02:28,270 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 21:02:28,270 - __main__ - INFO - Processing request - Task Type: classification
+2025-09-07 21:02:28,273 - __main__ - INFO - Processing text prompt: iris dataset
+2025-09-07 21:02:28,273 - __main__ - INFO - Processing text prompt: iris dataset
+2025-09-07 21:02:30,217 - root - INFO - Dataset downloaded from Kaggle: ml_system\datasets\iris.csv
+2025-09-07 21:02:30,217 - root - INFO - Auto-detected task type: classification
+2025-09-07 21:02:30,218 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\iris.csv', 'classification')
+2025-09-07 21:02:30,218 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\iris.csv', 'classification')
+2025-09-07 21:02:30,219 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\iris.csv, Task type: classification
+2025-09-07 21:02:30,219 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\iris.csv, Task type: classification
+2025-09-07 21:02:30,219 - __main__ - INFO - Kaggle file exists: ml_system\datasets\iris.csv
+2025-09-07 21:02:30,219 - __main__ - INFO - Kaggle file exists: ml_system\datasets\iris.csv
+2025-09-07 21:02:30,222 - __main__ - INFO - File exists check: True
+2025-09-07 21:02:30,222 - __main__ - INFO - File exists check: True
+2025-09-07 21:02:30,226 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 5) samples
+2025-09-07 21:02:30,226 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 5) samples
+2025-09-07 21:02:30,227 - __main__ - INFO - Kaggle dataset columns: ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']
+2025-09-07 21:02:30,227 - __main__ - INFO - Kaggle dataset columns: ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']
+2025-09-07 21:02:30,228 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\iris.csv
+2025-09-07 21:02:30,228 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\iris.csv
+2025-09-07 21:02:30,228 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 21:02:30,228 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 21:02:30,230 - __main__ - INFO - Dataset analysis: 150 samples, 5 features
+2025-09-07 21:02:30,230 - __main__ - INFO - Dataset analysis: 150 samples, 5 features
+2025-09-07 21:02:36,779 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 21:02:36] "POST /process HTTP/1.1" 200 -
+2025-09-07 21:07:32,110 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:07:32,110 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:07:32,111 - __main__ - INFO - Processing text prompt: this project is ysed for iris classification for  the dataset taken by kaggle
+2025-09-07 21:07:32,111 - __main__ - INFO - Processing text prompt: this project is ysed for iris classification for  the dataset taken by kaggle
+2025-09-07 21:07:32,524 - __main__ - INFO - Kaggle download result: (None, None)
+2025-09-07 21:07:32,524 - __main__ - INFO - Kaggle download result: (None, None)
+2025-09-07 21:07:32,525 - __main__ - INFO - Unpacked Kaggle result - File: None, Task type: None
+2025-09-07 21:07:32,525 - __main__ - INFO - Unpacked Kaggle result - File: None, Task type: None
+2025-09-07 21:07:32,526 - __main__ - INFO - Kaggle download failed, falling back to synthetic data generation
+2025-09-07 21:07:32,526 - __main__ - INFO - Kaggle download failed, falling back to synthetic data generation
+2025-09-07 21:07:32,527 - __main__ - INFO - Fallback to synthetic data generation triggered
+2025-09-07 21:07:32,527 - __main__ - INFO - Fallback to synthetic data generation triggered
+2025-09-07 21:07:52,402 - __main__ - INFO - Generated synthetic dataset: (200, 5) samples
+2025-09-07 21:07:52,402 - __main__ - INFO - Generated synthetic dataset: (200, 5) samples
+2025-09-07 21:07:52,406 - __main__ - INFO - Synthetic dataset columns: ['feature1', 'feature2', 'feature3', 'feature4', 'target']
+2025-09-07 21:07:52,406 - __main__ - INFO - Synthetic dataset columns: ['feature1', 'feature2', 'feature3', 'feature4', 'target']
+2025-09-07 21:07:52,410 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 21:07:52,410 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 21:07:52,416 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 21:07:52,416 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 21:07:52,418 - __main__ - INFO - Changing task type from regression to classification based on generated data analysis
+2025-09-07 21:07:52,418 - __main__ - INFO - Changing task type from regression to classification based on generated data analysis
+2025-09-07 21:07:52,426 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 21:07:52,426 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 21:07:58,205 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 21:07:58] "POST /process HTTP/1.1" 200 -
+2025-09-07 21:10:23,086 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:10:23,086 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:10:23,088 - __main__ - INFO - Processing text prompt: this project is ysed for iris classification for  the dataset taken by kaggle
+2025-09-07 21:10:23,088 - __main__ - INFO - Processing text prompt: this project is ysed for iris classification for  the dataset taken by kaggle
+2025-09-07 21:10:23,488 - __main__ - INFO - Kaggle download result: (None, None)
+2025-09-07 21:10:23,488 - __main__ - INFO - Kaggle download result: (None, None)
+2025-09-07 21:10:23,489 - __main__ - INFO - Unpacked Kaggle result - File: None, Task type: None
+2025-09-07 21:10:23,489 - __main__ - INFO - Unpacked Kaggle result - File: None, Task type: None
+2025-09-07 21:10:23,490 - __main__ - INFO - Kaggle download failed, falling back to synthetic data generation
+2025-09-07 21:10:23,490 - __main__ - INFO - Kaggle download failed, falling back to synthetic data generation
+2025-09-07 21:10:23,490 - __main__ - INFO - Fallback to synthetic data generation triggered
+2025-09-07 21:10:23,490 - __main__ - INFO - Fallback to synthetic data generation triggered
+2025-09-07 21:10:42,188 - __main__ - INFO - Generated synthetic dataset: (200, 5) samples
+2025-09-07 21:10:42,188 - __main__ - INFO - Generated synthetic dataset: (200, 5) samples
+2025-09-07 21:10:42,199 - __main__ - INFO - Synthetic dataset columns: ['feature1', 'feature2', 'feature3', 'feature4', 'target']
+2025-09-07 21:10:42,199 - __main__ - INFO - Synthetic dataset columns: ['feature1', 'feature2', 'feature3', 'feature4', 'target']
+2025-09-07 21:10:42,207 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 21:10:42,207 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 21:10:42,213 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 21:10:42,213 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 21:10:42,219 - __main__ - INFO - Changing task type from regression to classification based on generated data analysis
+2025-09-07 21:10:42,219 - __main__ - INFO - Changing task type from regression to classification based on generated data analysis
+2025-09-07 21:10:42,226 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 21:10:42,226 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 21:10:48,529 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 21:10:48] "POST /process HTTP/1.1" 200 -
+2025-09-07 21:12:24,317 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:12:24,317 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:12:24,318 - __main__ - INFO - Processing text prompt: this project is ysed for iris classification for  the dataset taken by kaggle
+2025-09-07 21:12:24,318 - __main__ - INFO - Processing text prompt: this project is ysed for iris classification for  the dataset taken by kaggle
+2025-09-07 21:12:25,077 - __main__ - INFO - Kaggle download result: (None, None)
+2025-09-07 21:12:25,077 - __main__ - INFO - Kaggle download result: (None, None)
+2025-09-07 21:12:25,078 - __main__ - INFO - Unpacked Kaggle result - File: None, Task type: None
+2025-09-07 21:12:25,078 - __main__ - INFO - Unpacked Kaggle result - File: None, Task type: None
+2025-09-07 21:12:25,079 - __main__ - INFO - Kaggle download failed, falling back to synthetic data generation
+2025-09-07 21:12:25,079 - __main__ - INFO - Kaggle download failed, falling back to synthetic data generation
+2025-09-07 21:12:25,079 - __main__ - INFO - Fallback to synthetic data generation triggered
+2025-09-07 21:12:25,079 - __main__ - INFO - Fallback to synthetic data generation triggered
+2025-09-07 21:12:44,661 - __main__ - INFO - Generated synthetic dataset: (200, 5) samples
+2025-09-07 21:12:44,661 - __main__ - INFO - Generated synthetic dataset: (200, 5) samples
+2025-09-07 21:12:44,662 - __main__ - INFO - Synthetic dataset columns: ['feature1', 'feature2', 'feature3', 'feature4', 'target']
+2025-09-07 21:12:44,662 - __main__ - INFO - Synthetic dataset columns: ['feature1', 'feature2', 'feature3', 'feature4', 'target']
+2025-09-07 21:12:44,669 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 21:12:44,669 - __main__ - INFO - Generated synthetic dataset from text prompt
+2025-09-07 21:12:44,670 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 21:12:44,670 - __main__ - INFO - Auto-detected task type for generated dataset: classification
+2025-09-07 21:12:44,671 - __main__ - INFO - Changing task type from regression to classification based on generated data analysis
+2025-09-07 21:12:44,671 - __main__ - INFO - Changing task type from regression to classification based on generated data analysis
+2025-09-07 21:12:44,673 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 21:12:44,673 - __main__ - INFO - Dataset analysis: 200 samples, 5 features
+2025-09-07 21:12:50,282 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 21:12:50] "POST /process HTTP/1.1" 200 -
+2025-09-07 21:13:46,480 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 21:13:55,994 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 21:13:55,995 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 21:17:18,631 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 21:17:26,493 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 21:17:26,494 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 21:18:00,179 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 21:18:06,670 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.29.18:5001
+2025-09-07 21:18:06,671 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-09-07 21:21:50,129 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:21:50,129 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:21:50,129 - __main__ - INFO - Processing text prompt: this project is used for iris classification for the dataset taken by kaggle
+2025-09-07 21:21:50,129 - __main__ - INFO - Processing text prompt: this project is used for iris classification for the dataset taken by kaggle
+2025-09-07 21:21:50,130 - root - INFO - KAGGLE_DEBUG: Starting download for original query 'this project is used for iris classification for the dataset taken by kaggle'
+2025-09-07 21:21:50,130 - root - INFO - KAGGLE_DEBUG: Extracted search query: 'iris' -> datasets_dir: 'ml_system\datasets'
+2025-09-07 21:21:50,130 - root - INFO - KAGGLE_DEBUG: Kaggle API is available, initializing...
+2025-09-07 21:21:50,131 - root - INFO - KAGGLE_DEBUG: Kaggle authentication successful
+2025-09-07 21:21:50,133 - root - INFO - KAGGLE_DEBUG: Created datasets directory: ml_system\datasets
+2025-09-07 21:21:50,133 - root - INFO - KAGGLE_DEBUG: Searching for datasets with extracted query: 'iris'
+2025-09-07 21:21:50,783 - root - INFO - KAGGLE_DEBUG: Found 20 datasets for 'iris'
+2025-09-07 21:21:50,787 - root - INFO - KAGGLE_DEBUG: Dataset 0: uciml/iris
+2025-09-07 21:21:50,788 - root - INFO - KAGGLE_DEBUG: Dataset 1: himanshunakrani/iris-dataset
+2025-09-07 21:21:50,789 - root - INFO - KAGGLE_DEBUG: Dataset 2: arshid/iris-flower-dataset
+2025-09-07 21:21:50,789 - root - INFO - KAGGLE_DEBUG: Selected dataset reference: uciml/iris
+2025-09-07 21:21:50,789 - root - INFO - KAGGLE_DEBUG: Starting download of uciml/iris
+2025-09-07 21:21:50,790 - root - INFO - KAGGLE_DEBUG: Using temp directory: C:\Users\ADMIN\AppData\Local\Temp\tmpxoe5kv41
+2025-09-07 21:21:51,883 - root - INFO - KAGGLE_DEBUG: Download completed, searching for CSV files...
+2025-09-07 21:21:51,884 - root - INFO - KAGGLE_DEBUG: Checking directory C:\Users\ADMIN\AppData\Local\Temp\tmpxoe5kv41 with files: ['database.sqlite', 'Iris.csv']
+2025-09-07 21:21:51,885 - root - INFO - KAGGLE_DEBUG: Found CSV Iris.csv, copying to ml_system\datasets\Iris.csv
+2025-09-07 21:21:51,925 - root - INFO - KAGGLE_DEBUG: Copy completed, file exists: True
+2025-09-07 21:21:51,944 - root - INFO - KAGGLE_DEBUG: Saved to database successfully
+2025-09-07 21:21:51,947 - root - INFO - KAGGLE_DEBUG: Cleaned up temp directory
+2025-09-07 21:21:51,948 - root - INFO - KAGGLE_DEBUG: Starting task type detection for ml_system\datasets\Iris.csv
+2025-09-07 21:21:51,983 - root - INFO - KAGGLE_DEBUG: Task type detected: classification
+2025-09-07 21:21:52,947 - root - INFO - KAGGLE_DEBUG: Gemini task type: classification
+2025-09-07 21:21:52,948 - root - INFO - KAGGLE_DEBUG: Final task type: classification
+2025-09-07 21:21:52,948 - root - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 21:21:52,949 - root - INFO - Auto-detected task type: classification
+2025-09-07 21:21:52,949 - root - INFO - KAGGLE_DEBUG: Successfully processed query 'this project is used for iris classification for the dataset taken by kaggle' -> 'iris' -> ml_system\datasets\Iris.csv
+2025-09-07 21:21:52,949 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\Iris.csv', 'classification')
+2025-09-07 21:21:52,949 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\Iris.csv', 'classification')
+2025-09-07 21:21:52,950 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\Iris.csv, Task type: classification
+2025-09-07 21:21:52,950 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\Iris.csv, Task type: classification
+2025-09-07 21:21:52,951 - __main__ - INFO - Kaggle file exists: ml_system\datasets\Iris.csv
+2025-09-07 21:21:52,951 - __main__ - INFO - Kaggle file exists: ml_system\datasets\Iris.csv
+2025-09-07 21:21:52,955 - __main__ - INFO - File exists check: True
+2025-09-07 21:21:52,955 - __main__ - INFO - File exists check: True
+2025-09-07 21:21:52,962 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 6) samples
+2025-09-07 21:21:52,962 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 6) samples
+2025-09-07 21:21:52,963 - __main__ - INFO - Kaggle dataset columns: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+2025-09-07 21:21:52,963 - __main__ - INFO - Kaggle dataset columns: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+2025-09-07 21:21:52,963 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 21:21:52,963 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 21:21:52,964 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 21:21:52,964 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 21:21:52,965 - __main__ - INFO - Changing task type from regression to classification based on dataset analysis
+2025-09-07 21:21:52,965 - __main__ - INFO - Changing task type from regression to classification based on dataset analysis
+2025-09-07 21:21:52,968 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
+2025-09-07 21:21:52,968 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
+2025-09-07 21:22:01,504 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 21:22:01] "POST /process HTTP/1.1" 200 -
+2025-09-07 21:22:09,967 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:22:09,967 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:22:09,968 - __main__ - INFO - Processing text prompt: this project is ysed for iris classification for  the dataset taken by kaggle
+2025-09-07 21:22:09,968 - __main__ - INFO - Processing text prompt: this project is ysed for iris classification for  the dataset taken by kaggle
+2025-09-07 21:22:09,969 - root - INFO - KAGGLE_DEBUG: Starting download for original query 'this project is ysed for iris classification for  the dataset taken by kaggle'
+2025-09-07 21:22:09,969 - root - INFO - KAGGLE_DEBUG: Extracted search query: 'iris' -> datasets_dir: 'ml_system\datasets'
+2025-09-07 21:22:09,970 - root - INFO - KAGGLE_DEBUG: Kaggle API is available, initializing...
+2025-09-07 21:22:09,970 - root - INFO - KAGGLE_DEBUG: Kaggle authentication successful
+2025-09-07 21:22:09,974 - root - INFO - KAGGLE_DEBUG: Created datasets directory: ml_system\datasets
+2025-09-07 21:22:09,974 - root - INFO - KAGGLE_DEBUG: Searching for datasets with extracted query: 'iris'
+2025-09-07 21:22:10,633 - root - INFO - KAGGLE_DEBUG: Found 20 datasets for 'iris'
+2025-09-07 21:22:10,634 - root - INFO - KAGGLE_DEBUG: Dataset 0: uciml/iris
+2025-09-07 21:22:10,634 - root - INFO - KAGGLE_DEBUG: Dataset 1: himanshunakrani/iris-dataset
+2025-09-07 21:22:10,635 - root - INFO - KAGGLE_DEBUG: Dataset 2: arshid/iris-flower-dataset
+2025-09-07 21:22:10,635 - root - INFO - KAGGLE_DEBUG: Selected dataset reference: uciml/iris
+2025-09-07 21:22:10,635 - root - INFO - KAGGLE_DEBUG: Starting download of uciml/iris
+2025-09-07 21:22:10,636 - root - INFO - KAGGLE_DEBUG: Using temp directory: C:\Users\ADMIN\AppData\Local\Temp\tmphd59wqvt
+2025-09-07 21:22:11,439 - root - INFO - KAGGLE_DEBUG: Download completed, searching for CSV files...
+2025-09-07 21:22:11,440 - root - INFO - KAGGLE_DEBUG: Checking directory C:\Users\ADMIN\AppData\Local\Temp\tmphd59wqvt with files: ['database.sqlite', 'Iris.csv']
+2025-09-07 21:22:11,440 - root - INFO - KAGGLE_DEBUG: Found CSV Iris.csv, copying to ml_system\datasets\Iris.csv
+2025-09-07 21:22:11,467 - root - INFO - KAGGLE_DEBUG: Copy completed, file exists: True
+2025-09-07 21:22:11,486 - root - INFO - KAGGLE_DEBUG: Saved to database successfully
+2025-09-07 21:22:11,501 - root - INFO - KAGGLE_DEBUG: Cleaned up temp directory
+2025-09-07 21:22:11,513 - root - INFO - KAGGLE_DEBUG: Starting task type detection for ml_system\datasets\Iris.csv
+2025-09-07 21:22:11,527 - root - INFO - KAGGLE_DEBUG: Task type detected: classification
+2025-09-07 21:22:12,086 - root - INFO - KAGGLE_DEBUG: Gemini task type: classification
+2025-09-07 21:22:12,086 - root - INFO - KAGGLE_DEBUG: Final task type: classification
+2025-09-07 21:22:12,087 - root - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 21:22:12,089 - root - INFO - Auto-detected task type: classification
+2025-09-07 21:22:12,090 - root - INFO - KAGGLE_DEBUG: Successfully processed query 'this project is ysed for iris classification for  the dataset taken by kaggle' -> 'iris' -> ml_system\datasets\Iris.csv
+2025-09-07 21:22:12,090 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\Iris.csv', 'classification')
+2025-09-07 21:22:12,090 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\Iris.csv', 'classification')
+2025-09-07 21:22:12,091 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\Iris.csv, Task type: classification
+2025-09-07 21:22:12,091 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\Iris.csv, Task type: classification
+2025-09-07 21:22:12,092 - __main__ - INFO - Kaggle file exists: ml_system\datasets\Iris.csv
+2025-09-07 21:22:12,092 - __main__ - INFO - Kaggle file exists: ml_system\datasets\Iris.csv
+2025-09-07 21:22:12,096 - __main__ - INFO - File exists check: True
+2025-09-07 21:22:12,096 - __main__ - INFO - File exists check: True
+2025-09-07 21:22:12,103 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 6) samples
+2025-09-07 21:22:12,103 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 6) samples
+2025-09-07 21:22:12,105 - __main__ - INFO - Kaggle dataset columns: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+2025-09-07 21:22:12,105 - __main__ - INFO - Kaggle dataset columns: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+2025-09-07 21:22:12,106 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 21:22:12,106 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 21:22:12,107 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 21:22:12,107 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 21:22:12,108 - __main__ - INFO - Changing task type from regression to classification based on dataset analysis
+2025-09-07 21:22:12,108 - __main__ - INFO - Changing task type from regression to classification based on dataset analysis
+2025-09-07 21:22:12,109 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
+2025-09-07 21:22:12,109 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
+2025-09-07 21:22:21,366 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 21:22:21] "POST /process HTTP/1.1" 200 -
+2025-09-07 21:23:58,984 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:23:58,984 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:23:58,985 - __main__ - INFO - Processing text prompt: iris classification
+2025-09-07 21:23:58,985 - __main__ - INFO - Processing text prompt: iris classification
+2025-09-07 21:23:58,986 - root - INFO - KAGGLE_DEBUG: Starting download for original query 'iris classification'
+2025-09-07 21:23:58,987 - root - INFO - KAGGLE_DEBUG: Extracted search query: 'iris' -> datasets_dir: 'ml_system\datasets'
+2025-09-07 21:23:58,987 - root - INFO - KAGGLE_DEBUG: Kaggle API is available, initializing...
+2025-09-07 21:23:58,989 - root - INFO - KAGGLE_DEBUG: Kaggle authentication successful
+2025-09-07 21:23:58,991 - root - INFO - KAGGLE_DEBUG: Created datasets directory: ml_system\datasets
+2025-09-07 21:23:58,991 - root - INFO - KAGGLE_DEBUG: Searching for datasets with extracted query: 'iris'
+2025-09-07 21:23:59,661 - root - INFO - KAGGLE_DEBUG: Found 20 datasets for 'iris'
+2025-09-07 21:23:59,662 - root - INFO - KAGGLE_DEBUG: Dataset 0: uciml/iris
+2025-09-07 21:23:59,662 - root - INFO - KAGGLE_DEBUG: Dataset 1: himanshunakrani/iris-dataset
+2025-09-07 21:23:59,663 - root - INFO - KAGGLE_DEBUG: Dataset 2: arshid/iris-flower-dataset
+2025-09-07 21:23:59,663 - root - INFO - KAGGLE_DEBUG: Selected dataset reference: uciml/iris
+2025-09-07 21:23:59,663 - root - INFO - KAGGLE_DEBUG: Starting download of uciml/iris
+2025-09-07 21:23:59,664 - root - INFO - KAGGLE_DEBUG: Using temp directory: C:\Users\ADMIN\AppData\Local\Temp\tmp46x1sm23
+2025-09-07 21:24:00,433 - root - INFO - KAGGLE_DEBUG: Download completed, searching for CSV files...
+2025-09-07 21:24:00,444 - root - INFO - KAGGLE_DEBUG: Checking directory C:\Users\ADMIN\AppData\Local\Temp\tmp46x1sm23 with files: ['database.sqlite', 'Iris.csv']
+2025-09-07 21:24:00,448 - root - INFO - KAGGLE_DEBUG: Found CSV Iris.csv, copying to ml_system\datasets\Iris.csv
+2025-09-07 21:24:00,528 - root - INFO - KAGGLE_DEBUG: Copy completed, file exists: True
+2025-09-07 21:24:00,581 - root - INFO - KAGGLE_DEBUG: Saved to database successfully
+2025-09-07 21:24:00,606 - root - INFO - KAGGLE_DEBUG: Cleaned up temp directory
+2025-09-07 21:24:00,608 - root - INFO - KAGGLE_DEBUG: Starting task type detection for ml_system\datasets\Iris.csv
+2025-09-07 21:24:00,623 - root - INFO - KAGGLE_DEBUG: Task type detected: classification
+2025-09-07 21:24:01,168 - root - INFO - KAGGLE_DEBUG: Gemini task type: classification
+2025-09-07 21:24:01,168 - root - INFO - KAGGLE_DEBUG: Final task type: classification
+2025-09-07 21:24:01,169 - root - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 21:24:01,169 - root - INFO - Auto-detected task type: classification
+2025-09-07 21:24:01,170 - root - INFO - KAGGLE_DEBUG: Successfully processed query 'iris classification' -> 'iris' -> ml_system\datasets\Iris.csv
+2025-09-07 21:24:01,171 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\Iris.csv', 'classification')
+2025-09-07 21:24:01,171 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\Iris.csv', 'classification')
+2025-09-07 21:24:01,172 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\Iris.csv, Task type: classification
+2025-09-07 21:24:01,172 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\Iris.csv, Task type: classification
+2025-09-07 21:24:01,173 - __main__ - INFO - Kaggle file exists: ml_system\datasets\Iris.csv
+2025-09-07 21:24:01,173 - __main__ - INFO - Kaggle file exists: ml_system\datasets\Iris.csv
+2025-09-07 21:24:01,177 - __main__ - INFO - File exists check: True
+2025-09-07 21:24:01,177 - __main__ - INFO - File exists check: True
+2025-09-07 21:24:01,184 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 6) samples
+2025-09-07 21:24:01,184 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 6) samples
+2025-09-07 21:24:01,185 - __main__ - INFO - Kaggle dataset columns: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+2025-09-07 21:24:01,185 - __main__ - INFO - Kaggle dataset columns: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+2025-09-07 21:24:01,186 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 21:24:01,186 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 21:24:01,188 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 21:24:01,188 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 21:24:01,190 - __main__ - INFO - Changing task type from regression to classification based on dataset analysis
+2025-09-07 21:24:01,190 - __main__ - INFO - Changing task type from regression to classification based on dataset analysis
+2025-09-07 21:24:01,192 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
+2025-09-07 21:24:01,192 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
+2025-09-07 21:24:09,653 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 21:24:09] "POST /process HTTP/1.1" 200 -
+2025-09-07 21:29:54,616 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:29:54,616 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:29:54,617 - __main__ - INFO - Processing text prompt: this project is ysed for iris classification for  the dataset taken by kaggle
+2025-09-07 21:29:54,617 - __main__ - INFO - Processing text prompt: this project is ysed for iris classification for  the dataset taken by kaggle
+2025-09-07 21:29:54,618 - root - INFO - KAGGLE_DEBUG: Starting download for original query 'this project is ysed for iris classification for  the dataset taken by kaggle'
+2025-09-07 21:29:54,619 - root - INFO - KAGGLE_DEBUG: Extracted search query: 'iris' -> datasets_dir: 'ml_system\datasets'
+2025-09-07 21:29:54,619 - root - INFO - KAGGLE_DEBUG: Kaggle API is available, initializing...
+2025-09-07 21:29:54,620 - root - INFO - KAGGLE_DEBUG: Kaggle authentication successful
+2025-09-07 21:29:54,622 - root - INFO - KAGGLE_DEBUG: Created datasets directory: ml_system\datasets
+2025-09-07 21:29:54,622 - root - INFO - KAGGLE_DEBUG: Searching for datasets with extracted query: 'iris'
+2025-09-07 21:29:55,173 - root - INFO - KAGGLE_DEBUG: Found 20 datasets for 'iris'
+2025-09-07 21:29:55,174 - root - INFO - KAGGLE_DEBUG: Dataset 0: uciml/iris
+2025-09-07 21:29:55,174 - root - INFO - KAGGLE_DEBUG: Dataset 1: himanshunakrani/iris-dataset
+2025-09-07 21:29:55,174 - root - INFO - KAGGLE_DEBUG: Dataset 2: arshid/iris-flower-dataset
+2025-09-07 21:29:55,175 - root - INFO - KAGGLE_DEBUG: Selected dataset reference: uciml/iris
+2025-09-07 21:29:55,175 - root - INFO - KAGGLE_DEBUG: Starting download of uciml/iris
+2025-09-07 21:29:55,176 - root - INFO - KAGGLE_DEBUG: Using temp directory: C:\Users\ADMIN\AppData\Local\Temp\tmpzbzr646s
+2025-09-07 21:29:56,066 - root - INFO - KAGGLE_DEBUG: Download completed, searching for CSV files...
+2025-09-07 21:29:56,067 - root - INFO - KAGGLE_DEBUG: Checking directory C:\Users\ADMIN\AppData\Local\Temp\tmpzbzr646s with files: ['database.sqlite', 'Iris.csv']
+2025-09-07 21:29:56,068 - root - INFO - KAGGLE_DEBUG: Found CSV Iris.csv, copying to ml_system\datasets\Iris.csv
+2025-09-07 21:29:56,121 - root - INFO - KAGGLE_DEBUG: Copy completed, file exists: True
+2025-09-07 21:29:56,138 - root - INFO - KAGGLE_DEBUG: Saved to database successfully
+2025-09-07 21:29:56,143 - root - INFO - KAGGLE_DEBUG: Cleaned up temp directory
+2025-09-07 21:29:56,148 - root - INFO - KAGGLE_DEBUG: Starting task type detection for ml_system\datasets\Iris.csv
+2025-09-07 21:29:56,170 - root - INFO - KAGGLE_DEBUG: Task type detected: classification
+2025-09-07 21:29:58,168 - root - INFO - KAGGLE_DEBUG: Gemini task type: classification
+2025-09-07 21:29:58,168 - root - INFO - KAGGLE_DEBUG: Final task type: classification
+2025-09-07 21:29:58,168 - root - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 21:29:58,169 - root - INFO - Auto-detected task type: classification
+2025-09-07 21:29:58,169 - root - INFO - KAGGLE_DEBUG: Successfully processed query 'this project is ysed for iris classification for  the dataset taken by kaggle' -> 'iris' -> ml_system\datasets\Iris.csv
+2025-09-07 21:29:58,170 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\Iris.csv', 'classification')
+2025-09-07 21:29:58,170 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\Iris.csv', 'classification')
+2025-09-07 21:29:58,170 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\Iris.csv, Task type: classification
+2025-09-07 21:29:58,170 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\Iris.csv, Task type: classification
+2025-09-07 21:29:58,171 - __main__ - INFO - Kaggle file exists: ml_system\datasets\Iris.csv
+2025-09-07 21:29:58,171 - __main__ - INFO - Kaggle file exists: ml_system\datasets\Iris.csv
+2025-09-07 21:29:58,175 - __main__ - INFO - File exists check: True
+2025-09-07 21:29:58,175 - __main__ - INFO - File exists check: True
+2025-09-07 21:29:58,181 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 6) samples
+2025-09-07 21:29:58,181 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 6) samples
+2025-09-07 21:29:58,182 - __main__ - INFO - Kaggle dataset columns: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+2025-09-07 21:29:58,182 - __main__ - INFO - Kaggle dataset columns: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+2025-09-07 21:29:58,183 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 21:29:58,183 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 21:29:58,184 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 21:29:58,184 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 21:29:58,184 - __main__ - INFO - Changing task type from regression to classification based on dataset analysis
+2025-09-07 21:29:58,184 - __main__ - INFO - Changing task type from regression to classification based on dataset analysis
+2025-09-07 21:29:58,186 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
+2025-09-07 21:29:58,186 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
+2025-09-07 21:30:07,290 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 21:30:07] "POST /process HTTP/1.1" 200 -

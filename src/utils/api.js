@@ -137,39 +137,19 @@ export const apiService = {
 
   // Nebula Backend Integration
   nebula: {
-    // Data Processing - Use Python backend
+    // Data Processing - Python backend (port 5001)
     processDataset: (config) => {
-      const formData = new FormData();
-      formData.append('task_type', config.taskType || 'text_classification');
-      formData.append('text_prompt', config.textPrompt || 'Movie recommendation system');
-      
-      // Add file if provided
-      if (config.file) {
-        formData.append('file', config.file);
+      const form = new FormData();
+      const task = config?.taskType || 'text_classification';
+      form.append('task_type', task);
+      if (config?.textPrompt) form.append('text_prompt', config.textPrompt);
+      if (config?.file instanceof File) {
+        form.append('file', config.file);
       }
-      
-      // Add folder zip if provided
-      if (config.folderZip) {
-        formData.append('folder_zip', config.folderZip);
-      }
-      
       return fetch('http://localhost:5001/process', {
         method: 'POST',
-        mode: 'cors',
-        credentials: 'same-origin',
-        headers: {
-          'Accept': 'application/json',
-        },
-        body: formData
-      }).then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      }).catch(error => {
-        console.error('Fetch error:', error);
-        throw error;
-      });
+        body: form
+      }).then(r => r.json());
     },
     
     // Model Training
@@ -198,6 +178,15 @@ export const apiService = {
     // Dataset Operations
     expandDataset: (config) => api.post('/dataset/expand', config),
     preprocessData: (config) => api.post('/preprocess', config),
+  },
+
+  // Deployment endpoints
+  deployment: {
+    create: (config) => api.post('/deploy', config),
+    getStatus: (deploymentId) => api.get(`/deploy/status/${deploymentId}`),
+    getAll: (params = {}) => api.get('/deploy', { params }),
+    stop: (deploymentId) => api.post(`/deploy/${deploymentId}/stop`),
+    update: (deploymentId, data) => api.put(`/deploy/${deploymentId}`, data),
   },
 };
 

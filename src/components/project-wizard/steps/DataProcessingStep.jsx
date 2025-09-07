@@ -102,30 +102,60 @@ const DataProcessingStep = ({ data, updateData, stepData }) => {
         taskType: data.taskConfig?.id || data.task || 'text_classification',
         textPrompt: data.description || 'ML Project',
         preprocessing: {
-          dataCleaning: data.preprocessing?.options?.some(opt => opt.id === 'data_cleaning') || false,
-          dataSplitting: data.preprocessing?.options?.some(opt => opt.id === 'data_splitting') || false,
-          dataNormalization: data.preprocessing?.options?.some(opt => opt.id === 'data_normalization') || false,
-          dataAugmentation: data.preprocessing?.options?.some(opt => opt.id === 'data_augmentation') || false
+          dataCleaning: data.preprocessing?.options?.some(opt => opt.id === 'cleaning') || false,
+          dataSplitting: data.preprocessing?.options?.some(opt => opt.id === 'splitting') || false,
+          dataNormalization: data.preprocessing?.options?.some(opt => opt.id === 'normalize') || false,
+          dataAugmentation: data.preprocessing?.options?.some(opt => opt.id === 'augmentation') || false
         },
         dataset: {
-          totalSamples: data.datasets.length * 100, // Estimate
+          totalSamples: data.datasets.length * 2000, // Better estimate based on file count
           features: ['text', 'label'],
-          dataType: data.dataType || 'text'
+          dataType: data.dataType || 'text',
+          files: data.datasets.length // Send file count to backend
         }
       };
 
-      // Add the first uploaded file to the configuration
-      if (data.datasets && data.datasets.length > 0 && data.datasets[0].file) {
-        preprocessingConfig.file = data.datasets[0].file;
-        console.log('Adding file to processing:', data.datasets[0].file.name);
-      } else {
-        console.log('No file found in datasets:', data.datasets);
+      // Add the first uploaded file to the configuration if it's a real file upload
+      if (data.datasets && data.datasets.length > 0) {
+        const firstDataset = data.datasets[0];
+        if (firstDataset.file) {
+          preprocessingConfig.file = firstDataset.file;
+          console.log('Adding file to processing:', firstDataset.file.name);
+        } else if (firstDataset.isKaggleDataset) {
+          console.log('Using Kaggle dataset for processing:', firstDataset.name);
+        } else if (firstDataset.isSample) {
+          console.log('Using sample dataset for processing:', firstDataset.name);
+        } else {
+          console.log('Dataset without file found:', firstDataset.name);
+        }
       }
 
       const response = await apiService.nebula.processDataset(preprocessingConfig);
-      const results = response;
-
-      setProcessingResults(results);
+      const results = response.data || response; // Handle both axios response format and direct data
+      
+      // Extract the nested data for display
+      const processedData = results.data || results;
+      const analysisData = processedData.analysis || {};
+      
+      const processedResults = {
+        ...results,
+        // Handle both real file processing and fallback data
+        totalSamples: results.totalSamples || processedData.processedData?.totalSamples || processedData.totalSamples || 'N/A',
+        features: results.features || processedData.processedData?.featureCount || processedData.processedData?.features?.length || processedData.features?.length || 'N/A',
+        quality: analysisData.dataQuality || 'Good',
+        filename: processedData.filename || null,
+        preview: processedData.preview || null,
+        missingValues: analysisData.missingValues || 0,
+        duplicates: analysisData.duplicates || 0,
+        dataTypes: analysisData.dataTypes || [],
+        columnTypes: analysisData.columnTypes || {},
+        // Add additional fields from API response for better debugging
+        taskType: results.task_type || results.detected_task_type || 'Unknown',
+        modelName: results.model_info?.model_name || 'Unknown',
+        modelScore: results.model_info?.score || 'N/A'
+      };
+      
+      setProcessingResults(processedResults);
       updateData({
         preprocessing: {
           ...data.preprocessing,
@@ -337,7 +367,7 @@ const DataProcessingStep = ({ data, updateData, stepData }) => {
             <Icon name="CheckCircle" size={20} className="text-green-500" />
             Processing Complete
           </h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
             <div className="p-4 bg-green-50 rounded-xl border border-green-200">
               <div className="text-sm text-green-600">Total Samples</div>
               <div className="text-xl font-bold text-green-700">{processingResults.totalSamples || 'N/A'}</div>
@@ -347,8 +377,26 @@ const DataProcessingStep = ({ data, updateData, stepData }) => {
               <div className="text-xl font-bold text-blue-700">{processingResults.features || 'N/A'}</div>
             </div>
             <div className="p-4 bg-purple-50 rounded-xl border border-purple-200">
-              <div className="text-sm text-purple-600">Data Quality</div>
-              <div className="text-xl font-bold text-purple-700">{processingResults.quality || 'Good'}</div>
+              <div className="text-sm text-purple-600">Task Type</div>
+              <div className="text-xl font-bold text-purple-700 capitalize">{processingResults.taskType || 'N/A'}</div>
+            </div>
+            <div className="p-4 bg-orange-50 rounded-xl border border-orange-200">
+              <div className="text-sm text-orange-600">Data Quality</div>
+              <div className="text-xl font-bold text-orange-700">{processingResults.quality || 'Good'}</div>
+            </div>
+          </div>
+          
+          {/* Model Information */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="p-4 bg-indigo-50 rounded-xl border border-indigo-200">
+              <div className="text-sm text-indigo-600">Model</div>
+              <div className="text-xl font-bold text-indigo-700">{processingResults.modelName || 'N/A'}</div>
+            </div>
+            <div className="p-4 bg-teal-50 rounded-xl border border-teal-200">
+              <div className="text-sm text-teal-600">Accuracy Score</div>
+              <div className="text-xl font-bold text-teal-700">
+                {processingResults.modelScore !== 'N/A' ? `${(processingResults.modelScore * 100).toFixed(1)}%` : 'N/A'}
+              </div>
             </div>
           </div>
           

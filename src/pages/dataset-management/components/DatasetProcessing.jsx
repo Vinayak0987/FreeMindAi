@@ -3,6 +3,7 @@ import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
 import Select from '../../../components/ui/Select';
 import { Checkbox } from '../../../components/ui/Checkbox';
+import { apiService } from '../../../utils/api';
 
 const DatasetProcessing = ({ dataset }) => {
   const [selectedOperations, setSelectedOperations] = useState([]);
@@ -109,12 +110,32 @@ const DatasetProcessing = ({ dataset }) => {
     { id: 'churn', name: 'Churn', type: 'categorical', missing: 0 }
   ];
 
-  const handleStartProcessing = () => {
+  const handleStartProcessing = async () => {
+    if (!dataset || !dataset.file) {
+      console.error('No dataset file available for processing');
+      return;
+    }
+    
     setProcessingStatus('processing');
-    // Simulate processing
-    setTimeout(() => {
+    try {
+      // Call the real API with the dataset file and selected preprocessing options
+      const response = await apiService.nebula.processDataset({
+        file: dataset.file,
+        taskType: dataset.type || 'classification',
+        preprocessing: {
+          dataCleaning: selectedOperations.includes('missing_values'),
+          dataSplitting: true, // Always split data
+          dataNormalization: selectedOperations.includes('normalization'),
+          dataAugmentation: selectedOperations.includes('feature_engineering')
+        }
+      });
+      
+      console.log('Processing completed:', response.data);
       setProcessingStatus('completed');
-    }, 3000);
+    } catch (error) {
+      console.error('Processing failed:', error);
+      setProcessingStatus('error');
+    }
   };
 
   const getColumnIcon = (type) => {

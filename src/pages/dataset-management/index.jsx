@@ -9,11 +9,14 @@ import DatasetVisualization from './components/DatasetVisualization';
 import DatasetProcessing from './components/DatasetProcessing';
 import UploadZone from './components/UploadZone';
 import AIAssistantFAB from '../../components/AIAssistantFAB';
+import { apiService } from '../../utils/api';
 
 const DatasetManagement = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [isUploadZoneVisible, setIsUploadZoneVisible] = useState(false);
   const [selectedDataset, setSelectedDataset] = useState(null);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [processingStatus, setProcessingStatus] = useState('idle');
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: 'BarChart3' },
@@ -27,10 +30,67 @@ const DatasetManagement = () => {
     setActiveTab('overview');
   };
 
-  const handleUpload = (files) => {
+  const handleUpload = async (files) => {
     console.log('Files uploaded:', files);
+    setUploadedFiles(files);
     setIsUploadZoneVisible(false);
-    // Handle uploaded files here
+    
+    // If there are uploaded files, automatically process the first one
+    if (files && files.length > 0) {
+      const firstFile = files[0];
+      if (firstFile.file) {
+        try {
+          setProcessingStatus('processing');
+          
+          // Determine task type based on file extension
+          const extension = firstFile.name.split('.').pop()?.toLowerCase();
+          let taskType = 'classification'; // default
+          
+          if (extension === 'csv' || extension === 'xlsx') {
+            taskType = 'classification'; // Will be auto-detected by backend
+          } else if (['jpg', 'jpeg', 'png', 'gif'].includes(extension)) {
+            taskType = 'image_classification';
+          }
+          
+          const response = await apiService.nebula.processDataset({
+            file: firstFile.file,
+            taskType: taskType,
+            preprocessing: {
+              dataCleaning: true,
+              dataSplitting: true,
+              dataNormalization: false,
+              dataAugmentation: false
+            }
+          });
+          
+          console.log('Processing response:', response.data);
+          
+          // Create a dataset object from the processing response
+          const processedDataset = {
+            id: `uploaded_${Date.now()}`,
+            name: firstFile.name,
+            type: taskType,
+            size: {
+              totalFiles: 1,
+              totalSize: firstFile.size,
+              sizeUnit: 'B'
+            },
+            analysis: response.data.analysis || response.data,
+            status: 'ready',
+            uploadDate: firstFile.uploadDate,
+            source: 'upload'
+          };
+          
+          setSelectedDataset(processedDataset);
+          setActiveTab('overview');
+          setProcessingStatus('completed');
+          
+        } catch (error) {
+          console.error('Error processing uploaded file:', error);
+          setProcessingStatus('error');
+        }
+      }
+    }
   };
 
   const renderTabContent = () => {

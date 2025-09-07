@@ -5,8 +5,9 @@ import Input from '../../../components/ui/Input';
 import Select from '../../../components/ui/Select';
 
 const DeploymentConfigPanel = ({ onDeploy, selectedModel }) => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0); // Start with platform selection
   const [config, setConfig] = useState({
+    platform: '',
     cloudProvider: '',
     region: '',
     instanceType: '',
@@ -14,15 +15,81 @@ const DeploymentConfigPanel = ({ onDeploy, selectedModel }) => {
     minInstances: 1,
     maxInstances: 10,
     apiName: '',
+    serviceName: '',
+    environment: 'development',
+    taskType: 'classification',
+    dataType: 'tabular',
     description: ''
   });
+  const [isDeploying, setIsDeploying] = useState(false);
 
-  const cloudProviders = [
-    { value: 'aws', label: 'Amazon Web Services' },
-    { value: 'gcp', label: 'Google Cloud Platform' },
-    { value: 'azure', label: 'Microsoft Azure' },
-    { value: 'freemind', label: 'FreeMind Cloud' }
+  // Local deployment handler
+  const handleLocalDeployment = async () => {
+    setIsDeploying(true);
+    try {
+      const deploymentData = {
+        platform: 'local',
+        serviceName: config.serviceName || selectedModel?.name?.toLowerCase().replace(/\s+/g, '-') || 'ml-model',
+        environment: config.environment,
+        taskType: config.taskType,
+        dataType: config.dataType,
+        modelConfig: {
+          name: selectedModel?.name,
+          version: selectedModel?.version,
+          type: selectedModel?.type,
+          accuracy: selectedModel?.accuracy
+        },
+        deploymentConfig: {
+          autoScaling: false // Not applicable for local
+        }
+      };
+
+      const response = await fetch('/api/deploy', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(deploymentData)
+      });
+
+      if (response.ok) {
+        // Handle file download
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${deploymentData.serviceName}-local-deployment.zip`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+        
+        // Notify parent component
+        onDeploy({ 
+          ...deploymentData, 
+          status: 'downloaded',
+          timestamp: new Date().toISOString()
+        });
+      } else {
+        throw new Error('Download failed');
+      }
+    } catch (error) {
+      console.error('Local deployment failed:', error);
+      alert('Failed to generate deployment package. Please try again.');
+    } finally {
+      setIsDeploying(false);
+    }
+  };
+
+  const deploymentPlatforms = [
+    { value: 'local', label: 'Local Development', icon: 'Monitor', description: 'Download project package for local deployment' },
+    { value: 'aws', label: 'Amazon Web Services', icon: 'Cloud', description: 'Deploy to AWS cloud infrastructure' },
+    { value: 'gcp', label: 'Google Cloud Platform', icon: 'Cloud', description: 'Deploy to Google Cloud Platform' },
+    { value: 'azure', label: 'Microsoft Azure', icon: 'Cloud', description: 'Deploy to Microsoft Azure' },
+    { value: 'freemind', label: 'FreeMind Cloud', icon: 'Zap', description: 'Deploy to FreeMind managed cloud' }
   ];
+  
+  const cloudProviders = deploymentPlatforms.filter(p => p.value !== 'local');
 
   const regions = [
     { value: 'us-east-1', label: 'US East (N. Virginia)' },
@@ -92,6 +159,141 @@ const DeploymentConfigPanel = ({ onDeploy, selectedModel }) => {
 
   const renderStepContent = () => {
     switch (currentStep) {
+      case 0: // Platform selection
+        return (
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-semibold text-foreground mb-6">Choose Deployment Platform</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {deploymentPlatforms.map((platform) => {
+                  const isSelected = config.platform === platform.value;
+                  return (
+                    <div
+                      key={platform.value}
+                      className={`p-6 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
+                        isSelected
+                          ? 'border-primary bg-primary/10 shadow-lg'
+                          : 'border-border hover:border-primary/50 hover:shadow-md'
+                      }`}
+                      onClick={() => handleInputChange('platform', platform.value)}
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                          isSelected ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
+                        }`}>
+                          <Icon name={platform.icon} size={24} />
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-lg font-semibold text-foreground mb-2">{platform.label}</h4>
+                          <p className="text-sm text-muted-foreground">{platform.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            
+            {config.platform && config.platform !== 'local' && (
+              <div className="mt-6 text-center">
+                <Button
+                  onClick={() => setCurrentStep(1)}
+                  iconName="ChevronRight"
+                  iconPosition="right"
+                  className="bg-primary hover:bg-primary/90"
+                >
+                  Continue with {deploymentPlatforms.find(p => p.value === config.platform)?.label}
+                </Button>
+              </div>
+            )}
+            
+            {config.platform === 'local' && (
+              <div className="mt-6 p-6 bg-muted/30 rounded-2xl border border-border">
+                <h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
+                  <Icon name="Settings" size={20} className="text-primary" />
+                  Local Deployment Configuration
+                </h4>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <Input
+                      label="Service Name"
+                      type="text"
+                      value={config.serviceName || selectedModel?.name?.toLowerCase().replace(/\s+/g, '-') || 'ml-model'}
+                      onChange={(e) => handleInputChange('serviceName', e.target.value)}
+                      placeholder="my-awesome-model"
+                      description="Name for your local deployment package"
+                    />
+                  </div>
+                  
+                  <div>
+                    <Select
+                      label="Environment"
+                      options={[
+                        { value: 'development', label: 'Development' },
+                        { value: 'staging', label: 'Staging' },
+                        { value: 'production', label: 'Production' }
+                      ]}
+                      value={config.environment}
+                      onChange={(value) => handleInputChange('environment', value)}
+                    />
+                  </div>
+                  
+                  <div>
+                    <Select
+                      label="Task Type"
+                      options={[
+                        { value: 'classification', label: 'Classification' },
+                        { value: 'regression', label: 'Regression' },
+                        { value: 'image_classification', label: 'Image Classification' },
+                        { value: 'text_classification', label: 'Text Classification' },
+                        { value: 'sentiment_analysis', label: 'Sentiment Analysis' },
+                        { value: 'object_detection', label: 'Object Detection' }
+                      ]}
+                      value={config.taskType}
+                      onChange={(value) => handleInputChange('taskType', value)}
+                    />
+                  </div>
+                  
+                  <div>
+                    <Select
+                      label="Data Type"
+                      options={[
+                        { value: 'tabular', label: 'Tabular Data' },
+                        { value: 'image', label: 'Image Data' },
+                        { value: 'text', label: 'Text Data' },
+                        { value: 'audio', label: 'Audio Data' },
+                        { value: 'video', label: 'Video Data' }
+                      ]}
+                      value={config.dataType}
+                      onChange={(value) => handleInputChange('dataType', value)}
+                    />
+                  </div>
+                </div>
+                
+                <div className="mt-6">
+                  <Button
+                    onClick={handleLocalDeployment}
+                    disabled={isDeploying}
+                    iconName={isDeploying ? "Loader2" : "Download"}
+                    iconPosition="left"
+                    className="bg-success hover:bg-success/90"
+                  >
+                    {isDeploying ? 'Generating Package...' : 'Download Deployment Package'}
+                  </Button>
+                </div>
+                
+                <div className="mt-4 p-4 bg-blue-50 rounded-xl border border-blue-200">
+                  <div className="text-sm text-blue-700">
+                    <Icon name="Info" size={16} className="inline mr-2" />
+                    This will download a complete Python project with Flask API, Docker support, and setup instructions.
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      
       case 1:
         return (
           <div className="space-y-6">
@@ -247,76 +449,100 @@ const DeploymentConfigPanel = ({ onDeploy, selectedModel }) => {
     <div className="bg-card border border-border rounded-lg p-6 elevation-1">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-semibold text-foreground">Deploy Model</h2>
-        <div className="flex items-center space-x-2">
-          <Icon name="Rocket" size={20} className="text-primary" />
-          <span className="text-sm text-muted-foreground">Step {currentStep} of 4</span>
-        </div>
-      </div>
-      {/* Progress Steps */}
-      <div className="flex items-center justify-between mb-8">
-        {steps?.map((step, index) => (
-          <div key={step?.id} className="flex items-center">
-            <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-colors duration-200 ${
-              currentStep >= step?.id
-                ? 'bg-primary border-primary text-primary-foreground'
-                : 'border-border text-muted-foreground'
-            }`}>
-              <Icon name={step?.icon} size={16} />
-            </div>
-            <div className="ml-3">
-              <p className={`text-sm font-medium ${
-                currentStep >= step?.id ? 'text-foreground' : 'text-muted-foreground'
-              }`}>
-                {step?.title}
-              </p>
-            </div>
-            {index < steps?.length - 1 && (
-              <div className={`w-16 h-0.5 mx-4 ${
-                currentStep > step?.id ? 'bg-primary' : 'bg-border'
-              }`} />
-            )}
+        {currentStep > 0 && (
+          <div className="flex items-center space-x-2">
+            <Icon name="Rocket" size={20} className="text-primary" />
+            <span className="text-sm text-muted-foreground">Step {currentStep} of 4</span>
           </div>
-        ))}
+        )}
       </div>
+      
+      {/* Progress Steps - Only show for cloud deployments */}
+      {currentStep > 0 && config.platform !== 'local' && (
+        <div className="flex items-center justify-between mb-8">
+          {steps?.map((step, index) => (
+            <div key={step?.id} className="flex items-center">
+              <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-colors duration-200 ${
+                currentStep >= step?.id
+                  ? 'bg-primary border-primary text-primary-foreground'
+                  : 'border-border text-muted-foreground'
+              }`}>
+                <Icon name={step?.icon} size={16} />
+              </div>
+              <div className="ml-3">
+                <p className={`text-sm font-medium ${
+                  currentStep >= step?.id ? 'text-foreground' : 'text-muted-foreground'
+                }`}>
+                  {step?.title}
+                </p>
+              </div>
+              {index < steps?.length - 1 && (
+                <div className={`w-16 h-0.5 mx-4 ${
+                  currentStep > step?.id ? 'bg-primary' : 'bg-border'
+                }`} />
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+      
       {/* Step Content */}
       <div className="mb-8">
         {renderStepContent()}
       </div>
-      {/* Navigation Buttons */}
-      <div className="flex items-center justify-between">
-        <Button
-          variant="outline"
-          onClick={handlePrevious}
-          disabled={currentStep === 1}
-          iconName="ChevronLeft"
-          iconPosition="left"
-        >
-          Previous
-        </Button>
-        
-        <div className="flex space-x-3">
-          {currentStep < 4 ? (
-            <Button
-              onClick={handleNext}
-              disabled={!isStepValid()}
-              iconName="ChevronRight"
-              iconPosition="right"
-            >
-              Next
-            </Button>
-          ) : (
-            <Button
-              variant="default"
-              onClick={handleDeploy}
-              iconName="Rocket"
-              iconPosition="left"
-              className="bg-success hover:bg-success/90"
-            >
-              Deploy Model
-            </Button>
-          )}
+      
+      {/* Navigation Buttons - Only show for cloud deployments after platform selection */}
+      {currentStep > 0 && config.platform !== 'local' && (
+        <div className="flex items-center justify-between">
+          <Button
+            variant="outline"
+            onClick={handlePrevious}
+            disabled={currentStep === 1}
+            iconName="ChevronLeft"
+            iconPosition="left"
+          >
+            Previous
+          </Button>
+          
+          <div className="flex space-x-3">
+            {currentStep < 4 ? (
+              <Button
+                onClick={handleNext}
+                disabled={!isStepValid()}
+                iconName="ChevronRight"
+                iconPosition="right"
+              >
+                Next
+              </Button>
+            ) : (
+              <Button
+                variant="default"
+                onClick={handleDeploy}
+                iconName="Rocket"
+                iconPosition="left"
+                className="bg-success hover:bg-success/90"
+              >
+                Deploy Model
+              </Button>
+            )}
+          </div>
         </div>
-      </div>
+      )}
+      
+      {/* Back to Platform Selection - Show when on cloud deployment steps */}
+      {currentStep > 0 && (
+        <div className="mt-4 pt-4 border-t border-border">
+          <Button
+            variant="ghost"
+            onClick={() => setCurrentStep(0)}
+            iconName="ArrowLeft"
+            iconPosition="left"
+            size="sm"
+          >
+            Back to Platform Selection
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

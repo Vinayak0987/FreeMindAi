@@ -34,6 +34,8 @@ app.use('/api/activities', require('./routes/activities'));
 app.use('/api/training', require('./routes/training'));
 app.use('/api/templates', require('./routes/templates'));
 app.use('/api/process', require('./routes/process'));
+app.use('/api/deploy', require('./routes/deployment'));
+app.use('/api/kaggle', require('./routes/kaggle'));
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

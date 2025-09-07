@@ -52,19 +52,20 @@ const UploadZone = ({ onUpload, isVisible, onClose }) => {
           clearInterval(interval);
           setIsUploading(false);
           
-          // Add files to uploaded list
+          // Add files to uploaded list with actual File objects
           const newFiles = files?.map(file => ({
             id: Date.now() + Math.random(),
             name: file?.name,
             size: file?.size,
             type: file?.type,
             uploadDate: new Date()?.toISOString(),
-            status: 'completed'
+            status: 'completed',
+            file: file // Preserve the actual File object for processing
           }));
           
           setUploadedFiles(prev => [...prev, ...newFiles]);
           
-          // Call parent callback
+          // Call parent callback with actual files
           if (onUpload) {
             onUpload(newFiles);
           }

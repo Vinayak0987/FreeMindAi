@@ -1,0 +1,8 @@
+2025-09-07 20:34:22,154 - root - INFO - Dataset downloaded from Kaggle: C:\Users\ADMIN\AppData\Local\Temp\tmpssad6zj1\Iris.csv
+2025-09-07 20:34:22,159 - root - INFO - Auto-detected task type: classification
+2025-09-07 20:34:39,162 - tensorflow - WARNING - From C:\Users\ADMIN\AppData\Local\Programs\Python\Python310\lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-09-07 20:48:45,788 - root - INFO - Dataset downloaded from Kaggle: C:\Users\ADMIN\Desktop\Project\Project\FreeMindAi\FreeMindAi\debug_datasets\Iris.csv
+2025-09-07 20:48:45,789 - root - INFO - Auto-detected task type: classification
+2025-09-07 20:48:47,726 - root - INFO - Dataset downloaded from Kaggle: ml_system/datasets\iris.csv
+2025-09-07 20:48:47,726 - root - INFO - Auto-detected task type: classification

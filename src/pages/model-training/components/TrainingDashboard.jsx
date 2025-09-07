@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Bar } from 'recharts';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
+import DownloadButton from '../../../components/DownloadButton';
 
-const TrainingDashboard = ({ isTraining, trainingConfig }) => {
+const TrainingDashboard = ({ isTraining, trainingConfig, projectId, trainingJobId }) => {
   const [currentPhase, setCurrentPhase] = useState('idle');
   const [progress, setProgress] = useState(0);
   const [metrics, setMetrics] = useState([]);
   const [logs, setLogs] = useState([]);
   const [estimatedTime, setEstimatedTime] = useState('--:--');
   const [elapsedTime, setElapsedTime] = useState(0);
+  const [trainingCompleted, setTrainingCompleted] = useState(false);
 
   const trainingPhases = [
     { id: 'preprocessing', label: 'Data Preprocessing', icon: 'Database', duration: 15 },
@@ -59,6 +61,11 @@ const TrainingDashboard = ({ isTraining, trainingConfig }) => {
         // Update metrics
         if (progress > 60 && metrics?.length < 8) {
           setMetrics(mockMetricsData?.slice(0, Math.floor((progress - 60) / 4)));
+        }
+        
+        // Mark training as completed when progress reaches 100%
+        if (progress >= 100 && !trainingCompleted) {
+          setTrainingCompleted(true);
         }
       }, 1000);
 
@@ -248,6 +255,127 @@ const TrainingDashboard = ({ isTraining, trainingConfig }) => {
           </div>
         </div>
       </div>
+
+      {/* Training Completion Section */}
+      {trainingCompleted && (
+        <div className="bg-card border border-border rounded-lg elevation-1 p-6">
+          <div className="flex items-start space-x-4">
+            <div className="w-16 h-16 bg-success/10 rounded-xl flex items-center justify-center flex-shrink-0">
+              <Icon name="CheckCircle" size={32} className="text-success" />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="text-xl font-bold text-foreground mb-2">🎉 Training Completed Successfully!</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Your model has been trained and is ready for deployment. Final accuracy: <span className="font-semibold text-success">91.2%</span>
+                  </p>
+                </div>
+              </div>
+              
+              {/* Download Options */}
+              <div className="space-y-4">
+                <h4 className="text-lg font-semibold text-foreground">Download Options</h4>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Choose what you'd like to download. All files include the necessary code and documentation.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* Trained Model */}
+                  <div className="border border-border rounded-lg p-4 hover:bg-muted/50 transition-colors">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <Icon name="Brain" size={20} className="text-primary" />
+                      <h5 className="font-medium text-foreground">Trained Model</h5>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Download the trained model with Streamlit app for predictions
+                    </p>
+                    <DownloadButton 
+                      projectId={projectId}
+                      trainingJobId={trainingJobId}
+                      type="trained_model"
+                      variant="default"
+                      size="sm"
+                      className="w-full"
+                    >
+                      Download Model
+                    </DownloadButton>
+                  </div>
+
+                  {/* Preprocessed Data */}
+                  <div className="border border-border rounded-lg p-4 hover:bg-muted/50 transition-colors">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <Icon name="Database" size={20} className="text-accent" />
+                      <h5 className="font-medium text-foreground">Processed Data</h5>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Download the cleaned and preprocessed dataset
+                    </p>
+                    <DownloadButton 
+                      projectId={projectId}
+                      trainingJobId={trainingJobId}
+                      type="preprocessed_data"
+                      variant="outline"
+                      size="sm"
+                      className="w-full"
+                    >
+                      Download Data
+                    </DownloadButton>
+                  </div>
+
+                  {/* Complete Project */}
+                  <div className="border border-border rounded-lg p-4 hover:bg-muted/50 transition-colors bg-primary/5 border-primary/20">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <Icon name="Package" size={20} className="text-primary" />
+                      <h5 className="font-medium text-foreground">Complete Project</h5>
+                      <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">Recommended</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      Download everything: model, data, code, and documentation
+                    </p>
+                    <DownloadButton 
+                      projectId={projectId}
+                      trainingJobId={trainingJobId}
+                      type="complete_project"
+                      variant="default"
+                      size="sm"
+                      className="w-full"
+                    >
+                      Download All
+                    </DownloadButton>
+                  </div>
+                </div>
+                
+                {/* Additional Information */}
+                <div className="mt-6 p-4 bg-muted/30 rounded-lg border border-border">
+                  <h5 className="font-medium text-foreground mb-2 flex items-center space-x-2">
+                    <Icon name="Info" size={16} className="text-primary" />
+                    <span>What's Included</span>
+                  </h5>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li className="flex items-center space-x-2">
+                      <Icon name="CheckCircle" size={14} className="text-success" />
+                      <span>Ready-to-use Streamlit web application</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <Icon name="CheckCircle" size={14} className="text-success" />
+                      <span>Requirements.txt with all dependencies</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <Icon name="CheckCircle" size={14} className="text-success" />
+                      <span>Setup script for easy environment configuration</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <Icon name="CheckCircle" size={14} className="text-success" />
+                      <span>Comprehensive README with usage instructions</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

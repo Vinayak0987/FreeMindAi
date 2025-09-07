@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Upload, File, X, Database, FileText, Image, Music, Video } from 'lucide-react';
 import Button from '../../ui/Button';
 import Icon from '../../AppIcon';
+import KaggleBrowser from '../../dataset/KaggleBrowser';
 
 const DataUploadStep = ({ data, updateData, stepData }) => {
   const [dragActive, setDragActive] = useState(false);
@@ -230,7 +231,7 @@ const DataUploadStep = ({ data, updateData, stepData }) => {
       )}
 
       {/* Sample Datasets */}
-      <div className="p-6 bg-muted/30 rounded-2xl border border-border">
+      <div className="p-6 bg-muted/30 rounded-2xl border border-border mb-8">
         <h4 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
           <Icon name="Download" size={20} className="text-blue-500" />
           Or Try Sample Datasets
@@ -298,6 +299,30 @@ const DataUploadStep = ({ data, updateData, stepData }) => {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Kaggle Dataset Browser */}
+      <div className="p-6 bg-gradient-to-br from-orange-50 to-blue-50 rounded-2xl border border-orange-200">
+        <KaggleBrowser
+          onSelectDataset={(kaggleDataset) => {
+            const dataset = {
+              id: kaggleDataset.id || Date.now(),
+              name: kaggleDataset.name || kaggleDataset.title || kaggleDataset.id,
+              size: kaggleDataset.analysis?.totalSamples || 0,
+              type: kaggleDataset.taskType === 'image_classification' ? 'image' : 
+                    kaggleDataset.taskType === 'sentiment_analysis' ? 'text' : 
+                    kaggleDataset.taskType === 'forecasting' ? 'tabular' : 'tabular',
+              isKaggleDataset: true,
+              kaggleData: kaggleDataset,
+              uploadedAt: new Date(),
+              status: 'ready'
+            };
+            updateData({
+              datasets: [...(data.datasets || []), dataset],
+              dataType: data.dataType || dataset.type
+            });
+          }}
+        />
       </div>
     </div>
   );

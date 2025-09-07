@@ -15,10 +15,17 @@ const ModelTraining = () => {
   const [trainingConfig, setTrainingConfig] = useState(null);
   const [currentMetrics, setCurrentMetrics] = useState(null);
   const [activeTab, setActiveTab] = useState('dashboard');
+  
+  // Mock project and training job IDs - in real app these would come from URL params or context
+  const [projectId] = useState('64a7b8c9d1e2f3a4b5c6d7e8'); // Mock project ID
+  const [trainingJobId, setTrainingJobId] = useState(null);
 
   const handleStartTraining = (config) => {
     setTrainingConfig(config);
     setIsTraining(true);
+    // Generate a mock training job ID when training starts
+    const newTrainingJobId = 'job_' + Date.now().toString();
+    setTrainingJobId(newTrainingJobId);
     console.log('Starting training with config:', config);
   };
 
@@ -181,6 +188,8 @@ const ModelTraining = () => {
                   <TrainingDashboard 
                     isTraining={isTraining}
                     trainingConfig={trainingConfig}
+                    projectId={projectId}
+                    trainingJobId={trainingJobId}
                   />
                 )}
                 

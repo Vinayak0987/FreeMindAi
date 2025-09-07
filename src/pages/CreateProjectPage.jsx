@@ -164,14 +164,102 @@ const CreateProjectPage = () => {
           preprocessing: projectData.preprocessing,
           evaluation: projectData.evaluation || {
             metrics: ['accuracy', 'loss']
-          },
-          deployment: projectData.deployment || {
-            platform: 'local'
           }
         };
 
         const trainingResponse = await apiService.nebula.trainModel(trainingConfig);
         console.log('Training job started:', trainingResponse.data);
+      }
+
+      // If deployment configuration is provided, handle deployment
+      if (projectData.deployment?.platform) {
+        try {
+          if (projectData.deployment.platform === 'local') {
+            // Handle local deployment with ZIP file download
+            console.log('Generating local deployment package...');
+            
+            const localDeploymentConfig = {
+              platform: 'local',
+              serviceName: projectData.deployment.serviceName || `${projectData.name.toLowerCase().replace(/\s+/g, '-')}-model`,
+              environment: projectData.deployment.environment || 'development',
+              taskType: projectData.task,
+              dataType: projectData.dataType,
+              modelConfig: {
+                ...projectData.modelConfig,
+                dataset: {
+                  name: projectData.name,
+                  samples: projectData.datasets?.[0]?.samples || 'N/A',
+                  features: projectData.datasets?.[0]?.features || 'N/A',
+                  size: projectData.datasets?.[0]?.size || 'N/A'
+                }
+              },
+              deploymentConfig: {
+                autoScaling: projectData.deployment.autoScaling,
+                memoryLimit: projectData.deployment.memoryLimit,
+                enableMonitoring: projectData.deployment.enableMonitoring
+              }
+            };
+            
+            // Make API call to generate and download ZIP
+            const response = await fetch('http://localhost:5000/api/deploy', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+              },
+              body: JSON.stringify(localDeploymentConfig)
+            });
+            
+            if (response.ok) {
+              // Handle ZIP file download
+              const blob = await response.blob();
+              const downloadUrl = window.URL.createObjectURL(blob);
+              const link = document.createElement('a');
+              link.href = downloadUrl;
+              
+              // Get filename from Content-Disposition header
+              const contentDisposition = response.headers.get('Content-Disposition');
+              let filename = `${localDeploymentConfig.serviceName}-deployment.zip`;
+              if (contentDisposition) {
+                const match = contentDisposition.match(/filename="(.+)"/);
+                if (match) filename = match[1];
+              }
+              
+              link.download = filename;
+              document.body.appendChild(link);
+              link.click();
+              link.remove();
+              window.URL.revokeObjectURL(downloadUrl);
+              
+              console.log('Local deployment package downloaded successfully');
+              
+              // Show success message and navigate
+              alert('Local deployment package generated successfully! Check your downloads folder.');
+              navigate('/projects');
+              return; // Exit early for local deployment
+            } else {
+              const errorData = await response.json();
+              throw new Error(errorData.message || 'Failed to generate local deployment package');
+            }
+          } else {
+            // Handle cloud platform deployments
+            const deploymentConfig = {
+              projectId: projectId,
+              platform: projectData.deployment.platform,
+              serviceName: projectData.deployment.serviceName || `${projectData.name.toLowerCase().replace(/\s+/g, '-')}-model`,
+              environment: projectData.deployment.environment || 'production',
+              autoScaling: projectData.deployment.autoScaling,
+              memoryLimit: projectData.deployment.memoryLimit,
+              enableMonitoring: projectData.deployment.enableMonitoring
+            };
+
+            const deploymentResponse = await apiService.deployment.create(deploymentConfig);
+            console.log('Deployment started:', deploymentResponse.data);
+          }
+        } catch (deploymentError) {
+          console.error('Deployment failed:', deploymentError);
+          alert(`Deployment failed: ${deploymentError.message}. Project was created successfully, but deployment could not be started.`);
+        }
       }
 
       console.log('Project created successfully:', projectResponse.data);

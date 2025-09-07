@@ -4,11 +4,18 @@ import Image from '../../../components/AppImage';
 import Button from '../../../components/ui/Button';
 import Input from '../../../components/ui/Input';
 import Select from '../../../components/ui/Select';
+import KaggleBrowser from '../../../components/dataset/KaggleBrowser';
 
 const DatasetLibrary = ({ selectedDataset, onDatasetSelect }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [sortBy, setSortBy] = useState('recent');
+  const [activeTab, setActiveTab] = useState('local'); // 'local', 'kaggle'
+
+  const tabs = [
+    { id: 'local', label: 'My Datasets', icon: 'Folder' },
+    { id: 'kaggle', label: 'Kaggle Datasets', icon: 'Database' }
+  ];
 
   const datasets = [
     {
@@ -160,103 +167,158 @@ const DatasetLibrary = ({ selectedDataset, onDatasetSelect }) => {
       <div className="p-4 border-b border-border">
         <h2 className="text-lg font-semibold text-foreground mb-4">Dataset Library</h2>
         
-        {/* Search */}
-        <Input
-          type="search"
-          placeholder="Search datasets..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e?.target?.value)}
-          className="mb-3"
-        />
-
-        {/* Filters */}
-        <div className="space-y-2">
-          <Select
-            options={filterOptions}
-            value={filterType}
-            onChange={setFilterType}
-            placeholder="Filter by type"
-          />
-          <Select
-            options={sortOptions}
-            value={sortBy}
-            onChange={setSortBy}
-            placeholder="Sort by"
-          />
+        {/* Tabs */}
+        <div className="flex space-x-1 p-1 bg-muted/50 rounded-lg mb-4">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 flex-1 justify-center ${
+                activeTab === tab.id
+                  ? 'bg-background text-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-background/50'
+              }`}
+            >
+              <Icon name={tab.icon} size={16} />
+              <span>{tab.label}</span>
+            </button>
+          ))}
         </div>
-      </div>
-      {/* Dataset List */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3">
-        {filteredDatasets?.map((dataset) => (
-          <div
-            key={dataset?.id}
-            onClick={() => onDatasetSelect(dataset)}
-            className={`p-3 rounded-lg border cursor-pointer transition-all duration-150 hover:elevation-1 ${
-              selectedDataset?.id === dataset?.id
-                ? 'border-primary bg-primary/5' :'border-border hover:border-primary/50'
-            }`}
-          >
-            <div className="flex items-start justify-between mb-2">
-              <div className="flex items-center space-x-2">
-                <Icon name={getTypeIcon(dataset?.type)} size={16} className="text-muted-foreground" />
-                <h3 className="font-medium text-foreground text-sm truncate">{dataset?.name}</h3>
-                {dataset?.isSynthetic && (
-                  <span className="px-1.5 py-0.5 bg-accent/20 text-accent text-xs rounded">AI</span>
-                )}
-                {dataset?.isPublic && (
-                  <span className="px-1.5 py-0.5 bg-secondary/20 text-secondary text-xs rounded">Public</span>
-                )}
-              </div>
-              <Icon 
-                name={getStatusIcon(dataset?.status)} 
-                size={14} 
-                className={getStatusColor(dataset?.status)}
+        
+        {/* Search and Filters - only show for local datasets */}
+        {activeTab === 'local' && (
+          <>
+            <Input
+              type="search"
+              placeholder="Search datasets..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e?.target?.value)}
+              className="mb-3"
+            />
+
+            <div className="space-y-2">
+              <Select
+                options={filterOptions}
+                value={filterType}
+                onChange={setFilterType}
+                placeholder="Filter by type"
+              />
+              <Select
+                options={sortOptions}
+                value={sortBy}
+                onChange={setSortBy}
+                placeholder="Sort by"
               />
             </div>
+          </>
+        )}
+      </div>
+      {/* Tab Content */}
+      <div className="flex-1 overflow-y-auto">
+        {activeTab === 'local' && (
+          <div className="p-4 space-y-3">
+            {filteredDatasets?.length > 0 ? (
+              filteredDatasets.map((dataset) => (
+                <div
+                  key={dataset?.id}
+                  onClick={() => onDatasetSelect(dataset)}
+                  className={`p-3 rounded-lg border cursor-pointer transition-all duration-150 hover:elevation-1 ${
+                    selectedDataset?.id === dataset?.id
+                      ? 'border-primary bg-primary/5' :'border-border hover:border-primary/50'
+                  }`}
+                >
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex items-center space-x-2">
+                      <Icon name={getTypeIcon(dataset?.type)} size={16} className="text-muted-foreground" />
+                      <h3 className="font-medium text-foreground text-sm truncate">{dataset?.name}</h3>
+                      {dataset?.isSynthetic && (
+                        <span className="px-1.5 py-0.5 bg-accent/20 text-accent text-xs rounded">AI</span>
+                      )}
+                      {dataset?.isPublic && (
+                        <span className="px-1.5 py-0.5 bg-secondary/20 text-secondary text-xs rounded">Public</span>
+                      )}
+                    </div>
+                    <Icon 
+                      name={getStatusIcon(dataset?.status)} 
+                      size={14} 
+                      className={getStatusColor(dataset?.status)}
+                    />
+                  </div>
 
-            <p className="text-xs text-muted-foreground mb-2 line-clamp-2">{dataset?.description}</p>
+                  <p className="text-xs text-muted-foreground mb-2 line-clamp-2">{dataset?.description}</p>
 
-            <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>{dataset?.size}</span>
-              {dataset?.quality && (
-                <span className="flex items-center space-x-1">
-                  <Icon name="Star" size={12} />
-                  <span>{dataset?.quality}%</span>
-                </span>
-              )}
-            </div>
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <span>{dataset?.size}</span>
+                    {dataset?.quality && (
+                      <span className="flex items-center space-x-1">
+                        <Icon name="Star" size={12} />
+                        <span>{dataset?.quality}%</span>
+                      </span>
+                    )}
+                  </div>
 
-            {dataset?.rows > 0 && (
-              <div className="flex items-center space-x-3 mt-2 text-xs text-muted-foreground">
-                <span>{dataset?.rows?.toLocaleString()} rows</span>
-                {dataset?.columns > 0 && <span>{dataset?.columns} cols</span>}
+                  {dataset?.rows > 0 && (
+                    <div className="flex items-center space-x-3 mt-2 text-xs text-muted-foreground">
+                      <span>{dataset?.rows?.toLocaleString()} rows</span>
+                      {dataset?.columns > 0 && <span>{dataset?.columns} cols</span>}
+                    </div>
+                  )}
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {dataset?.tags?.slice(0, 2)?.map((tag) => (
+                      <span key={tag} className="px-1.5 py-0.5 bg-muted text-muted-foreground text-xs rounded">
+                        {tag}
+                      </span>
+                    ))}
+                    {dataset?.tags?.length > 2 && (
+                      <span className="px-1.5 py-0.5 bg-muted text-muted-foreground text-xs rounded">
+                        +{dataset?.tags?.length - 2}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="text-center py-12">
+                <Icon name="Database" size={48} className="mx-auto mb-4 text-muted-foreground" />
+                <h3 className="text-lg font-medium text-foreground mb-2">No datasets found</h3>
+                <p className="text-muted-foreground mb-4">Try adjusting your search or filters</p>
               </div>
             )}
-
-            {/* Tags */}
-            <div className="flex flex-wrap gap-1 mt-2">
-              {dataset?.tags?.slice(0, 2)?.map((tag) => (
-                <span key={tag} className="px-1.5 py-0.5 bg-muted text-muted-foreground text-xs rounded">
-                  {tag}
-                </span>
-              ))}
-              {dataset?.tags?.length > 2 && (
-                <span className="px-1.5 py-0.5 bg-muted text-muted-foreground text-xs rounded">
-                  +{dataset?.tags?.length - 2}
-                </span>
-              )}
-            </div>
           </div>
-        ))}
+        )}
+        
+        {activeTab === 'kaggle' && (
+          <div className="p-4">
+            <KaggleBrowser 
+              onSelectDataset={onDatasetSelect}
+              isVisible={true}
+            />
+          </div>
+        )}
       </div>
       {/* Quick Actions */}
       <div className="p-4 border-t border-border space-y-2">
-        <Button variant="outline" fullWidth iconName="Plus" iconPosition="left">
-          Upload Dataset
-        </Button>
-        <Button variant="ghost" fullWidth iconName="Sparkles" iconPosition="left">
-          Generate Synthetic
-        </Button>
+        {activeTab === 'local' ? (
+          <>
+            <Button variant="outline" fullWidth iconName="Plus" iconPosition="left">
+              Upload Dataset
+            </Button>
+            <Button variant="ghost" fullWidth iconName="Sparkles" iconPosition="left">
+              Generate Synthetic
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button variant="outline" fullWidth iconName="ExternalLink" iconPosition="left">
+              Browse Kaggle
+            </Button>
+            <Button variant="ghost" fullWidth iconName="Sparkles" iconPosition="left">
+              AI Auto-Fetch
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );
