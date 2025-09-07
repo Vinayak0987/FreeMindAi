@@ -793,3 +793,105 @@
 2025-09-07 21:29:58,186 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
 2025-09-07 21:29:58,186 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
 2025-09-07 21:30:07,290 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 21:30:07] "POST /process HTTP/1.1" 200 -
+2025-09-07 21:41:02,592 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:41:02,592 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 21:41:02,593 - __main__ - INFO - Processing text prompt: this is project about classification of iris using dataset from Kaggle and training model 
+2025-09-07 21:41:02,593 - __main__ - INFO - Processing text prompt: this is project about classification of iris using dataset from Kaggle and training model 
+2025-09-07 21:41:02,594 - root - INFO - KAGGLE_DEBUG: Starting download for original query 'this is project about classification of iris using dataset from Kaggle and training model '
+2025-09-07 21:41:02,594 - root - INFO - KAGGLE_DEBUG: Extracted search query: 'iris' -> datasets_dir: 'ml_system\datasets'
+2025-09-07 21:41:02,595 - root - INFO - KAGGLE_DEBUG: Kaggle API is available, initializing...
+2025-09-07 21:41:02,596 - root - INFO - KAGGLE_DEBUG: Kaggle authentication successful
+2025-09-07 21:41:02,599 - root - INFO - KAGGLE_DEBUG: Created datasets directory: ml_system\datasets
+2025-09-07 21:41:02,599 - root - INFO - KAGGLE_DEBUG: Searching for datasets with extracted query: 'iris'
+2025-09-07 21:41:03,072 - root - INFO - KAGGLE_DEBUG: Found 20 datasets for 'iris'
+2025-09-07 21:41:03,073 - root - INFO - KAGGLE_DEBUG: Dataset 0: uciml/iris
+2025-09-07 21:41:03,074 - root - INFO - KAGGLE_DEBUG: Dataset 1: himanshunakrani/iris-dataset
+2025-09-07 21:41:03,076 - root - INFO - KAGGLE_DEBUG: Dataset 2: arshid/iris-flower-dataset
+2025-09-07 21:41:03,077 - root - INFO - KAGGLE_DEBUG: Selected dataset reference: uciml/iris
+2025-09-07 21:41:03,077 - root - INFO - KAGGLE_DEBUG: Starting download of uciml/iris
+2025-09-07 21:41:03,079 - root - INFO - KAGGLE_DEBUG: Using temp directory: C:\Users\ADMIN\AppData\Local\Temp\tmpoovwoh9e
+2025-09-07 21:41:04,698 - root - INFO - KAGGLE_DEBUG: Download completed, searching for CSV files...
+2025-09-07 21:41:04,699 - root - INFO - KAGGLE_DEBUG: Checking directory C:\Users\ADMIN\AppData\Local\Temp\tmpoovwoh9e with files: ['database.sqlite', 'Iris.csv']
+2025-09-07 21:41:04,699 - root - INFO - KAGGLE_DEBUG: Found CSV Iris.csv, copying to ml_system\datasets\Iris.csv
+2025-09-07 21:41:04,740 - root - INFO - KAGGLE_DEBUG: Copy completed, file exists: True
+2025-09-07 21:41:04,755 - root - INFO - KAGGLE_DEBUG: Saved to database successfully
+2025-09-07 21:41:04,758 - root - INFO - KAGGLE_DEBUG: Cleaned up temp directory
+2025-09-07 21:41:04,759 - root - INFO - KAGGLE_DEBUG: Starting task type detection for ml_system\datasets\Iris.csv
+2025-09-07 21:41:04,773 - root - INFO - KAGGLE_DEBUG: Task type detected: classification
+2025-09-07 21:41:05,433 - root - INFO - KAGGLE_DEBUG: Gemini task type: classification
+2025-09-07 21:41:05,434 - root - INFO - KAGGLE_DEBUG: Final task type: classification
+2025-09-07 21:41:05,434 - root - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 21:41:05,437 - root - INFO - Auto-detected task type: classification
+2025-09-07 21:41:05,438 - root - INFO - KAGGLE_DEBUG: Successfully processed query 'this is project about classification of iris using dataset from Kaggle and training model ' -> 'iris' -> ml_system\datasets\Iris.csv
+2025-09-07 21:41:05,439 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\Iris.csv', 'classification')
+2025-09-07 21:41:05,439 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\Iris.csv', 'classification')
+2025-09-07 21:41:05,439 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\Iris.csv, Task type: classification
+2025-09-07 21:41:05,439 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\Iris.csv, Task type: classification
+2025-09-07 21:41:05,440 - __main__ - INFO - Kaggle file exists: ml_system\datasets\Iris.csv
+2025-09-07 21:41:05,440 - __main__ - INFO - Kaggle file exists: ml_system\datasets\Iris.csv
+2025-09-07 21:41:05,443 - __main__ - INFO - File exists check: True
+2025-09-07 21:41:05,443 - __main__ - INFO - File exists check: True
+2025-09-07 21:41:05,460 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 6) samples
+2025-09-07 21:41:05,460 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 6) samples
+2025-09-07 21:41:05,462 - __main__ - INFO - Kaggle dataset columns: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+2025-09-07 21:41:05,462 - __main__ - INFO - Kaggle dataset columns: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+2025-09-07 21:41:05,464 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 21:41:05,464 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 21:41:05,465 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 21:41:05,465 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 21:41:05,466 - __main__ - INFO - Changing task type from regression to classification based on dataset analysis
+2025-09-07 21:41:05,466 - __main__ - INFO - Changing task type from regression to classification based on dataset analysis
+2025-09-07 21:41:05,475 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
+2025-09-07 21:41:05,475 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
+2025-09-07 21:41:14,412 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 21:41:14] "POST /process HTTP/1.1" 200 -
+2025-09-07 22:43:45,908 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 22:43:45,908 - __main__ - INFO - Processing request - Task Type: regression
+2025-09-07 22:43:45,917 - __main__ - INFO - Processing text prompt: The Iris Flower Classification is one of the most famous problems in machine learning,  project. The goal is to classify different species of Iris flowers based on the dimensions of their petals and sepals.
+2025-09-07 22:43:45,917 - __main__ - INFO - Processing text prompt: The Iris Flower Classification is one of the most famous problems in machine learning,  project. The goal is to classify different species of Iris flowers based on the dimensions of their petals and sepals.
+2025-09-07 22:43:45,919 - root - INFO - KAGGLE_DEBUG: Starting download for original query 'The Iris Flower Classification is one of the most famous problems in machine learning,  project. The goal is to classify different species of Iris flowers based on the dimensions of their petals and sepals.'
+2025-09-07 22:43:45,920 - root - INFO - KAGGLE_DEBUG: Extracted search query: 'iris' -> datasets_dir: 'ml_system\datasets'
+2025-09-07 22:43:45,920 - root - INFO - KAGGLE_DEBUG: Kaggle API is available, initializing...
+2025-09-07 22:43:45,960 - root - INFO - KAGGLE_DEBUG: Kaggle authentication successful
+2025-09-07 22:43:45,979 - root - INFO - KAGGLE_DEBUG: Created datasets directory: ml_system\datasets
+2025-09-07 22:43:45,980 - root - INFO - KAGGLE_DEBUG: Searching for datasets with extracted query: 'iris'
+2025-09-07 22:43:46,649 - root - INFO - KAGGLE_DEBUG: Found 20 datasets for 'iris'
+2025-09-07 22:43:46,651 - root - INFO - KAGGLE_DEBUG: Dataset 0: uciml/iris
+2025-09-07 22:43:46,658 - root - INFO - KAGGLE_DEBUG: Dataset 1: himanshunakrani/iris-dataset
+2025-09-07 22:43:46,659 - root - INFO - KAGGLE_DEBUG: Dataset 2: arshid/iris-flower-dataset
+2025-09-07 22:43:46,660 - root - INFO - KAGGLE_DEBUG: Selected dataset reference: uciml/iris
+2025-09-07 22:43:46,660 - root - INFO - KAGGLE_DEBUG: Starting download of uciml/iris
+2025-09-07 22:43:46,663 - root - INFO - KAGGLE_DEBUG: Using temp directory: C:\Users\ADMIN\AppData\Local\Temp\tmp5blmltz4
+2025-09-07 22:43:47,484 - root - INFO - KAGGLE_DEBUG: Download completed, searching for CSV files...
+2025-09-07 22:43:47,485 - root - INFO - KAGGLE_DEBUG: Checking directory C:\Users\ADMIN\AppData\Local\Temp\tmp5blmltz4 with files: ['database.sqlite', 'Iris.csv']
+2025-09-07 22:43:47,486 - root - INFO - KAGGLE_DEBUG: Found CSV Iris.csv, copying to ml_system\datasets\Iris.csv
+2025-09-07 22:43:47,537 - root - INFO - KAGGLE_DEBUG: Copy completed, file exists: True
+2025-09-07 22:43:47,565 - root - INFO - KAGGLE_DEBUG: Saved to database successfully
+2025-09-07 22:43:47,569 - root - INFO - KAGGLE_DEBUG: Cleaned up temp directory
+2025-09-07 22:43:47,577 - root - INFO - KAGGLE_DEBUG: Starting task type detection for ml_system\datasets\Iris.csv
+2025-09-07 22:43:47,717 - root - INFO - KAGGLE_DEBUG: Task type detected: classification
+2025-09-07 22:43:48,500 - root - INFO - KAGGLE_DEBUG: Gemini task type: classification
+2025-09-07 22:43:48,501 - root - INFO - KAGGLE_DEBUG: Final task type: classification
+2025-09-07 22:43:48,501 - root - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 22:43:48,502 - root - INFO - Auto-detected task type: classification
+2025-09-07 22:43:48,503 - root - INFO - KAGGLE_DEBUG: Successfully processed query 'The Iris Flower Classification is one of the most famous problems in machine learning,  project. The goal is to classify different species of Iris flowers based on the dimensions of their petals and sepals.' -> 'iris' -> ml_system\datasets\Iris.csv
+2025-09-07 22:43:48,504 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\Iris.csv', 'classification')
+2025-09-07 22:43:48,504 - __main__ - INFO - Kaggle download result: ('ml_system\\datasets\\Iris.csv', 'classification')
+2025-09-07 22:43:48,507 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\Iris.csv, Task type: classification
+2025-09-07 22:43:48,507 - __main__ - INFO - Unpacked Kaggle result - File: ml_system\datasets\Iris.csv, Task type: classification
+2025-09-07 22:43:48,508 - __main__ - INFO - Kaggle file exists: ml_system\datasets\Iris.csv
+2025-09-07 22:43:48,508 - __main__ - INFO - Kaggle file exists: ml_system\datasets\Iris.csv
+2025-09-07 22:43:48,513 - __main__ - INFO - File exists check: True
+2025-09-07 22:43:48,513 - __main__ - INFO - File exists check: True
+2025-09-07 22:43:48,521 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 6) samples
+2025-09-07 22:43:48,521 - __main__ - INFO - Successfully loaded Kaggle dataset: (150, 6) samples
+2025-09-07 22:43:48,523 - __main__ - INFO - Kaggle dataset columns: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+2025-09-07 22:43:48,523 - __main__ - INFO - Kaggle dataset columns: ['Id', 'SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
+2025-09-07 22:43:48,524 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 22:43:48,524 - __main__ - INFO - Dataset downloaded from Kaggle: ml_system\datasets\Iris.csv
+2025-09-07 22:43:48,525 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 22:43:48,525 - __main__ - INFO - Auto-detected task type for Kaggle dataset: classification
+2025-09-07 22:43:48,525 - __main__ - INFO - Changing task type from regression to classification based on dataset analysis
+2025-09-07 22:43:48,525 - __main__ - INFO - Changing task type from regression to classification based on dataset analysis
+2025-09-07 22:43:48,529 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
+2025-09-07 22:43:48,529 - __main__ - INFO - Dataset analysis: 150 samples, 6 features
+2025-09-07 22:43:57,728 - werkzeug - INFO - 127.0.0.1 - - [07/Sep/2025 22:43:57] "POST /process HTTP/1.1" 200 -
