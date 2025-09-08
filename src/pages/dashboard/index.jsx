@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import Header from '../../components/ui/Header';
 import Icon from '../../components/AppIcon';
 import Button from '../../components/ui/Button';
@@ -24,6 +25,7 @@ const Dashboard = () => {
   const [filterBy, setFilterBy] = useState('all');
   const [isAuthenticated, setIsAuthenticated] = useState(null); // null = checking, false = not auth, true = auth
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   // CRITICAL: All hooks must be called BEFORE any conditional returns!
   // API data hooks - these must be called on every render
@@ -144,7 +146,7 @@ const Dashboard = () => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
               <div>
                 <h1 className="text-4xl font-bold text-foreground mb-3">
-                  Welcome back, Alok! 🙏✨
+                  Welcome back, {user?.name || 'Friend'}! 🙏✨
                 </h1>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   Here's what's happening with your ML projects today. Let's build the future of AI! 🚀
